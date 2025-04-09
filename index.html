@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Vangi Mathis</title>
+    <link href="css/style2.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">Vangi<span> Mathis</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="index.html#presentation">À propos</a></li>
+            <li><a href="index.html#projects">Travaux</a></li>
+        </ul>
+        <a class="github-icon" href="https://github.com/Spirit38" target="_blank"><i class="fab fa-github"></i></a>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-text">
+            <h1 class="big-title">Développeur<br>Administrateur réseaux</h1>
+            <a href="#contact" class="contact-button">Contactez-moi</a>
+        </div>
+        <div class="hero-image">
+            <img src="assets/photo.jpg" alt="Photo de Vangi Mathis">
+        </div>
+    </section>
+
+    <section class="presentation" id="presentation">
+        <h2>Présentation</h2>
+        <p>
+            Je m'appelle <strong>Vangi Mathis</strong>, passionné par le numérique et les technologies de l'information. Je me destine au métier de <strong>développeur</strong> et <strong>administrateur systèmes et réseaux</strong>, avec une forte appétence pour les infrastructures.
+        </p>
+        <p>
+            🎯 <strong>Mon objectif </strong>: concevoir des applications performantes tout en assurant leur bon fonctionnement sur le plan réseau.
+        </p>
+        <p>
+            📜 <strong>Diplômes</strong> :
+            <ul>
+                <li>Lycée Polyvalent Vaucanson / 2021 - 2024 <br>- Baccalauréat STI2D Option système d'information et numérique (SIN)</li>
+                <li>IUT 2 Université Grenoble Alpes / 2024 - 2027<br> - BUT Informatique </li>
+            </ul>
+        </p>
+        <p>
+            💼 Je suis motivé, rigoureux, et toujours prêt à apprendre de nouvelles compétences pour évoluer dans un environnement technique stimulant.
+        </p>
+    </section>
+
+    <section class="projects" id="projects">
+        <h2>Mes Projets</h2>
+        <div class="project-list">
+            <div class="project-item">
+                <img src="assets/project1.png" alt="Projet 1">
+                <h3>Création d'un Site Web Institutionnel</h3>
+                <p>Créer un site web institutionnel pour une entreprise du secteur numérique</p>
+                <a href="project1.html" class="project-link">En savoir plus</a>
+            </div>
+            <!-- Ajoutez d'autres projets ici -->
+        </div>
+    </section>
+    
+
+    <section class="skills">
+        <div class="skill-box">
+            <h3>Java</h3>
+            <p>1 ans d'expérience</p>
+        </div>
+        <div class="skill-box">
+            <h3>HTML/CSS</h3>
+            <p>1 ans d'expérience</p>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2>Contactez-moi</h2>
+        <p>N'hésitez pas à me contacter pour toute question ou opportunité professionnelle.</p>
+    
+        <div class="contact-methods">
+            <a href="https://www.linkedin.com/in/votreprofil" target="_blank" class="contact-icon">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="https://github.com/Spirit38" target="_blank" class="contact-icon">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="mailto:mathis.vangi@gmail.com" class="contact-icon">
+                <i class="fas fa-envelope"></i> Email
+            </a>
+        </div>
+    
+        <form action="submit_form.php" method="post" class="contact-form">
+            <label for="name">Nom :</label>
+            <input type="text" id="name" name="name" required>
+    
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
+    
+            <label for="message">Message :</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+    
+            <button type="submit">Envoyer</button>
+        </form>
+    </section>
+    
+    
+
+    <footer>
+        <p>&copy; 2025 Vangi Mathis. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
