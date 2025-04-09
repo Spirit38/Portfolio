@@ -15,13 +15,20 @@
 <body>
     <nav class="navbar">
         <div class="logo">Vangi<span> Mathis</span></div>
-        <ul class="nav-links">
+    
+        <div class="burger" id="burger">
+            <i class="fas fa-bars"></i>
+        </div>
+    
+        <ul class="nav-links" id="nav-links">
             <li><a href="index.html">Accueil</a></li>
             <li><a href="index.html#presentation">À propos</a></li>
             <li><a href="index.html#projects">Travaux</a></li>
         </ul>
+    
         <a class="github-icon" href="https://github.com/Spirit38" target="_blank"><i class="fab fa-github"></i></a>
     </nav>
+    
 
     <section class="hero">
         <div class="hero-text">
@@ -102,7 +109,7 @@
             <input type="email" id="email" name="Email" required>
         
             <label for="message">Message :</label>
-            <textarea id="message" name="Message" rows="4" required></textarea>
+            <textarea id="message" name="message" rows="4" required></textarea>
         
             <button type="submit">Envoyer</button>
         </form>
@@ -114,5 +121,14 @@
     <footer>
         <p>&copy; 2025 Vangi Mathis. Tous droits réservés.</p>
     </footer>
+    <script>
+        const burger = document.getElementById('burger');
+        const navLinks = document.getElementById('nav-links');
+    
+        burger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+    
 </body>
 </html>
