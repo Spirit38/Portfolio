@@ -367,13 +367,18 @@ footer {
 
     .skills {
         flex-direction: column;
+        align-items: center;
         gap: 1.5rem;
-        padding: 1rem;
+        padding: 1.5rem 1rem;
+        margin: 2rem 1rem;
     }
-
+    
+    
     .skill-box {
-        width: 100%;
+        width: 90%;
+        max-width: 300px;
     }
+    
 
     .contact-methods {
         flex-direction: column;
@@ -382,7 +387,7 @@ footer {
 
     .contact-form {
         width: 100%;
-        padding: 0 1rem;
+        /* padding: 0 1rem; */
     }
 
     .big-title {
