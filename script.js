@@ -14,3 +14,10 @@ burger.addEventListener('click', () => {
     burgerIcon.classList.add('fa-bars');
   }
 });
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('active');
+    burgerIcon.classList.remove('fa-times');
+    burgerIcon.classList.add('fa-bars');
+  });
+});
