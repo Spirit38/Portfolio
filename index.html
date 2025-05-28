@@ -1,128 +1,407 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Vangi Mathis</title>
-    <link href="css/style2.css" rel="stylesheet">
+    <title>Portfolio - Vangi Mathis | Développeur & Administrateur Réseaux</title>
+    <meta name="description" content="Portfolio de Vangi Mathis, développeur et administrateur systèmes et réseaux. Découvrez mes projets et compétences techniques.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" href="assets/photo2.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-    <nav class="navbar">
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
         <div class="logo">Vangi<span> Mathis</span></div>
-    
-        <div class="burger" id="burger">
-            <i class="fas fa-bars" id="burger-icon"></i>
-        </div>
-          
-    
+        
         <ul class="nav-links" id="nav-links">
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="index.html#presentation">À propos</a></li>
-            <li><a href="index.html#projects">Projet</a></li>
+            <li><a href="#home" class="nav-link active">Accueil</a></li>
+            <li><a href="#about" class="nav-link">À propos</a></li>
+            <li><a href="#timeline" class="nav-link">Parcours</a></li>
+            <li><a href="#skills" class="nav-link">Compétences</a></li>
+            <li><a href="#projects" class="nav-link">Projets</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
-    
-        <a class="github-icon" href="https://github.com/Spirit38" target="_blank"><i class="fab fa-github"></i></a>
-    </nav>
-    
 
-    <section class="hero">
-        <div class="hero-text">
-            <h1 class="big-title">Développeur<br>Administrateur réseaux</h1>
-            <a href="#contact" class="contact-button">Contactez-moi</a>
-        </div>
-        <div class="hero-image">
-            <img src="assets/photo2.jpeg" alt="Photo de Vangi Mathis">
-        </div>
-    </section>
-
-    <section class="presentation" id="presentation">
-        <h2>Présentation</h2>
-        <p>
-            Je m'appelle <strong>Vangi Mathis</strong>, passionné par le numérique et les technologies de l'information. Je me destine au métier de <strong>développeur</strong> et <strong>administrateur systèmes et réseaux</strong>, avec une forte appétence pour les infrastructures.
-        </p>
-        <p>
-            🎯 <strong>Mon objectif </strong>: concevoir des applications performantes tout en assurant leur bon fonctionnement sur le plan réseau.
-        </p>
-        <p>
-            📜 <strong>Diplômes</strong> :
-            <ul>
-                <li>Lycée Polyvalent Vaucanson / 2021 - 2024 <br>- Baccalauréat STI2D Option système d'information et numérique (SIN)</li>
-                <li>IUT 2 Université Grenoble Alpes / 2024 - 2027<br> - BUT Informatique </li>
-            </ul>
-        </p>
-        <p>
-            💼 Je suis motivé, rigoureux, et toujours prêt à apprendre de nouvelles compétences pour évoluer dans un environnement technique stimulant.
-        </p>
-    </section>
-
-    <section class="projects" id="projects">
-        <h2>Mes Projets</h2>
-        <div class="project-list">
-            <div class="project-item">
-                <img src="assets/project1.png" alt="Projet 1">
-                <h3>Création d'un Site Web Institutionnel</h3>
-                <p>Créer un site web institutionnel pour une entreprise du secteur numérique</p>
-                <a href="project1.html" class="project-link">En savoir plus</a>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <button class="theme-toggle" id="theme-toggle" title="Changer le thème">
+                <i class="fas fa-sun"></i>
+            </button>
+            <a href="https://github.com/Spirit38" target="_blank" class="github-icon">
+                <i class="fab fa-github"></i>
+            </a>
+            <div class="mobile-menu" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            <!-- Autres projets ici -->
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content" data-aos="fade-right">
+            <div class="hero-subtitle">Développeur & Administrateur Réseaux</div>
+            <h1 class="hero-title">Vangi Mathis</h1>
+            <p class="hero-description">
+                Passionné par le développement et les infrastructures réseaux, 
+                je conçois des solutions techniques innovantes et performantes.
+            </p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">Voir mes projets</a>
+                <a href="#contact" class="btn btn-secondary">Me contacter</a>
+                <!-- <a href="/assets/cv.pdf" class="btn btn-secondary" download>Télécharger CV</a> -->
+            </div>
+        </div>
+        <div class="hero-image" data-aos="fade-left">
+            <img src="assets/photo2.png" alt="Photo de Vangi Mathis">
         </div>
     </section>
-    
 
-    <section class="skills">
-        <div class="skill-box">
-            <h3>Java</h3>
-            <p>1 an d'expérience</p>
+    <!-- About Section -->
+    <section class="section" id="about">
+        <h2 class="section-title" data-aos="fade-up">À propos de moi</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+            Découvrez mon parcours et ma passion pour la technologie
+        </p>
+        
+        <div class="about-content">
+            <div class="about-text" data-aos="fade-right">
+                <p>
+                    Je m'appelle <strong>Vangi Mathis</strong>, étudiant passionné par le numérique 
+                    et les technologies de l'information. Je me destine au métier de développeur 
+                    et administrateur systèmes et réseaux.
+                </p>
+                <p>
+                    Mon objectif est de concevoir des applications performantes tout en assurant 
+                    leur bon fonctionnement sur le plan réseau et infrastructures.
+                </p>
+                <p>
+                    Motivé, rigoureux, et toujours prêt à apprendre de nouvelles compétences 
+                    pour évoluer dans un environnement technique stimulant.
+                </p>
+            </div>
+            
+            <div class="about-stats" data-aos="fade-left">
+                <div class="stat-item">
+                    <span class="stat-number">1+</span>
+                    <span>Années d'étude</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">4+</span>
+                    <span>Projets réalisés</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">5+</span>
+                    <span>Technologies maîtrisées</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span>Motivation</span>
+                </div>
+            </div>
         </div>
-        <div class="skill-box">
-            <h3>HTML/CSS</h3>
-            <p>1 an d'expérience</p>
-        </div>
-        <!-- Autres skill ici -->
     </section>
 
-    <section class="contact" id="contact">
-        <h2>Contactez-moi</h2>
-        <p>N'hésitez pas à me contacter pour toute question ou opportunité professionnelle.</p>
-    
-        <div class="contact-methods">
-            <a href="https://www.linkedin.com/in/mathis-vangi" target="_blank" class="contact-icon">
-                <i class="fab fa-linkedin"></i> LinkedIn
-            </a>
-            <a href="https://github.com/Spirit38" target="_blank" class="contact-icon">
-                <i class="fab fa-github"></i> GitHub
-            </a>
-            <a href="mailto:mathis.vangi@gmail.com" class="contact-icon">
-                <i class="fas fa-envelope"></i> Email
-            </a>
+    <!-- Timeline Section -->
+    <section class="section" id="timeline">
+        <h2 class="section-title" data-aos="fade-up">Mon Parcours</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+            Les étapes clés de ma formation et de mon évolution
+        </p>
+        
+        <div class="timeline">
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="timeline-content">
+                    <div class="timeline-date">2024 - 2027</div>
+                    <h3 class="timeline-title">BUT Informatique</h3>
+                    <p class="timeline-desc">
+                        IUT 2 Université Grenoble Alpes - Formation complète en développement, 
+                        réseaux et systèmes d'information.
+                    </p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            
+            <div class="timeline-item" data-aos="fade-left">
+                <div class="timeline-content">
+                    <div class="timeline-date">2021 - 2024</div>
+                    <h3 class="timeline-title">Baccalauréat STI2D SIN</h3>
+                    <p class="timeline-desc">
+                        Lycée Polyvalent Vaucanson Grenoble - Spécialisation en Systèmes d'Information 
+                        et Numérique, bases solides en informatique.
+                    </p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            
         </div>
-    
-        <form action="https://formspree.io/f/myzelkkz" method="post" class="contact-form">
-            <label for="name">Nom :</label>
-            <input type="text" id="name" name="Nom" required>
-        
-            <label for="email">Email :</label>
-            <input type="email" id="email" name="Email" required>
-        
-            <label for="message">Message :</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-        
-            <button type="submit">Envoyer</button>
-        </form>
-        
     </section>
-    
-    
 
-    <footer>
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+        <h2 class="section-title" data-aos="fade-up">Mes Compétences</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+            Technologies et outils que je maîtrise
+        </p>
+        
+        <div class="skills-container" data-aos="fade-up" data-aos-delay="200">
+            <div class="skill-category">
+                <h3><i class="fas fa-code"></i> Langages de Programmation</h3>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Java</span>
+                        <span class="skill-level">Intermédiaire</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="75"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">JavaScript</span>
+                        <span class="skill-level">Intermédiaire</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="70"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">HTML/CSS</span>
+                        <span class="skill-level">Avancé</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="85"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">SQL</span>
+                        <span class="skill-level">Intermédiaire</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="65"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3><i class="fas fa-network-wired"></i> Réseaux & Systèmes</h3>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Administration Linux</span>
+                        <span class="skill-level">Intermédiaire</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="70"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Configuration Réseaux</span>
+                        <span class="skill-level">Intermédiaire</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="75"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Virtualisation</span>
+                        <span class="skill-level">Débutant</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="25"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Sécurité</span>
+                        <span class="skill-level">Débutant</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="25"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3><i class="fas fa-tools"></i> Outils & Technologies</h3>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Git/GitHub</span>
+                        <span class="skill-level">Intermédiaire</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="80"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">VS Code</span>
+                        <span class="skill-level">Avancé</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="90"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Base de données</span>
+                        <span class="skill-level">Intermédiaire</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="65"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <h2 class="section-title" data-aos="fade-up">Mes Projets</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+            Découvrez quelques-unes de mes réalisations
+        </p>
+        
+        <div class="projects-grid">
+            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                <img src="assets/project1.png" alt="Site Web Institutionnel" class="project-image">
+                <div class="project-content">
+                    <h3 class="project-title">Site Web Institutionnel</h3>
+                    <p class="project-description">
+                        Création d'un site web institutionnel pour une entreprise du secteur numérique, 
+                        destiné à la génération Alpha avec un design sobre et écologique.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Responsive</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="project1.html" class="project-link">
+                            <i class="fas fa-eye"></i> Voir détails
+                        </a>
+                        <a href="https://github.com/Spirit38" class="project-link" target="_blank">
+                            <i class="fab fa-github"></i> Code source
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <h2 class="section-title" data-aos="fade-up">Contactez-moi</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+            N'hésitez pas à me contacter pour toute question ou opportunité
+        </p>
+        
+        <div class="contact-container">
+            <div class="contact-info" data-aos="fade-right">
+                <h3 style="color: var(--text-primary); margin-bottom: 1.5rem;">Informations de contact</h3>
+                
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <strong>Email</strong><br>
+                        <a href="mailto:mathis.vangi@gmail.com" style="color: var(--text-secondary);">mathis.vangi@gmail.com</a>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <strong>Localisation</strong><br>
+                        Grenoble, France
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <div>
+                        <strong>Formation</strong><br>
+                        BUT Informatique - IUT2 UGA
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-briefcase"></i>
+                    <div>
+                        <strong>Statut</strong><br>
+                        Étudiant - Recherche stage/alternance
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/mathis-vangi" target="_blank" class="social-link">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/Spirit38" target="_blank" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="mailto:mathis.vangi@gmail.com" class="social-link">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <!-- <a href="/assets/cv.pdf" download class="social-link">
+                        <i class="fas fa-download"></i>
+                    </a> -->
+                </div>
+            </div>
+            
+            <form class="contact-form" data-aos="fade-left" action="https://formspree.io/f/myzelkkz" method="post">
+                <h3 style="color: var(--text-primary); margin-bottom: 1.5rem;">Envoyez-moi un message</h3>
+                
+                <div class="form-group">
+                    <label for="name">Nom complet *</label>
+                    <input type="text" id="name" name="Nom" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Adresse email *</label>
+                    <input type="email" id="email" name="Email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Sujet</label>
+                    <input type="text" id="subject" name="Sujet" placeholder="Ex: Opportunité de stage">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" rows="6" required placeholder="Votre message..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-paper-plane"></i> Envoyer le message
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
         <p>&copy; 2025 Vangi Mathis. Tous droits réservés.</p>
     </footer>
+
+    <!-- Scroll to top button -->
+    <button class="scroll-top" id="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
