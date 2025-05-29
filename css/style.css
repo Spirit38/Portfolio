@@ -6,7 +6,9 @@
   --bg-card: #1a1a2e;
   --bg-secondary: #16213e;
   --text-primary: #ffffff;
+  --text-nav2: #ffffff;
   --text-secondary: #b3c3d6;
+  --text-nav: #b3c3d6;
   --text-muted: #8b949e;
   --gradient: linear-gradient(
     135deg,
@@ -24,6 +26,8 @@
   --bg-secondary: #e2e8f0;
   --text-primary: #1a202c;
   --text-secondary: #4a5568;
+  --text-nav2: #ffffff;
+  --text-nav: #ffffff;
   --text-muted: #718096;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
@@ -87,7 +91,7 @@ html {
 }
 
 .nav-links a {
-  color: var(--text-secondary);
+  color: var(--text-nav);
   text-decoration: none;
   font-weight: 500;
   position: relative;
@@ -96,7 +100,7 @@ html {
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--text-primary);
+  color: var(--text-nav2);
 }
 
 .nav-links a::after {
