@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GELPP — Gestionnaire d'événements (Vangi Mathis)</title>
+  <meta name="description" content="GELPP — Gestionnaire d'événements pour lotissements et propriétés partagées (MEGA SAE)." />
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
+  <!-- Swiper (carousel) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <!-- Page styles (votre css principal) -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* Styles locaux utiles pour la page projet */
+    .project-detail { padding: 3rem 1rem; }
+    .project-gallery { max-width: 1000px; margin: 0 auto 2.5rem; }
+    .swiper { width: 100%; height: 460px; }
+    .swiper-slide img { width: 100%; height: 100%; object-fit: contain; border-radius: 12px; }
+    @media (max-width: 640px) { .swiper { height: 300px; } }
+    .project-content { max-width: 840px; margin: 0 auto; }
+    .button-group .btn { padding: 0.7rem 1.1rem; }
+  </style>
+</head>
+
+<body>
+  <!-- Loading Screen -->
+  <div class="loading" id="loading"><div class="loader"></div></div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="logo">Vangi<span> Mathis</span></div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html#home" class="nav-link">Accueil</a></li>
+      <li><a href="index.html#about" class="nav-link">À propos</a></li>
+      <li><a href="index.html#projects" class="nav-link active">Projets</a></li>
+      <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <button class="theme-toggle" id="theme-toggle" title="Changer le thème"><i class="fas fa-sun"></i></button>
+      <a href="https://github.com/Spirit38" target="_blank" class="github-icon"><i class="fab fa-github"></i></a>
+      <div class="mobile-menu" id="mobile-menu"><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+
+  <!-- Section Projet -->
+  <section class="section project-detail">
+    <h1 class="section-title" data-aos="fade-up">GELPP — Gestionnaire d'événements</h1>
+    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">MEGA SAE — Application Java/JavaFX pour la gestion d'événements en copropriété.</p>
+
+    <!-- Swiper gallery -->
+    <div class="project-gallery" data-aos="fade-up" data-aos-delay="150">
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+
+          <div class="swiper-slide">
+            <img src="assets/project2.png" alt="Maquette page principale GELPP" loading="lazy">
+          </div>
+
+          <div class="swiper-slide">
+            <img src="assets/project2.1.png" alt="Calendrier des événements GELPP" loading="lazy">
+          </div>
+
+          <div class="swiper-slide">
+            <img src="assets/project2.2.png" alt="Écran de création d'événement GELPP" loading="lazy">
+          </div>
+
+          <div class="swiper-slide">
+            <img src="assets/project2.3.png" alt="Diagrammes UML et modélisation" loading="lazy">
+          </div>
+
+          <div class="swiper-slide">
+            <img src="assets/project2.4.png" alt="Diagrammes UML et modélisation" loading="lazy">
+          </div>
+
+          <div class="swiper-slide">
+            <img src="assets/project2.6.png" alt="Diagrammes UML et modélisation" loading="lazy">
+          </div>
+
+          <div class="swiper-slide">
+            <img src="assets/project2.7.png" alt="Diagrammes UML et modélisation" loading="lazy">
+          </div>
+
+        </div>
+        <!-- Pagination & navigation -->
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </div>
+
+    <!-- Contenu du projet -->
+    <div class="project-content">
+
+      <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+        <h2>🎯 Description</h2>
+        <p>Dans le cadre de notre projet MEGA SAE, nous avons conçu et développé <strong>GELPP</strong> (Gestionnaire d’Événements pour les Lotissements et Propriétés Partagées), une application lourde destinée à faciliter la gestion d'événements (assemblées générales, réunions, fêtes de voisinage) au sein des copropriétés. L'application est développée en Java avec JavaFX pour fournir une interface graphique ergonomique et conforme aux besoins métiers.</p>
+      </div>
+
+      <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+        <h2>❓ Problématique</h2>
+        <p>La gestion d'événements en copropriété est souvent dispersée (emails, affichages papiers, tableurs). GELPP centralise les informations, simplifie la planification, et améliore la communication entre gestionnaires et résidents.</p>
+      </div>
+
+      <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+        <h2>🧠 Compétences mobilisées</h2>
+        <ul>
+          <li>Java & JavaFX (IHM et logique métier)</li>
+          <li>Modélisation UML (Visual Paradigm)</li>
+          <li>Contrôle de versions (Git / GitHub)</li>
+          <li>Méthodes agiles et gestion de projet</li>
+        </ul>
+      </div>
+
+      <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+        <h2>🎯 Objectifs</h2>
+        <ul>
+          <li>Permettre la création, la planification et le suivi d'événements</li>
+          <li>Offrir une interface intuitive pour les gestionnaires</li>
+          <li>Faciliter la communication et l'archivage des compte-rendus</li>
+        </ul>
+      </div>
+
+      <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+        <h2>🤝 Travail en équipe</h2>
+        <p>Le projet a été réalisé par une équipe de 4 à 5 personnes. Nous avons utilisé Discord pour la communication, GitHub pour le code et Visual Paradigm pour la modélisation. Chaque membre avait des responsabilités claires (IHM, backend, tests, documentation).</p>
+      </div>
+
+      <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+        <h2>👤 Apports individuels</h2>
+        <p>Contribution au développement Java/JavaFX, à la conception des maquettes et à la rédaction des documents de cadrage. Participation aux revues de code et aux tests d'intégration.</p>
+      </div>
+
+      <div data-aos="fade-up" style="margin-bottom: 2rem;">
+        <h2>🛠️ Savoir-faire acquis</h2>
+        <ul>
+          <li>Réalisation d'une application Java complète</li>
+          <li>Modélisation et conception logicielle</li>
+          <li>Travail collaboratif et gestion de versions</li>
+        </ul>
+      </div>
+
+      <div class="button-group" data-aos="fade-up" style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;">
+        <a href="index.html#projects" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Retour aux projets</a>
+        <a href="https://github.com/Spirit38/GELPP" class="btn btn-secondary" target="_blank"><i class="fab fa-github"></i> Code source</a>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Scroll to Top -->
+  <button class="scroll-top" id="scroll-top"><i class="fas fa-arrow-up"></i></button>
+
+  <!-- Footer -->
+  <footer class="footer"><p>&copy; 2025 Vangi Mathis. Tous droits réservés.</p></footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="script.js"></script>
+
+  <script>
+    // AOS
+    AOS.init({ once: true, duration: 600 });
+
+    // Swiper
+    const swiper = new Swiper('.mySwiper', {
+      loop: true,
+      pagination: { el: '.swiper-pagination', clickable: true },
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+      keyboard: { enabled: true },
+    });
+
+    // Optional: simple lazy loader hide
+    window.addEventListener('load', () => {
+      const l = document.getElementById('loading');
+      if (l) l.style.display = 'none';
+    });
+  </script>
+</body>
+
+</html>
