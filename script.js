@@ -1,4 +1,3 @@
-// Initialize AOS (Animate On Scroll)
 AOS.init({
   duration: 1000,
   easing: "ease-in-out",
@@ -6,7 +5,6 @@ AOS.init({
   offset: 100,
 });
 
-// Loading screen
 window.addEventListener("load", function () {
   const loading = document.getElementById("loading");
   setTimeout(() => {
@@ -14,19 +12,16 @@ window.addEventListener("load", function () {
   }, 1000);
 });
 
-// Navigation functionality
 const navbar = document.getElementById("navbar");
 const navLinks = document.getElementById("nav-links");
 const mobileMenu = document.getElementById("mobile-menu");
 const navLinkElements = document.querySelectorAll(".nav-link");
 
-// Mobile menu toggle
 mobileMenu.addEventListener("click", function () {
   navLinks.classList.toggle("active");
   this.classList.toggle("active");
 });
 
-// Close mobile menu when clicking on a link
 navLinkElements.forEach((link) => {
   link.addEventListener("click", function () {
     navLinks.classList.remove("active");
@@ -34,7 +29,6 @@ navLinkElements.forEach((link) => {
   });
 });
 
-// Navbar scroll effect
 window.addEventListener("scroll", function () {
   if (window.scrollY > 100) {
     navbar.classList.add("scrolled");
@@ -43,7 +37,6 @@ window.addEventListener("scroll", function () {
   }
 });
 
-// Active navigation link
 function setActiveNavLink() {
   const sections = document.querySelectorAll("section[id]");
   const scrollPos = window.scrollY + 200;
@@ -66,7 +59,6 @@ function setActiveNavLink() {
 
 window.addEventListener("scroll", setActiveNavLink);
 
-// Smooth scroll for navigation links
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
     e.preventDefault();
@@ -80,11 +72,9 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   });
 });
 
-// Theme toggle
 const themeToggle = document.getElementById("theme-toggle");
 const body = document.body;
 
-// Check for saved theme preference or default to 'dark'
 const currentTheme = localStorage.getItem("theme") || "dark";
 body.setAttribute("data-theme", currentTheme);
 
@@ -106,7 +96,6 @@ themeToggle.addEventListener("click", function () {
   }
 });
 
-// Skills animation
 function animateSkills() {
   const skillBars = document.querySelectorAll(".skill-progress");
 
@@ -116,7 +105,6 @@ function animateSkills() {
   });
 }
 
-// Trigger skills animation when section is visible
 const skillsSection = document.getElementById("skills");
 const observer = new IntersectionObserver(
   (entries) => {
@@ -132,7 +120,6 @@ const observer = new IntersectionObserver(
 
 observer.observe(skillsSection);
 
-// Scroll to top button
 const scrollTopBtn = document.getElementById("scroll-top");
 
 window.addEventListener("scroll", function () {
@@ -160,7 +147,6 @@ contactForm.addEventListener("submit", function (e) {
     '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
   submitBtn.disabled = true;
 
-  // Reset after 3 seconds (Formspree will handle the actual submission)
   setTimeout(() => {
     submitBtn.innerHTML = '<i class="fas fa-check"></i> Message envoyé !';
     setTimeout(() => {
@@ -170,7 +156,6 @@ contactForm.addEventListener("submit", function (e) {
   }, 1000);
 });
 
-// Add some interactive effects
 document.querySelectorAll(".project-card").forEach((card) => {
   card.addEventListener("mouseenter", function () {
     this.style.transform = "translateY(-10px) rotateX(5deg)";
@@ -196,17 +181,16 @@ function typeWriter(element, text, speed = 100) {
   type();
 }
 
-// Start typing effect after page load
+
 window.addEventListener("load", function () {
   setTimeout(() => {
     const heroTitle = document.querySelector(".hero-title");
     if (heroTitle) {
-      typeWriter(heroTitle, "Vangi Mathis", 150);
+      typeWriter(heroTitle, "Mathis Vangi", 150);
     }
   }, 1500);
 });
 
-// Add floating animation to hero image
 const heroImage = document.querySelector(".hero-image img");
 if (heroImage) {
   let floatDirection = 1;
@@ -217,7 +201,6 @@ if (heroImage) {
   }, 16);
 }
 
-// Parallax effect for background elements
 window.addEventListener("scroll", function () {
   const scrolled = window.pageYOffset;
   const parallaxElements = document.querySelectorAll(".hero::before");
