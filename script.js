@@ -296,3 +296,45 @@ if (filterBtns.length > 0) {
         });
     });
 }
+
+/* =========================================
+   Zoom Image Projet
+   ========================================= */
+
+const lightbox = document.createElement('div');
+lightbox.id = 'lightbox';
+lightbox.className = 'lightbox';
+document.body.appendChild(lightbox);
+
+const projectImages = document.querySelectorAll('.swiper-slide img');
+
+if (projectImages.length > 0) {
+    projectImages.forEach(image => {
+        image.addEventListener('click', e => {
+            e.stopPropagation(); 
+            
+            lightbox.classList.add('active');
+            
+            const img = document.createElement('img');
+            img.src = image.src;
+            
+            while (lightbox.firstChild) {
+                lightbox.removeChild(lightbox.firstChild);
+            }
+            
+            lightbox.appendChild(img);
+        });
+    });
+}
+
+lightbox.addEventListener('click', e => {
+    if (e.target === e.currentTarget) {
+        lightbox.classList.remove('active');
+    }
+});
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        lightbox.classList.remove('active');
+    }
+});

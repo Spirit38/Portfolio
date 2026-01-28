@@ -6,6 +6,7 @@
   --bg-card: #1a1a2e;
   --bg-secondary: #16213e;
   --text-primary: #ffffff;
+  --text-mobile: #ffffff;
   --text-nav2: #ffffff;
   --text-secondary: #b3c3d6;
   --text-nav: #b3c3d6;
@@ -25,6 +26,7 @@
   --bg-card: #f8fafc;
   --bg-secondary: #e2e8f0;
   --text-primary: #1a202c;
+  --text-mobile: #ffffff;
   --text-secondary: #4a5568;
   --text-nav2: #ffffff;
   --text-nav: #ffffff;
@@ -819,7 +821,7 @@ html {
 .mobile-menu span {
   width: 25px;
   height: 3px;
-  background: var(--text-primary);
+  background: var(--text-mobile);
   margin: 3px 0;
   transition: var(--transition);
 }
@@ -978,4 +980,52 @@ html {
   100% {
     transform: rotate(360deg);
   }
+}
+
+/* =========================================
+   Zoom Image
+   ========================================= */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+  cursor: zoom-out;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox.active {
+  display: flex;
+  opacity: 1;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90vh;
+  border-radius: 8px;
+  box-shadow: 0 0 50px rgba(0,0,0,0.5);
+  border: 2px solid var(--primary-color);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+  cursor: default;
+}
+
+.lightbox.active img {
+  transform: scale(1);
+}
+
+.swiper-slide img {
+  cursor: zoom-in;
+  transition: filter 0.3s;
+}
+
+.swiper-slide img:hover {
+  filter: brightness(1.1);
 }
