@@ -11,25 +11,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <!-- AOS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-
-  <!-- Swiper (carousel) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
-  <!-- Page styles (votre css principal) -->
   <link rel="stylesheet" href="css/style.css" />
-
-  <style>
-    /* Styles locaux utiles pour la page projet */
-    .project-gallery { max-width: 1000px; margin: 0 auto 2.5rem; }
-    .swiper { width: 100%; height: 460px; }
-    .swiper-slide img { width: 100%; height: 100%; object-fit: contain; border-radius: 12px; }
-    @media (max-width: 640px) { .swiper { height: 300px; } }
-    .project-content { max-width: 840px; margin: 0 auto; }
-    .button-group .btn { padding: 0.7rem 1.1rem; }
-  </style>
+  <link rel="icon" type="image/png" href="assets/ms-icon-310x310.png">
 </head>
 
 <body>
@@ -38,7 +23,7 @@
 
   <!-- Navigation -->
   <nav class="navbar" id="navbar">
-    <div class="logo">Vangi<span> Mathis</span></div>
+    <div class="logo">Mathis<span> Vangi</span></div>
     <ul class="nav-links" id="nav-links">
       <li><a href="index.html#home" class="nav-link">Accueil</a></li>
       <li><a href="index.html#about" class="nav-link">À propos</a></li>
@@ -168,25 +153,6 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script src="script.js"></script>
-
-  <script>
-    // AOS
-    AOS.init({ once: true, duration: 600 });
-
-    // Swiper
-    const swiper = new Swiper('.mySwiper', {
-      loop: true,
-      pagination: { el: '.swiper-pagination', clickable: true },
-      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-      keyboard: { enabled: true },
-    });
-
-    // Optional: simple lazy loader hide
-    window.addEventListener('load', () => {
-      const l = document.getElementById('loading');
-      if (l) l.style.display = 'none';
-    });
-  </script>
 </body>
 
 </html>

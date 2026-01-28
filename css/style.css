@@ -32,6 +32,31 @@
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
+.filter-btn {
+    padding: 8px 16px;
+    margin: 0 5px;
+    border: 2px solid var(--bg-card);
+    background: transparent;
+    color: var(--text-primary);
+    cursor: pointer;
+    border-radius: 20px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.filter-btn:hover {
+    background: rgba(79, 70, 229, 0.1);
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+  background: var(--primary-color);
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -488,6 +513,10 @@ html {
   gap: 2rem;
 }
 
+.project-card.hidden {
+    display: none;
+}
+
 .project-card {
   background: var(--bg-card);
   border-radius: var(--border-radius);
@@ -515,7 +544,35 @@ html {
 
 .project-content {
   padding: 2rem;
+  max-width: 840px;
+  margin: 0 auto; 
 }
+
+.button-group .btn {
+  padding: 0.7rem 1.1rem; 
+}
+
+.project-gallery { 
+  max-width: 1000px; 
+  margin: 0 auto 2.5rem; 
+}
+
+.mb-medium { 
+  margin-bottom: 1.5rem; 
+}
+
+.swiper { 
+  width: 100%;
+  height: 460px;
+}
+
+.swiper-slide img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: contain; 
+  border-radius: 12px; 
+}
+    
 
 .project-title {
   font-size: 1.3rem;
@@ -765,6 +822,9 @@ html {
 
   .section {
     padding: 3rem 1rem;
+  }
+  .swiper { 
+    height: 300px; 
   }
 }
 

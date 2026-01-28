@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aide&Vous — Assistant pour aidants (Vangi Mathis)</title>
+  <meta name="description" content="Aide&Vous — Application Web sécurisée pour la gestion des dossiers médicaux et la coordination des aidants familiaux." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/png" href="assets/ms-icon-310x310.png">
+
+</head>
+
+<body>
+  <div class="loading" id="loading"><div class="loader"></div></div>
+
+  <nav class="navbar" id="navbar">
+    <div class="logo">Mathis<span> Vangi</span></div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html#home" class="nav-link">Accueil</a></li>
+      <li><a href="index.html#about" class="nav-link">À propos</a></li>
+      <li><a href="index.html#projects" class="nav-link active">Projets</a></li>
+      <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <button class="theme-toggle" id="theme-toggle" title="Changer le thème"><i class="fas fa-sun"></i></button>
+      <a href="https://github.com/Spirit38" target="_blank" class="github-icon"><i class="fab fa-github"></i></a>
+      <div class="mobile-menu" id="mobile-menu"><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+
+  <section class="section project-detail">
+    <h1 class="section-title" data-aos="fade-up">Aide&Vous</h1>
+    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Application web — Plateforme de coordination et de suivi médical pour les aidants familiaux.</p>
+
+    <div class="project-gallery" data-aos="fade-up" data-aos-delay="150">
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+
+          <div class="swiper-slide">
+            <img src="assets/aidevous_landing.png" alt="Landing Page Aide&Vous" loading="lazy">
+          </div>
+
+          <div class="swiper-slide">
+            <img src="assets/aidevous_dashboard.png" alt="Tableau de bord Aidant" loading="lazy">
+          </div>
+
+          <div class="swiper-slide">
+            <img src="assets/aidevous_profil.png" alt="Profil" loading="lazy">
+          </div>
+
+          <div class="swiper-slide">
+            <img src="assets/aidevous_coffre.png" alt="Coffre-fort" loading="lazy">
+          </div>
+
+          <div class="swiper-slide">
+            <img src="assets/aidevous_coffree.png" alt="Coffre-fort" loading="lazy">
+          </div>
+
+          <div class="swiper-slide">
+            <img src="assets/aidevous_post-it.png" alt="Post-It" loading="lazy">
+          </div>
+
+          <div class="swiper-slide">
+             <img src="assets/aidevous_agenda.png" alt="Agenda Partagé" loading="lazy">
+          </div>
+
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </div>
+
+    <div class="project-content">
+
+      <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+        <h2>🎯 Description</h2>
+        <p><strong>Aide&Vous</strong> est une application web conçue pour simplifier le quotidien des aidants familiaux. Elle permet de centraliser les informations médicales (ordonnances, contacts, rendez-vous) d'une personne dépendante et de les partager de manière sécurisée avec un "cercle de soin" (famille, infirmiers, voisins).</p>
+        <p>Le projet se distingue par son approche technique rigoureuse : développement <strong>"Native" (sans framework)</strong> pour garantir performance et accessibilité en zone rurale, et intégration d'un module <strong>OCR</strong> pour la numérisation automatique des documents.</p>
+      </div>
+
+      <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+        <h2>❓ Problématique</h2>
+        <p>Les aidants sont souvent submergés par la gestion administrative et médicale (perte d'ordonnances, manque de coordination entre proches). Aide&Vous répond au besoin de centralisation, de sécurité des données de santé (contexte RGPD) et d'accessibilité rapide en cas d'urgence.</p>
+      </div>
+
+      <div data-aos="fade-up" class="mb-medium"> <h2>🧠 Stack Technique & Compétences</h2>
+        <div style="margin-bottom: 10px;">
+            <span class="tech-tag">PHP 8.4 (MVC Natif)</span> <span class="tech-tag">PostgreSQL</span>
+            <span class="tech-tag">Python (Tesseract OCR)</span> <span class="tech-tag">Debian 13</span>
+        </div>
+        <ul>
+            <li><strong>Architecture :</strong> Client-Serveur / Modèle MVC (Modèle-Vue-Contrôleur) conçu de zéro.</li>
+            <li><strong>Base de données :</strong> Modélisation complexe (MCD/MLD) avec PostgreSQL.</li>
+            <li><strong>Sécurité :</strong> Chiffrement des documents (AES-256), Hachage Argon2, protection CSRF/XSS.</li> 
+            <li><strong>Système :</strong> Déploiement et configuration sur un serveur Debian sécurisé.</li>
+        </ul>
+      </div>
+
+      <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+        <h2>🚀 Fonctionnalités Clés</h2>
+        <ul>
+          <li><strong>Coffre-fort numérique :</strong> Upload et analyse automatique d'ordonnances via OCR (Python).</li>
+          <li><strong>Fiche d'Urgence :</strong> Génération instantanée d'une fiche récapitulative.</li>
+          <li><strong>Cercle de Soin :</strong> Gestion des permissions pour inviter d'autres aidants.</li>
+          <li><strong>Agenda Partagé :</strong> Suivi des rendez-vous médicaux et évènement.</li>
+        </ul>
+      </div>
+
+      <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+        <h2>🤝 Travail en équipe</h2>
+        <p>Projet réalisé en équipe avec une méthodologie Agile. Utilisation de Git et Trello pour le suivi des tâches. Rédaction complète d'un dossier d'architecture technique justifiant les choix (Natif vs Framework, PostgreSQL vs SQLite).</p>
+      </div>
+
+      <div data-aos="fade-up" class="mb-large">
+        <h2>🛠️ Savoir-faire acquis</h2>
+        <ul>
+            <li>Conception d'une architecture MVC robuste sans dépendance à un framework.</li>
+            <li>Mise en place d'un pont applicatif (PHP exécutant des scripts Python).</li>
+            <li>Gestion de la confidentialité des données de santé (Introduction aux normes RGPD).</li>
+            <li>Travail collaboratif (Git).</li>
+        </ul>
+      </div>
+      <div class="button-group" data-aos="fade-up" style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;">
+        <a href="index.html#projects" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Retour aux projets</a>
+        <a href="https://github.com/Spirit38/AideEtVous" class="btn btn-secondary" target="_blank"><i class="fab fa-github"></i> Code source</a>
+      </div>
+
+    </div>
+
+  </section>
+
+  <button class="scroll-top" id="scroll-top"><i class="fas fa-arrow-up"></i></button>
+
+  <footer class="footer"><p>&copy; 2026 Vangi Mathis. Tous droits réservés.</p></footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
