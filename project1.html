@@ -54,11 +54,21 @@
       Projet visant à rendre les entreprises du numérique accessibles aux jeunes publics.
     </p>
 
-    <p class="gallery-hint" data-aos="fade-up">
+    <!-- Swiper gallery -->
+     <p class="gallery-hint" data-aos="fade-up">
       <i class="fas fa-search-plus"></i> Cliquez sur les images pour les agrandir
     </p>
-    <div data-aos="fade-up" style="margin-bottom: 3rem;">
-      <img src="assets/project1.png" alt="Projet 1" class="project-image" style="width: 100%; max-width: 800px; display: block; margin: 0 auto; border-radius: 16px;" />
+    <div class="project-gallery" data-aos="fade-up" data-aos-delay="150">
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="assets/project1.png" alt="Photo site Orange Business Service" loading="lazy">
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
     </div>
 
     <div class="project-content" style="max-width: 800px; margin: 0 auto;">
@@ -140,6 +150,7 @@
   </footer>
 
   <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script src="script.js"></script>
 </body>
