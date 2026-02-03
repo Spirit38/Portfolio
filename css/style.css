@@ -1029,3 +1029,91 @@ html {
 .swiper-slide img:hover {
   filter: brightness(1.1);
 }
+
+/* --- AWARD RIBBON --- */
+
+.project-card {
+    position: relative;
+    overflow: hidden; 
+}
+
+.award-ribbon.silver {
+  background: linear-gradient(45deg, #E0E0E0, #9E9E9E);
+  color: #333333;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+
+  position: absolute;
+  top: 32px;      
+  right: -60px;   
+  width: 220px;   
+  transform: rotate(45deg);
+  z-index: 10;
+
+  display: flex;             
+  justify-content: center;   
+  align-items: center;       
+  gap: 8px;                  
+  padding: 8px 0;            
+  
+  font-weight: 800;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.award-ribbon.silver i {
+  margin-right: 0; 
+}
+
+@keyframes silver-shine {
+  0% { background-position: -100px; }
+  20% { background-position: 200px; }
+  100% { background-position: 200px; }
+}
+
+.award-ribbon.silver {
+  background: linear-gradient(45deg, #9E9E9E 0%, #E0E0E0 40%, #ffffff 50%, #E0E0E0 60%, #9E9E9E 100%);
+  background-size: 200% auto;
+  animation: silver-shine 3s infinite linear;
+}
+
+/* --- PAGE PROJET : BANDEAU PRIX --- */
+.project-award {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 40px 0;
+}
+
+.award-content {
+    background: linear-gradient(135deg, #e0e0e0, #ffffff);
+    border: 2px solid #C0C0C0; /* Argent */
+    color: #333;
+    padding: 15px 30px;
+    border-radius: 50px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.1rem;
+}
+
+.award-content i {
+    font-size: 1.5rem;
+    color: #C0C0C0; /* Couleur Argent */
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* --- INDICATION ZOOM --- */
+.gallery-hint {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 10px;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+.gallery-hint i {
+    margin-right: 5px;
+}
