@@ -810,6 +810,19 @@ html {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.footer-link {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+
+.footer-link:hover {
+  color: var(--primary-color); /* Le lien change de couleur au survol */
+}
+
 /* Mobile Menu */
 .mobile-menu {
   display: none;
@@ -1116,4 +1129,88 @@ html {
 
 .gallery-hint i {
     margin-right: 5px;
+}
+
+/* --- Style pour la page Mentions Légales --- */
+.mentions-body {
+    background-color: var(--bg-dark);
+    min-height: 100vh;
+}
+
+.mentions-container {
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+    background: var(--bg-card);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mentions-container h1 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.mentions-container h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 2px;
+}
+
+.mentions-container h2 {
+    color: var(--text-primary);
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.mentions-container p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.mentions-container a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.mentions-container a:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+.back-to-portfolio {
+    display: inline-block;
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: var(--text-secondary) !important;
+}
+
+.back-to-portfolio:hover {
+    color: var(--primary-color) !important;
+    transform: translateX(-5px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .mentions-container {
+        margin: 20px;
+        padding: 25px;
+    }
+    .mentions-container h1 {
+        font-size: 1.8rem;
+    }
 }
