@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartCity Infra — Haute Disponibilité & Sécurité (Vangi Mathis)</title>
+    <meta name="description"
+        content="Infrastructure SmartCity — Architecture réseau L3 sécurisée, cluster VRRP, pare-feu nftables et supervision SIEM Wazuh." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" type="image/png" href="assets/ms-icon-310x310.png">
+</head>
+
+<body>
+    <div class="loading" id="loading">
+        <div class="loader"></div>
+    </div>
+
+    <nav class="navbar" id="navbar">
+        <div class="logo">Mathis<span> Vangi</span></div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html#home" class="nav-link">Accueil</a></li>
+            <li><a href="index.html#about" class="nav-link">À propos</a></li>
+            <li><a href="index.html#projects" class="nav-link active">Projets</a></li>
+            <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div style="display:flex;align-items:center;gap:1rem;">
+            <button class="theme-toggle" id="theme-toggle" title="Changer le thème"><i class="fas fa-sun"></i></button>
+            <a href="https://github.com/Spirit38" target="_blank" class="github-icon"><i class="fab fa-github"></i></a>
+            <div class="mobile-menu" id="mobile-menu"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <section class="section project-detail">
+        <h1 class="section-title" data-aos="fade-up" style="margin-top: 2rem;">Infrastructure SmartCity</h1>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+            Architecture réseau de niveau 3, haute disponibilité (VRRP) et supervision (SIEM).
+        </p>
+
+        <p class="gallery-hint" data-aos="fade-up" data-aos-delay="150">
+            <i class="fas fa-search-plus"></i> Cliquez sur les images pour les agrandir
+        </p>
+
+        <div class="project-gallery" data-aos="fade-up" data-aos-delay="200">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="assets/schema_reseau.png" alt="Schéma de l'architecture réseau SmartCity"
+                            loading="lazy">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/zabbix.png" alt="Tableau de bord de supervision Zabbix" loading="lazy">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/wazuh_dashboard.png" alt="Dashboard SIEM Wazuh" loading="lazy">
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+
+        <div class="project-content">
+
+            <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+                <h2>🎯 Description</h2>
+                <p>
+                    Déployé dans le cadre d'un projet de fin d'année, ce projet simule l'infrastructure informatique
+                    complète d'une <strong>SmartCity</strong> (gestion intelligente des feux de circulation et des
+                    caméras). L'objectif était de construire un réseau d'entreprise virtualisé "from scratch", capable
+                    de résister aux pannes matérielles et aux cyberattaques, tout en assurant une traçabilité totale des
+                    événements.
+                </p>
+            </div>
+
+            <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+                <h2>❓ Problématique</h2>
+                <p>
+                    Comment garantir qu'un réseau gérant des équipements critiques (IoT) ne soit jamais paralysé par une
+                    panne de routeur, et comment empêcher qu'une compromission sur un capteur urbain ne se propage vers
+                    les serveurs de bases de données internes ? La réponse réside dans la <strong>redondance</strong> et
+                    le principe de <strong>moindre privilège</strong>.
+                </p>
+            </div>
+
+            <div data-aos="fade-up" class="mb-medium">
+                <h2>🧠 Stack Technique & Outils</h2>
+                <div style="margin-bottom: 10px;">
+                    <span class="tech-tag">Proxmox VE</span>
+                    <span class="tech-tag">nftables</span>
+                    <span class="tech-tag">Keepalived (VRRP)</span>
+                    <span class="tech-tag">Nginx</span>
+                </div>
+                <ul>
+                    <li><strong>Routage & Sécurité :</strong> Filtrage L3/L4 Stateful, NAT (Masquerade) et politique
+                        Default Drop.</li>
+                    <li><strong>Services d'Infrastructure :</strong> Serveurs DNS interne (BIND9), DHCP dynamique (Kea),
+                        et relais DHCP.</li>
+                    <li><strong>Supervision (MCO) :</strong> Métrologie active avec Zabbix (agents et serveurs).</li>
+                    <li><strong>SIEM :</strong> Centralisation, corrélation des logs et détection d'intrusions via
+                        Wazuh.</li>
+                </ul>
+            </div>
+
+            <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+                <h2>🚀 Architecture & Implémentation</h2>
+                <ul>
+                    <li><strong>Segmentation par VLANs :</strong> Création de 7 réseaux isolés (Admin, IoT, Serveurs,
+                        DMZ, Utilisateurs...) pour cloisonner les accès.</li>
+                    <li><strong>Cluster Haute Disponibilité (HA) :</strong> Mise en place de deux routeurs redondants.
+                        En cas de crash du maître, le routeur de secours reprend l'adresse IP Virtuelle (VIP) en
+                        <strong>moins de 2 secondes</strong> grâce à Keepalived.
+                    </li>
+                    <li><strong>Isolation de la DMZ :</strong> Exposition sécurisée des services Web (Wiki, Zabbix) via
+                        un Reverse Proxy Nginx centralisant les certificats SSL.</li>
+                    <li><strong>Défense réactive :</strong> Configuration de règles nftables loggant spécifiquement les
+                        scans provenant du VLAN IoT, déclenchant des alertes de criticité 10 sur le tableau de bord
+                        Wazuh.</li>
+                </ul>
+            </div>
+
+            <div data-aos="fade-up" class="mb-large">
+                <h2>🛠️ Savoir-faire acquis</h2>
+                <ul>
+                    <li>Synchronisation fine des politiques de sécurité sur un cluster réseau (évitement de l'asymétrie
+                        de routage).</li>
+                    <li>Diagnostic avancé de paquets réseau via <code>tcpdump</code>, <code>traceroute</code> et
+                        <code>nft monitor</code>.
+                    </li>
+                    <li>Sécurisation des accès administrateurs par <strong>tunnels SSH</strong> et clés
+                        cryptographiques.</li>
+                    <li>Automatisation des processus de maintenance, incluant la création de scripts bash pour les mises
+                        à jour globales des machines virtuelles (QEMU Guest Agent).</li>
+                    <li>Rédaction d'une base de connaissances technique complète (MediaWiki).</li>
+                </ul>
+            </div>
+
+            <div class="button-group" data-aos="fade-up"
+                style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;">
+                <a href="index.html#projects" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Retour aux
+                    projets</a>
+            </div>
+
+        </div>
+    </section>
+
+    <button class="scroll-top" id="scroll-top"><i class="fas fa-arrow-up"></i></button>
+
+    <footer class="footer">
+        <p>&copy; 2026 Mathis Vangi. Tous droits réservés.</p>
+        <p><a href="mention-legal.html" class="footer-link">Mentions Légales</a></p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
