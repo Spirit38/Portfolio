@@ -5,11 +5,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GELPP — Gestionnaire d'événements (Vangi Mathis)</title>
-  <meta name="description" content="GELPP — Gestionnaire d'événements pour lotissements et propriétés partagées (MEGA SAE)." />
+  <meta name="description"
+    content="GELPP — Gestionnaire d'événements pour lotissements et propriétés partagées (MEGA SAE)." />
+  <meta name="theme-color" content="#0f0f23" />
 
-  <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap&font-display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -18,11 +21,11 @@
 </head>
 
 <body>
-  <!-- Loading Screen -->
-  <div class="loading" id="loading"><div class="loader"></div></div>
+  <div class="loading" id="loading">
+    <div class="loader"></div>
+  </div>
 
-  <!-- Navigation -->
-  <nav class="navbar" id="navbar">
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Navigation principale">
     <div class="logo">Mathis<span> Vangi</span></div>
     <ul class="nav-links" id="nav-links">
       <li><a href="index.html#home" class="nav-link">Accueil</a></li>
@@ -31,72 +34,84 @@
       <li><a href="index.html#contact" class="nav-link">Contact</a></li>
     </ul>
     <div style="display:flex;align-items:center;gap:1rem;">
-      <button class="theme-toggle" id="theme-toggle" title="Changer le thème"><i class="fas fa-sun"></i></button>
-      <a href="https://github.com/Spirit38" target="_blank" class="github-icon"><i class="fab fa-github"></i></a>
-      <div class="mobile-menu" id="mobile-menu"><span></span><span></span><span></span></div>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Basculer vers le mode clair">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+      </button>
+      <a href="https://github.com/Spirit38" target="_blank" rel="noopener noreferrer" class="github-icon"
+        aria-label="Profil GitHub de Mathis Vangi">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      <button class="mobile-menu" id="mobile-menu" aria-label="Ouvrir le menu" aria-expanded="false"
+        aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
-  <!-- Section Projet -->
-  <section class="section project-detail">
-    <h1 class="section-title" data-aos="fade-up" style="margin-top: 2rem;">GELPP — Gestionnaire d'événements</h1>
-    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Projet — Application Java/JavaFX pour la gestion d'événements en copropriété.</p>
-
-    <!-- Swiper gallery -->
-     <p class="gallery-hint" data-aos="fade-up">
-      <i class="fas fa-search-plus"></i> Cliquez sur les images pour les agrandir
+  <section class="section project-detail" aria-labelledby="project-heading">
+    <h1 class="section-title" id="project-heading" data-aos="fade-up" style="margin-top: 2rem;">GELPP — Gestionnaire
+      d'événements</h1>
+    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+      Projet — Application Java/JavaFX pour la gestion d'événements en copropriété.
     </p>
+
+    <p class="gallery-hint" data-aos="fade-up">
+      <i class="fas fa-search-plus" aria-hidden="true"></i> Cliquez sur les images pour les agrandir
+    </p>
+
     <div class="project-gallery" data-aos="fade-up" data-aos-delay="150">
-      <div class="swiper mySwiper">
+      <div class="swiper mySwiper" role="region" aria-label="Galerie du projet GELPP">
         <div class="swiper-wrapper">
-
           <div class="swiper-slide">
-            <img src="assets/project2.png" alt="Maquette page principale GELPP" loading="lazy">
+            <img src="assets/project2.png" alt="Page principale de l'application GELPP avec la liste des événements"
+              width="960" height="460" loading="lazy">
           </div>
-
           <div class="swiper-slide">
-            <img src="assets/project2.1.png" alt="Calendrier des événements GELPP" loading="lazy">
+            <img src="assets/project2.1.png" alt="Vue calendrier des événements dans GELPP" width="960" height="460"
+              loading="lazy">
           </div>
-
           <div class="swiper-slide">
-            <img src="assets/project2.2.png" alt="Écran de création d'événement GELPP" loading="lazy">
+            <img src="assets/project2.2.png" alt="Formulaire de création d'un nouvel événement" width="960" height="460"
+              loading="lazy">
           </div>
-
           <div class="swiper-slide">
-            <img src="assets/project2.3.png" alt="Diagrammes UML et modélisation" loading="lazy">
+            <img src="assets/project2.3.png" alt="Diagramme UML de classes du projet GELPP" width="960" height="460"
+              loading="lazy">
           </div>
-
           <div class="swiper-slide">
-            <img src="assets/project2.4.png" alt="Diagrammes UML et modélisation" loading="lazy">
+            <img src="assets/project2.4.png" alt="Diagramme de séquence UML" width="960" height="460" loading="lazy">
           </div>
-
           <div class="swiper-slide">
-            <img src="assets/project2.6.png" alt="Diagrammes UML et modélisation" loading="lazy">
+            <img src="assets/project2.6.png" alt="Maquette de l'interface de gestion des résidents" width="960"
+              height="460" loading="lazy">
           </div>
-
           <div class="swiper-slide">
-            <img src="assets/project2.7.png" alt="Diagrammes UML et modélisation" loading="lazy">
+            <img src="assets/project2.7.png" alt="Vue de la documentation technique et architecture du projet"
+              width="960" height="460" loading="lazy">
           </div>
-
         </div>
-        <!-- Pagination & navigation -->
         <div class="swiper-pagination"></div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next" aria-label="Image suivante"></div>
+        <div class="swiper-button-prev" aria-label="Image précédente"></div>
       </div>
     </div>
 
-    <!-- Contenu du projet -->
     <div class="project-content">
 
       <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
         <h2>🎯 Description</h2>
-        <p>Dans le cadre de notre projet, nous avons conçu et développé <strong>GELPP</strong> (Gestionnaire d’Événements pour les Lotissements et Propriétés Partagées), une application lourde destinée à faciliter la gestion d'événements (assemblées générales, réunions, fêtes de voisinage) au sein des copropriétés. L'application est développée en Java avec JavaFX pour fournir une interface graphique ergonomique et conforme aux besoins métiers.</p>
+        <p>Dans le cadre de notre projet, nous avons conçu et développé <strong>GELPP</strong> (Gestionnaire
+          d'Événements pour les Lotissements et Propriétés Partagées), une application lourde destinée à faciliter la
+          gestion d'événements (assemblées générales, réunions, fêtes de voisinage) au sein des copropriétés.
+          L'application est développée en Java avec JavaFX pour fournir une interface graphique ergonomique et conforme
+          aux besoins métiers.</p>
       </div>
 
       <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
         <h2>❓ Problématique</h2>
-        <p>La gestion d'événements en copropriété est souvent dispersée (emails, affichages papiers, tableurs). GELPP centralise les informations, simplifie la planification, et améliore la communication entre gestionnaires et résidents.</p>
+        <p>La gestion d'événements en copropriété est souvent dispersée (emails, affichages papiers, tableurs). GELPP
+          centralise les informations, simplifie la planification, et améliore la communication entre gestionnaires et
+          résidents.</p>
       </div>
 
       <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
@@ -120,12 +135,15 @@
 
       <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
         <h2>🤝 Travail en équipe</h2>
-        <p>Le projet a été réalisé par une équipe de 4 à 5 personnes. Nous avons utilisé Discord pour la communication, GitHub pour le code et Visual Paradigm pour la modélisation. Chaque membre avait des responsabilités claires (IHM, backend, tests, documentation).</p>
+        <p>Le projet a été réalisé par une équipe de 4 à 5 personnes. Nous avons utilisé Discord pour la communication,
+          GitHub pour le code et Visual Paradigm pour la modélisation. Chaque membre avait des responsabilités claires
+          (IHM, backend, tests, documentation).</p>
       </div>
 
       <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
         <h2>👤 Apports individuels</h2>
-        <p>Contribution au développement Java/JavaFX, à la conception des maquettes et à la rédaction des documents de cadrage. Participation aux revues de code et aux tests d'intégration.</p>
+        <p>Contribution au développement Java/JavaFX, à la conception des maquettes et à la rédaction des documents de
+          cadrage. Participation aux revues de code et aux tests d'intégration.</p>
       </div>
 
       <div data-aos="fade-up" style="margin-bottom: 2rem;">
@@ -137,25 +155,28 @@
         </ul>
       </div>
 
-      <div class="button-group" data-aos="fade-up" style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;">
-        <a href="index.html#projects" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Retour aux projets</a>
-        <a href="https://github.com/Spirit38/GELPP" class="btn btn-secondary" target="_blank"><i class="fab fa-github"></i> Code source</a>
+      <div class="button-group" data-aos="fade-up"
+        style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;">
+        <a href="index.html#projects" class="btn btn-secondary">
+          <i class="fas fa-arrow-left" aria-hidden="true"></i> Retour aux projets
+        </a>
+        <a href="https://github.com/Spirit38/GELPP" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-github" aria-hidden="true"></i> Code source
+        </a>
       </div>
 
     </div>
-
   </section>
 
-  <!-- Scroll to Top -->
-  <button class="scroll-top" id="scroll-top"><i class="fas fa-arrow-up"></i></button>
+  <button class="scroll-top" id="scroll-top" aria-label="Retour en haut de page">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
 
-  <!-- Footer -->
-<!-- Footer -->
   <footer class="footer">
-    <p>&copy; 2025 Mathis Vangi. Tous droits réservés.</p>
+    <p>&copy; 2026 Mathis Vangi. Tous droits réservés.</p>
     <p><a href="mention-legal.html" class="footer-link">Mentions Légales</a></p>
   </footer>
-  <!-- Scripts -->
+
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script src="script.js"></script>

@@ -4,25 +4,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aide&Vous — Assistant pour aidants (Vangi Mathis)</title>
-  <meta name="description" content="Aide&Vous — Application Web sécurisée pour la gestion des dossiers médicaux et la coordination des aidants familiaux." />
+  <title>Aide&amp;Vous — Assistant pour aidants (Vangi Mathis)</title>
+  <meta name="description"
+    content="Aide&Vous — Application Web sécurisée pour la gestion des dossiers médicaux et la coordination des aidants familiaux." />
+  <meta name="theme-color" content="#0f0f23" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap&font-display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
   <link rel="stylesheet" href="css/style.css" />
   <link rel="icon" type="image/png" href="assets/ms-icon-310x310.png">
 </head>
 
 <body>
-  <div class="loading" id="loading"><div class="loader"></div></div>
+  <div class="loading" id="loading">
+    <div class="loader"></div>
+  </div>
 
-  <nav class="navbar" id="navbar">
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Navigation principale">
     <div class="logo">Mathis<span> Vangi</span></div>
     <ul class="nav-links" id="nav-links">
       <li><a href="index.html#home" class="nav-link">Accueil</a></li>
@@ -31,62 +34,73 @@
       <li><a href="index.html#contact" class="nav-link">Contact</a></li>
     </ul>
     <div style="display:flex;align-items:center;gap:1rem;">
-      <button class="theme-toggle" id="theme-toggle" title="Changer le thème"><i class="fas fa-sun"></i></button>
-      <a href="https://github.com/Spirit38" target="_blank" class="github-icon"><i class="fab fa-github"></i></a>
-      <div class="mobile-menu" id="mobile-menu"><span></span><span></span><span></span></div>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Basculer vers le mode clair">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+      </button>
+      <a href="https://github.com/Spirit38" target="_blank" rel="noopener noreferrer" class="github-icon"
+        aria-label="Profil GitHub de Mathis Vangi">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      <button class="mobile-menu" id="mobile-menu" aria-label="Ouvrir le menu" aria-expanded="false"
+        aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
-  <section class="section project-detail">
-    <h1 class="section-title" data-aos="fade-up" style="margin-top: 2rem;">Aide&Vous</h1>
-    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Application web — Plateforme de coordination et de suivi médical pour les aidants familiaux.</p>
+  <section class="section project-detail" aria-labelledby="project-heading">
+    <h1 class="section-title" id="project-heading" data-aos="fade-up" style="margin-top: 2rem;">Aide&amp;Vous</h1>
+    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+      Application web — Plateforme de coordination et de suivi médical pour les aidants familiaux.
+    </p>
 
-    <div class="project-award" data-aos="zoom-in" data-aos-delay="200">
+    <div class="project-award" data-aos="zoom-in" data-aos-delay="200" role="note" aria-label="Distinction obtenue">
       <div class="award-content">
-        <i class="fas fa-medal"></i>
+        <i class="fas fa-medal" aria-hidden="true"></i>
         <span><strong>2ème Prix</strong> — Meilleur Prototype (IUT 2 - Département Informatique)</span>
       </div>
     </div>
 
     <p class="gallery-hint" data-aos="fade-up">
-      <i class="fas fa-search-plus"></i> Cliquez sur les images pour les agrandir
+      <i class="fas fa-search-plus" aria-hidden="true"></i> Cliquez sur les images pour les agrandir
     </p>
+
     <div class="project-gallery" data-aos="fade-up" data-aos-delay="150">
-      <div class="swiper mySwiper">
+      <div class="swiper mySwiper" role="region" aria-label="Galerie du projet Aide&Vous">
         <div class="swiper-wrapper">
-
           <div class="swiper-slide">
-            <img src="assets/aidevous_landing.png" alt="Landing Page Aide&Vous" loading="lazy">
+            <img src="assets/aidevous_landing.png" alt="Page d'accueil de l'application Aide&Vous" width="960"
+              height="460" loading="lazy">
           </div>
-
           <div class="swiper-slide">
-            <img src="assets/aidevous_dashboard.png" alt="Tableau de bord Aidant" loading="lazy">
+            <img src="assets/aidevous_dashboard.png" alt="Tableau de bord de l'aidant avec vue synthétique du dossier"
+              width="960" height="460" loading="lazy">
           </div>
-
           <div class="swiper-slide">
-            <img src="assets/aidevous_profil.png" alt="Profil" loading="lazy">
+            <img src="assets/aidevous_profil.png" alt="Page de profil de la personne aidée" width="960" height="460"
+              loading="lazy">
           </div>
-
           <div class="swiper-slide">
-            <img src="assets/aidevous_coffre.png" alt="Coffre-fort" loading="lazy">
+            <img src="assets/aidevous_coffre.png"
+              alt="Coffre-fort numérique listant les ordonnances et documents médicaux" width="960" height="460"
+              loading="lazy">
           </div>
-
           <div class="swiper-slide">
-            <img src="assets/aidevous_coffree.png" alt="Coffre-fort" loading="lazy">
+            <img src="assets/aidevous_coffree.png" alt="Détail d'une ordonnance analysée par OCR dans le coffre-fort"
+              width="960" height="460" loading="lazy">
           </div>
-
           <div class="swiper-slide">
-            <img src="assets/aidevous_post-it.png" alt="Post-It" loading="lazy">
+            <img src="assets/aidevous_post-it.png" alt="Interface des post-it collaboratifs partagés entre aidants"
+              width="960" height="460" loading="lazy">
           </div>
-
           <div class="swiper-slide">
-             <img src="assets/aidevous_agenda.png" alt="Agenda Partagé" loading="lazy">
+            <img src="assets/aidevous_agenda.png" alt="Agenda partagé avec les rendez-vous médicaux à venir" width="960"
+              height="460" loading="lazy">
           </div>
-
         </div>
         <div class="swiper-pagination"></div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next" aria-label="Image suivante"></div>
+        <div class="swiper-button-prev" aria-label="Image précédente"></div>
       </div>
     </div>
 
@@ -94,68 +108,88 @@
 
       <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
         <h2>🎯 Description</h2>
-        <p><strong>Aide&Vous</strong> est une application web conçue pour simplifier le quotidien des aidants familiaux. Elle permet de centraliser les informations médicales (ordonnances, contacts, rendez-vous) d'une personne dépendante et de les partager de manière sécurisée avec un "cercle de soin" (famille, infirmiers, voisins).</p>
+        <p><strong>Aide&amp;Vous</strong> est une application web conçue pour simplifier le quotidien des aidants
+          familiaux. Elle permet de centraliser les informations médicales (ordonnances, contacts, rendez-vous) d'une
+          personne dépendante et de les partager de manière sécurisée avec un "cercle de soin" (famille, infirmiers,
+          voisins).</p>
       </div>
 
       <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
         <h2>❓ Problématique</h2>
-        <p>Les aidants sont souvent submergés par la gestion administrative et médicale (perte d'ordonnances, manque de coordination entre proches). Aide&Vous répond au besoin de centralisation, de sécurité des données de santé (contexte RGPD) et d'accessibilité rapide en cas d'urgence.</p>
+        <p>Les aidants sont souvent submergés par la gestion administrative et médicale (perte d'ordonnances, manque de
+          coordination entre proches). Aide&amp;Vous répond au besoin de centralisation, de sécurité des données de
+          santé (contexte RGPD) et d'accessibilité rapide en cas d'urgence.</p>
       </div>
 
-      <div data-aos="fade-up" class="mb-medium"> <h2>🧠 Stack Technique & Compétences</h2>
+      <div data-aos="fade-up" class="mb-medium">
+        <h2>🧠 Stack Technique & Compétences</h2>
         <div style="margin-bottom: 10px;">
-            <span class="tech-tag">PHP 8.4 (MVC Natif)</span> <span class="tech-tag">PostgreSQL</span>
-            <span class="tech-tag">Python (Tesseract OCR)</span> <span class="tech-tag">Debian 13</span>
+          <span class="tech-tag">PHP 8.4 (MVC Natif)</span>
+          <span class="tech-tag">PostgreSQL</span>
+          <span class="tech-tag">Python (Tesseract OCR)</span>
+          <span class="tech-tag">Debian 13</span>
         </div>
         <ul>
-            <li><strong>Architecture :</strong> Client-Serveur / Modèle MVC (Modèle-Vue-Contrôleur) conçu de zéro.</li>
-            <li><strong>Base de données :</strong> Modélisation complexe (MCD/MLD) avec PostgreSQL.</li>
-            <li><strong>Sécurité :</strong> Chiffrement des documents (AES-256), Hachage Argon2, protection CSRF/XSS.</li> 
-            <li><strong>Système :</strong> Déploiement et configuration sur un serveur Debian sécurisé.</li>
+          <li><strong>Architecture :</strong> Client-Serveur / Modèle MVC (Modèle-Vue-Contrôleur) conçu de zéro.</li>
+          <li><strong>Base de données :</strong> Modélisation complexe (MCD/MLD) avec PostgreSQL.</li>
+          <li><strong>Sécurité :</strong> Chiffrement des documents (AES-256), Hachage Argon2, protection CSRF/XSS.</li>
+          <li><strong>Système :</strong> Déploiement et configuration sur un serveur Debian sécurisé.</li>
         </ul>
       </div>
 
       <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
         <h2>🚀 Fonctionnalités Clés</h2>
         <ul>
-          <li><strong>Coffre-fort numérique :</strong> Upload et analyse automatique d'ordonnances via OCR (Python).</li>
+          <li><strong>Coffre-fort numérique :</strong> Upload et analyse automatique d'ordonnances via OCR (Python).
+          </li>
           <li><strong>Fiche d'Urgence :</strong> Génération instantanée d'une fiche récapitulative.</li>
           <li><strong>Cercle de Soin :</strong> Gestion des permissions pour inviter d'autres aidants.</li>
-          <li><strong>Agenda Partagé :</strong> Suivi des rendez-vous médicaux et évènement.</li>
-          <li><strong>Post-it collaboratif :</strong> Post-it virtuels pour notes rapides et partage automatique entre tous les aidants.</li>
+          <li><strong>Agenda Partagé :</strong> Suivi des rendez-vous médicaux et événements.</li>
+          <li><strong>Post-it collaboratif :</strong> Post-it virtuels pour notes rapides et partage automatique entre
+            tous les aidants.</li>
         </ul>
       </div>
 
       <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
         <h2>🤝 Travail en équipe</h2>
-        <p>Projet réalisé en équipe avec une méthodologie Agile. Utilisation de Git et Trello pour le suivi des tâches. Rédaction complète d'un dossier d'architecture technique justifiant les choix (Natif vs Framework, PostgreSQL vs SQLite).</p>
+        <p>Projet réalisé en équipe avec une méthodologie Agile. Utilisation de Git et Trello pour le suivi des tâches.
+          Rédaction complète d'un dossier d'architecture technique justifiant les choix (Natif vs Framework, PostgreSQL
+          vs SQLite).</p>
       </div>
 
       <div data-aos="fade-up" class="mb-large">
         <h2>🛠️ Savoir-faire acquis</h2>
         <ul>
-            <li>Conception d'une architecture MVC robuste sans dépendance à un framework.</li>
-            <li>Mise en place d'un pont applicatif (PHP exécutant des scripts Python).</li>
-            <li>Gestion de la confidentialité des données de santé (Introduction aux normes RGPD).</li>
-            <li>Travail collaboratif (Git).</li>
+          <li>Conception d'une architecture MVC robuste sans dépendance à un framework.</li>
+          <li>Mise en place d'un pont applicatif (PHP exécutant des scripts Python).</li>
+          <li>Gestion de la confidentialité des données de santé (Introduction aux normes RGPD).</li>
+          <li>Travail collaboratif (Git).</li>
         </ul>
       </div>
-      <div class="button-group" data-aos="fade-up" style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;">
-        <a href="index.html#projects" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Retour aux projets</a>
-        <a href="https://github.com/Spirit38/AideEtVous" class="btn btn-secondary" target="_blank"><i class="fab fa-github"></i> Code source</a>
+
+      <div class="button-group" data-aos="fade-up"
+        style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;">
+        <a href="index.html#projects" class="btn btn-secondary">
+          <i class="fas fa-arrow-left" aria-hidden="true"></i> Retour aux projets
+        </a>
+        <a href="https://github.com/Spirit38/AideEtVous" class="btn btn-secondary" target="_blank"
+          rel="noopener noreferrer">
+          <i class="fab fa-github" aria-hidden="true"></i> Code source
+        </a>
       </div>
 
     </div>
-
   </section>
 
-  <button class="scroll-top" id="scroll-top"><i class="fas fa-arrow-up"></i></button>
+  <button class="scroll-top" id="scroll-top" aria-label="Retour en haut de page">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
 
-<!-- Footer -->
   <footer class="footer">
-    <p>&copy; 2025 Mathis Vangi. Tous droits réservés.</p>
+    <p>&copy; 2026 Mathis Vangi. Tous droits réservés.</p>
     <p><a href="mention-legal.html" class="footer-link">Mentions Légales</a></p>
   </footer>
+
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script src="script.js"></script>

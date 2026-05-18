@@ -1,63 +1,123 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mentions Légales - Mathis Vangi</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="css/style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mentions Légales - Mathis Vangi</title>
+    <meta name="theme-color" content="#0f0f23" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap&font-display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" type="image/png" href="assets/ms-icon-310x310.png">
 </head>
+
 <body class="mentions-body">
 
-    <div class="mentions-container">
-        <a href="index.html" class="back-to-portfolio">← Retour au portfolio</a>
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Navigation principale">
+        <div class="logo">Mathis<span> Vangi</span></div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html#home" class="nav-link">Accueil</a></li>
+            <li><a href="index.html#about" class="nav-link">À propos</a></li>
+            <li><a href="index.html#projects" class="nav-link">Projets</a></li>
+            <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div style="display:flex;align-items:center;gap:1rem;">
+            <button class="theme-toggle" id="theme-toggle" aria-label="Basculer vers le mode clair">
+                <i class="fas fa-sun" aria-hidden="true"></i>
+            </button>
+            <a href="https://github.com/Spirit38" target="_blank" rel="noopener noreferrer" class="github-icon"
+                aria-label="Profil GitHub de Mathis Vangi">
+                <i class="fab fa-github" aria-hidden="true"></i>
+            </a>
+            <button class="mobile-menu" id="mobile-menu" aria-label="Ouvrir le menu" aria-expanded="false"
+                aria-controls="nav-links">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
 
-        <h1>Mentions Légales</h1>
+    <main style="padding-top: 5rem;">
+        <div class="mentions-container">
+            <a href="index.html" class="back-to-portfolio">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i> Retour au portfolio
+            </a>
 
-        <h2><i class="fas fa-user"></i> Éditeur du Site</h2>
-        <p>
-            Ce site est un portfolio personnel, édité par :<br>
-            <strong>Mathis Vangi</strong><br>
-            Étudiant en BUT Informatique - IUT2 Grenoble Alpes<br>
-            <strong>Contact :</strong> <a href="mailto:mathis.vangi@gmail.com">mathis.vangi@gmail.com</a>
-        </p>
+            <h1>Mentions Légales</h1>
 
-        <h2><i class="fas fa-server"></i> Hébergement</h2>
-        <p>
-            Ce site est hébergé par la société :<br>
-            <strong>GitHub Inc.</strong><br>
-            88 Colin P. Kelly Jr. Street<br>
-            San Francisco, CA 94107, USA<br>
-            Site web : <a href="https://pages.github.com" target="_blank">pages.github.com</a>
-        </p>
+            <h2><i class="fas fa-user" aria-hidden="true"></i> Éditeur du Site</h2>
+            <p>
+                Ce site est un portfolio personnel, édité par :<br>
+                <strong>Mathis Vangi</strong><br>
+                Étudiant en BUT Informatique - IUT2 Grenoble Alpes<br>
+                <strong>Contact :</strong>
+                <!-- FIX : email obfusqué -->
+                <a href="#" class="obfuscated-email" data-user="mathis.vangi" data-domain="gmail.com">[cliquez pour
+                    afficher]</a>
+            </p>
 
-        <h2><i class="fas fa-copyright"></i> Propriété Intellectuelle</h2>
-        <p>
-            L'ensemble de ce site (code, design, textes et images personnelles) constitue une œuvre protégée par la législation sur le droit d'auteur. Toute reproduction ou représentation, en tout ou partie, à d'autres fins que l'usage privé, est interdite sans autorisation expresse.
-        </p>
-        
-        <p>
-            <strong>Crédits :</strong><br>
-            Les icônes utilisées sur ce site proviennent de la bibliothèque <strong>Font Awesome</strong> (version Free), utilisées conformément à leur licence.
-        </p>
+            <h2><i class="fas fa-server" aria-hidden="true"></i> Hébergement</h2>
+            <p>
+                Ce site est hébergé par la société :<br>
+                <strong>GitHub Inc.</strong><br>
+                88 Colin P. Kelly Jr. Street<br>
+                San Francisco, CA 94107, USA<br>
+                Site web : <a href="https://pages.github.com" target="_blank"
+                    rel="noopener noreferrer">pages.github.com</a>
+            </p>
 
-        <h2><i class="fas fa-envelope-open-text"></i> Données Personnelles</h2>
-        <p>
-            Le formulaire de contact de ce site est propulsé par le service <strong>Formspree</strong> (Formspree.io). 
-        </p>
-        <p>
-            Les informations fournies (nom, email, message) sont collectées uniquement pour répondre à votre demande. Elles ne sont ni conservées à des fins commerciales ni partagées avec des tiers.
-        </p>
-        <p>
-            Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données en me contactant par email. Pour plus d'infos : <a href="https://formspree.io/legal/privacy-policy" target="_blank">Confidentialité Formspree</a>.
-        </p>
+            <h2><i class="fas fa-copyright" aria-hidden="true"></i> Propriété Intellectuelle</h2>
+            <p>
+                L'ensemble de ce site (code, design, textes et images personnelles) constitue une œuvre protégée par la
+                législation sur le droit d'auteur. Toute reproduction ou représentation, en tout ou partie, à d'autres
+                fins que l'usage privé, est interdite sans autorisation expresse.
+            </p>
+            <p>
+                <strong>Crédits :</strong><br>
+                Les icônes utilisées sur ce site proviennent de la bibliothèque <strong>Font Awesome</strong> (version
+                Free), utilisées conformément à leur licence.
+            </p>
 
-        <p style="text-align: center; margin-top: 60px; font-size: 0.9rem; color: #aaa;">
-            Dernière mise à jour : 09/03/2026
-        </p>
-    </div>
+            <h2><i class="fas fa-envelope-open-text" aria-hidden="true"></i> Données Personnelles</h2>
+            <p>
+                Le formulaire de contact de ce site est propulsé par le service <strong>Formspree</strong>
+                (Formspree.io).
+            </p>
+            <p>
+                Les informations fournies (nom, email, message) sont collectées uniquement pour répondre à votre
+                demande. Elles ne sont ni conservées à des fins commerciales ni partagées avec des tiers.
+            </p>
+            <p>
+                Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos
+                données en me contactant par email. Pour plus d'infos : <a
+                    href="https://formspree.io/legal/privacy-policy" target="_blank"
+                    rel="noopener noreferrer">Confidentialité Formspree</a>.
+            </p>
 
+            <p style="text-align: center; margin-top: 60px; font-size: 0.9rem; color: #aaa;">
+                Dernière mise à jour : 09/03/2026
+            </p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Mathis Vangi. Tous droits réservés.</p>
+        <p><a href="mention-legal.html" class="footer-link">Mentions Légales</a></p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.querySelectorAll(".obfuscated-email").forEach(function (el) {
+            el.addEventListener("click", function (e) {
+                e.preventDefault();
+                var email = this.dataset.user + "@" + this.dataset.domain;
+                this.href = "mailto:" + email;
+                this.textContent = email;
+            });
+        });
+    </script>
 </body>
+
 </html>

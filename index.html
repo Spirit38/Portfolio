@@ -4,13 +4,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>
-    Portfolio - Mathis Vangi | Développeur & Administrateur Réseaux
-  </title>
+  <title>Portfolio - Mathis Vangi | Développeur & Administrateur Réseaux</title>
   <meta name="description"
     content="Portfolio de Mathis Vangi, développeur et administrateur réseaux et systèmes. Découvrez mes projets et compétences techniques." />
+
+  <!-- SEO Open Graph -->
+  <meta property="og:title" content="Portfolio - Mathis Vangi | Développeur & Administrateur Réseaux" />
+  <meta property="og:description"
+    content="Étudiant en BUT Informatique, passionné par le développement et les infrastructures réseaux." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
+
+  <!-- Theme color mobile -->
+  <meta name="theme-color" content="#0f0f23" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+  <!-- FIX : font-display=swap pour éviter le FOIT -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap&font-display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
@@ -23,7 +34,7 @@
     <div class="loader"></div>
   </div>
 
-  <nav class="navbar" id="navbar">
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Navigation principale">
     <div class="logo">Mathis<span> Vangi</span></div>
 
     <ul class="nav-links" id="nav-links">
@@ -36,24 +47,29 @@
     </ul>
 
     <div style="display: flex; align-items: center; gap: 1rem">
-      <button class="theme-toggle" id="theme-toggle" title="Changer le thème">
-        <i class="fas fa-sun"></i>
+      <!-- FIX : aria-label explicite sur le bouton thème -->
+      <button class="theme-toggle" id="theme-toggle" aria-label="Basculer vers le mode clair">
+        <i class="fas fa-sun" aria-hidden="true"></i>
       </button>
-      <a href="https://github.com/Spirit38" target="_blank" class="github-icon">
-        <i class="fab fa-github"></i>
+      <a href="https://github.com/Spirit38" target="_blank" rel="noopener noreferrer" class="github-icon"
+        aria-label="Profil GitHub de Mathis Vangi">
+        <i class="fab fa-github" aria-hidden="true"></i>
       </a>
-      <div class="mobile-menu" id="mobile-menu">
+      <!-- FIX : aria-label + aria-expanded sur le menu burger -->
+      <button class="mobile-menu" id="mobile-menu" aria-label="Ouvrir le menu" aria-expanded="false"
+        aria-controls="nav-links">
         <span></span>
         <span></span>
         <span></span>
-      </div>
+      </button>
     </div>
   </nav>
 
-  <section class="hero" id="home">
+  <section class="hero" id="home" aria-labelledby="hero-heading">
     <div class="hero-content" data-aos="fade-right">
       <div class="hero-subtitle">Développeur <br> Administrateur Réseaux & Systèmes</div>
-      <h1 class="hero-title">Mathis Vangi</h1>
+      <!-- FIX : h1 sémantique présent dès le chargement, typeWriter l'animera -->
+      <h1 class="hero-title" id="hero-heading">Mathis Vangi</h1>
       <p class="hero-description">
         Passionné par le développement et les infrastructures réseaux.
       </p>
@@ -65,12 +81,13 @@
       </div>
     </div>
     <div class="hero-image" data-aos="fade-left">
-      <img src="assets/photo2.png" alt="Photo de Mathis Vangi" />
+      <!-- FIX : dimensions explicites pour éviter le reflow -->
+      <img src="assets/photo2.png" alt="Portrait de Mathis Vangi" width="350" height="350" />
     </div>
   </section>
 
-  <section class="section" id="about">
-    <h2 class="section-title" data-aos="fade-up">À propos de moi</h2>
+  <section class="section" id="about" aria-labelledby="about-heading">
+    <h2 class="section-title" id="about-heading" data-aos="fade-up">À propos de moi</h2>
     <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
       Découvrez mon parcours et ma passion pour la technologie
     </p>
@@ -79,8 +96,8 @@
       <div class="about-text" data-aos="fade-right">
         <p>
           Bonjour et bienvenue ! Je suis <strong>Mathis Vangi</strong>, étudiant en informatique. Mon profil a une
-          petite particularité : j'aime autant écrire du code que configurer des serveurs. C'est ce qui m'anime au
-          quotidien.
+          petite particularité :
+          j'aime autant écrire du code que configurer des serveurs. C'est ce qui m'anime au quotidien.
         </p>
         <p>
           Pour moi, une bonne application ne s'arrête pas à son interface. Ce qui me passionne, c'est de comprendre
@@ -99,11 +116,11 @@
           <span>Années d'étude</span>
         </div>
         <div class="stat-item">
-          <span class="stat-number">4+</span>
+          <span class="stat-number">5+</span>
           <span>Projets réalisés</span>
         </div>
         <div class="stat-item">
-          <span class="stat-number">5+</span>
+          <span class="stat-number">10+</span>
           <span>Technologies maîtrisées</span>
         </div>
         <div class="stat-item">
@@ -114,8 +131,8 @@
     </div>
   </section>
 
-  <section class="section" id="timeline">
-    <h2 class="section-title" data-aos="fade-up">Mon parcours</h2>
+  <section class="section" id="timeline" aria-labelledby="timeline-heading">
+    <h2 class="section-title" id="timeline-heading" data-aos="fade-up">Mon Parcours</h2>
     <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
       Les étapes clés de ma formation et de mon évolution
     </p>
@@ -123,27 +140,22 @@
     <div class="timeline">
 
       <div class="timeline-item" data-aos="fade-right">
-        <div class="timeline-dot">
+        <div class="timeline-dot" aria-hidden="true">
           <i class="fas fa-graduation-cap"></i>
         </div>
-
         <div class="timeline-content">
           <div class="timeline-date">
-            <i class="far fa-calendar-alt"></i> 2024 - 2027 (En cours)
+            <i class="far fa-calendar-alt" aria-hidden="true"></i> 2024 - 2027 (En cours)
           </div>
-
           <h3 class="timeline-title">BUT Informatique</h3>
           <h4 class="timeline-subtitle">IUT 2 - Univ. Grenoble Alpes</h4>
-
           <p class="timeline-speciality">
-            Spécialité : Déploiement d’applications communicantes et sécurisées (Parcours B)
+            Spécialité : Déploiement d'applications communicantes et sécurisées (Parcours B)
           </p>
-
           <p class="timeline-desc">
             Acquisition de compétences entre <strong>développement</strong> et <strong>administration système</strong>.
             Apprentissage de l'installation, la configuration et la sécurisation des services réseaux.
           </p>
-
           <div class="timeline-tags">
             <span class="tech-tag">C / C++</span>
             <span class="tech-tag">Java</span>
@@ -156,26 +168,23 @@
       </div>
 
       <div class="timeline-item" data-aos="fade-right" data-aos-delay="100">
-        <div class="timeline-dot">
+        <div class="timeline-dot" aria-hidden="true">
           <i class="fas fa-briefcase"></i>
         </div>
-
         <div class="timeline-content">
           <div class="timeline-date">
-            <i class="far fa-calendar-alt"></i> Avril 2026 - Juin 2026 (En cours)
+            <i class="far fa-calendar-alt" aria-hidden="true"></i> Avril 2026 - Juin 2026 (En cours)
           </div>
-
           <h3 class="timeline-title">Stage : Développeur Logiciel</h3>
           <h4 class="timeline-subtitle">Mini-golf Indoor - Crolles, France</h4>
-
           <p class="timeline-desc">
             <strong>Missions prévues :</strong> Participation à la conception et au développement d'une
             <strong>application interactive</strong> pour les joueurs. Implémentation de <strong>solutions de
               sécurité</strong> et apprentissage des méthodes de travail collaboratif en équipe technique.
           </p>
-
           <div class="timeline-tags">
             <span class="tech-tag">Développement Applicatif</span>
+            <span class="tech-tag">React</span>
             <span class="tech-tag">Mobile</span>
             <span class="tech-tag">Sécurité</span>
             <span class="tech-tag">Travail d'équipe</span>
@@ -185,24 +194,21 @@
 
       <div class="timeline-item" data-aos="fade-right" data-aos-delay="200">
         <div class="timeline-dot"
-          style="border-color: #C0C0C0; color: #C0C0C0; box-shadow: 0 0 0 5px var(--bg-dark), 0 0 15px rgba(192, 192, 192, 0.4);">
+          style="border-color: #C0C0C0; color: #C0C0C0; box-shadow: 0 0 0 5px var(--bg-dark), 0 0 15px rgba(192, 192, 192, 0.4);"
+          aria-hidden="true">
           <i class="fas fa-medal"></i>
         </div>
-
         <div class="timeline-content" style="border-color: rgba(192, 192, 192, 0.3);">
           <div class="timeline-date" style="color: #C0C0C0; background: rgba(192, 192, 192, 0.1);">
-            <i class="far fa-star"></i> 2025 - 2026
+            <i class="far fa-star" aria-hidden="true"></i> 2025 - 2026
           </div>
-
           <h3 class="timeline-title">Prix du Meilleur Prototype (2ème)</h3>
           <h4 class="timeline-subtitle">IUT 2 - Univ. Grenoble Alpes</h4>
-
           <p class="timeline-desc">
-            <strong>Médaille d'Argent</strong> pour le projet <strong>Aide&Vous</strong>.
+            <strong>Médaille d'Argent</strong> pour le projet <strong>Aide&amp;Vous</strong>.
             Évaluation basée sur la qualité technique (Architecture MVC), l'expérience utilisateur et l'intégration de
             l'OCR.
           </p>
-
           <div class="timeline-tags">
             <span class="tech-tag" style="border: 1px solid #C0C0C0; color: #C0C0C0;">2ème Place</span>
             <span class="tech-tag">Architecture</span>
@@ -212,23 +218,19 @@
       </div>
 
       <div class="timeline-item" data-aos="fade-right" data-aos-delay="300">
-        <div class="timeline-dot">
+        <div class="timeline-dot" aria-hidden="true">
           <i class="fas fa-award"></i>
         </div>
-
         <div class="timeline-content">
           <div class="timeline-date">
-            <i class="far fa-calendar-alt"></i> 2024
+            <i class="far fa-calendar-alt" aria-hidden="true"></i> 2024
           </div>
-
           <h3 class="timeline-title">Certification PIX</h3>
           <h4 class="timeline-subtitle">Plateforme Nationale</h4>
-
           <p class="timeline-desc">
             Validation officielle des compétences numériques. Renforcement des savoirs en cybersécurité, traitement de
             données et culture numérique.
           </p>
-
           <div class="timeline-tags">
             <span class="tech-tag">Cybersécurité</span>
             <span class="tech-tag">Données</span>
@@ -238,23 +240,19 @@
       </div>
 
       <div class="timeline-item" data-aos="fade-right" data-aos-delay="400">
-        <div class="timeline-dot">
+        <div class="timeline-dot" aria-hidden="true">
           <i class="fas fa-school"></i>
         </div>
-
         <div class="timeline-content">
           <div class="timeline-date">
-            <i class="far fa-calendar-alt"></i> 2021 - 2024
+            <i class="far fa-calendar-alt" aria-hidden="true"></i> 2021 - 2024
           </div>
-
           <h3 class="timeline-title">Baccalauréat STI2D (SIN)</h3>
           <h4 class="timeline-subtitle">Lycée Polyvalent Vaucanson - Grenoble</h4>
           <p class="timeline-speciality">Spécialité : Systèmes d'Information et Numérique</p>
-
           <p class="timeline-desc">
             Acquisition des bases solides en logique de programmation, architecture réseau et électronique embarquée.
           </p>
-
           <div class="timeline-tags">
             <span class="tech-tag">Arduino / C++</span>
             <span class="tech-tag">HTML / CSS</span>
@@ -267,21 +265,22 @@
     </div>
   </section>
 
-  <section class="section" id="skills">
-    <h2 class="section-title" data-aos="fade-up">Mes Compétences</h2>
+  <section class="section" id="skills" aria-labelledby="skills-heading">
+    <h2 class="section-title" id="skills-heading" data-aos="fade-up">Mes Compétences</h2>
     <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
       Technologies et outils que je maîtrise
     </p>
 
     <div class="skills-container" data-aos="fade-up" data-aos-delay="200">
       <div class="skill-category">
-        <h3><i class="fas fa-code"></i> Langages de Programmation</h3>
+        <h3><i class="fas fa-code" aria-hidden="true"></i> Langages de Programmation</h3>
         <div class="skill-item">
           <div class="skill-header">
             <span class="skill-name">Java</span>
             <span class="skill-level">Avancé</span>
           </div>
-          <div class="skill-bar">
+          <div class="skill-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
+            aria-label="Java — 80%">
             <div class="skill-progress" data-width="80"></div>
           </div>
         </div>
@@ -290,7 +289,8 @@
             <span class="skill-name">C / C++</span>
             <span class="skill-level">Avancé</span>
           </div>
-          <div class="skill-bar">
+          <div class="skill-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
+            aria-label="C / C++ — 80%">
             <div class="skill-progress" data-width="80"></div>
           </div>
         </div>
@@ -299,7 +299,8 @@
             <span class="skill-name">HTML/CSS</span>
             <span class="skill-level">Avancé</span>
           </div>
-          <div class="skill-bar">
+          <div class="skill-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
+            aria-label="HTML/CSS — 80%">
             <div class="skill-progress" data-width="80"></div>
           </div>
         </div>
@@ -308,7 +309,8 @@
             <span class="skill-name">PHP</span>
             <span class="skill-level">Intermédiaire</span>
           </div>
-          <div class="skill-bar">
+          <div class="skill-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+            aria-label="PHP — 70%">
             <div class="skill-progress" data-width="70"></div>
           </div>
         </div>
@@ -317,20 +319,22 @@
             <span class="skill-name">SQL</span>
             <span class="skill-level">Intermédiaire</span>
           </div>
-          <div class="skill-bar">
+          <div class="skill-bar" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"
+            aria-label="SQL — 65%">
             <div class="skill-progress" data-width="65"></div>
           </div>
         </div>
       </div>
 
       <div class="skill-category">
-        <h3><i class="fas fa-network-wired"></i> Réseaux & Systèmes</h3>
+        <h3><i class="fas fa-network-wired" aria-hidden="true"></i> Réseaux & Systèmes</h3>
         <div class="skill-item">
           <div class="skill-header">
             <span class="skill-name">Administration Linux</span>
             <span class="skill-level">Intermédiaire</span>
           </div>
-          <div class="skill-bar">
+          <div class="skill-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+            aria-label="Administration Linux — 75%">
             <div class="skill-progress" data-width="75"></div>
           </div>
         </div>
@@ -339,7 +343,8 @@
             <span class="skill-name">Configuration Réseaux</span>
             <span class="skill-level">Intermédiaire</span>
           </div>
-          <div class="skill-bar">
+          <div class="skill-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+            aria-label="Configuration Réseaux — 75%">
             <div class="skill-progress" data-width="75"></div>
           </div>
         </div>
@@ -348,7 +353,8 @@
             <span class="skill-name">Sécurité & SIEM</span>
             <span class="skill-level">Intermédiaire</span>
           </div>
-          <div class="skill-bar">
+          <div class="skill-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+            aria-label="Sécurité et SIEM — 70%">
             <div class="skill-progress" data-width="70"></div>
           </div>
         </div>
@@ -357,20 +363,22 @@
             <span class="skill-name">Virtualisation & HA</span>
             <span class="skill-level">Intermédiaire</span>
           </div>
-          <div class="skill-bar">
+          <div class="skill-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+            aria-label="Virtualisation et HA — 70%">
             <div class="skill-progress" data-width="70"></div>
           </div>
         </div>
       </div>
 
       <div class="skill-category">
-        <h3><i class="fas fa-tools"></i> Outils & Technologies</h3>
+        <h3><i class="fas fa-tools" aria-hidden="true"></i> Outils & Technologies</h3>
         <div class="skill-item">
           <div class="skill-header">
             <span class="skill-name">IntelliJ IDEA</span>
             <span class="skill-level">Avancé</span>
           </div>
-          <div class="skill-bar">
+          <div class="skill-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
+            aria-label="IntelliJ IDEA — 90%">
             <div class="skill-progress" data-width="90"></div>
           </div>
         </div>
@@ -379,7 +387,8 @@
             <span class="skill-name">VS Code</span>
             <span class="skill-level">Avancé</span>
           </div>
-          <div class="skill-bar">
+          <div class="skill-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
+            aria-label="VS Code — 90%">
             <div class="skill-progress" data-width="90"></div>
           </div>
         </div>
@@ -388,7 +397,8 @@
             <span class="skill-name">Git/GitHub</span>
             <span class="skill-level">Intermédiaire</span>
           </div>
-          <div class="skill-bar">
+          <div class="skill-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
+            aria-label="Git/GitHub — 80%">
             <div class="skill-progress" data-width="80"></div>
           </div>
         </div>
@@ -397,7 +407,8 @@
             <span class="skill-name">Zabbix / Wazuh</span>
             <span class="skill-level">Intermédiaire</span>
           </div>
-          <div class="skill-bar">
+          <div class="skill-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+            aria-label="Zabbix / Wazuh — 70%">
             <div class="skill-progress" data-width="70"></div>
           </div>
         </div>
@@ -405,13 +416,13 @@
     </div>
   </section>
 
-  <section class="section" id="projects">
-    <h2 class="section-title" data-aos="fade-up">Mes Projets</h2>
+  <section class="section" id="projects" aria-labelledby="projects-heading">
+    <h2 class="section-title" id="projects-heading" data-aos="fade-up">Mes Projets</h2>
     <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
       Découvrez quelques-unes de mes réalisations
     </p>
 
-    <div class="project-filters">
+    <div class="project-filters" role="group" aria-label="Filtrer les projets par catégorie">
       <button class="filter-btn active" data-filter="all">Tous</button>
       <button class="filter-btn" data-filter="html">HTML / Frontend</button>
       <button class="filter-btn" data-filter="php">PHP / Backend</button>
@@ -420,17 +431,18 @@
     </div>
 
     <div class="projects-grid">
-
       <div class="project-card" data-category="network" data-aos="fade-up" data-aos-delay="400">
-        <img src="assets/schema_reseau.png" alt="Architecture Réseau SmartCity" class="project-image" />
+        <img src="assets/schema_reseau.png"
+          alt="Schéma de l'architecture réseau L3 de la SmartCity avec VLANs et cluster VRRP" class="project-image"
+          width="400" height="200" loading="lazy" />
         <div class="project-content">
           <h3 class="project-title">Infrastructure réseau sécurisée</h3>
           <p class="project-description">
-            Conception et déploiement d'une architecture réseau L3 hautement disponible pour la gestion intelligente du
+            Conception et déploiement d'une architecture réseau hautement disponible pour la gestion intelligente du
             trafic urbain. Intégration de la tolérance aux pannes (VRRP) et d'un système de surveillance complet.
           </p>
           <div class="project-tech">
-            <span class="tech-tag">nftables</span>
+            <span class="tech-tag">Proxmox</span>
             <span class="tech-tag">VRRP / Keepalived</span>
             <span class="tech-tag">Wazuh SIEM</span>
             <span class="tech-tag">Zabbix</span>
@@ -438,19 +450,21 @@
           </div>
           <div class="project-links">
             <a href="project-smartcity.html" class="project-link">
-              <i class="fas fa-eye"></i> Voir détails
+              <i class="fas fa-eye" aria-hidden="true"></i> Voir détails
             </a>
           </div>
         </div>
       </div>
 
       <div class="project-card" data-category="php" data-aos="fade-up" data-aos-delay="300">
-        <div class="award-ribbon silver">
-          <i class="fas fa-medal"></i> 2ème Prix
+        <div class="award-ribbon silver" aria-label="2ème Prix du meilleur prototype">
+          <i class="fas fa-medal" aria-hidden="true"></i> 2ème Prix
         </div>
-        <img src="assets/aidevous_landing.png" alt="Application Aide&Vous" class="project-image" />
+        <img src="assets/aidevous_landing.png"
+          alt="Page d'accueil de l'application Aide&Vous, plateforme pour aidants familiaux" class="project-image"
+          width="400" height="200" loading="lazy" />
         <div class="project-content">
-          <h3 class="project-title">Aide&Vous</h3>
+          <h3 class="project-title">Aide&amp;Vous</h3>
           <p class="project-description">
             Plateforme web sécurisée pour les aidants familiaux.
             Elle permet la centralisation des dossiers médicaux, l'analyse automatique d'ordonnances (OCR Python) et la
@@ -464,22 +478,24 @@
           </div>
           <div class="project-links">
             <a href="project-aidevous.html" class="project-link">
-              <i class="fas fa-eye"></i> Voir détails
+              <i class="fas fa-eye" aria-hidden="true"></i> Voir détails
             </a>
-            <a href="https://github.com/Spirit38/AideEtVous" class="project-link" target="_blank">
-              <i class="fab fa-github"></i> Code source
+            <a href="https://github.com/Spirit38/AideEtVous" class="project-link" target="_blank"
+              rel="noopener noreferrer">
+              <i class="fab fa-github" aria-hidden="true"></i> Code source
             </a>
           </div>
         </div>
       </div>
 
       <div class="project-card" data-category="java" data-aos="fade-up" data-aos-delay="300">
-        <img src="assets/project2.png" alt="Application GELPP" class="project-image" />
+        <img src="assets/project2.png" alt="Interface principale de l'application GELPP de gestion d'événements"
+          class="project-image" width="400" height="200" loading="lazy" />
         <div class="project-content">
           <h3 class="project-title">Application GELPP</h3>
           <p class="project-description">
             Développement d'une application Java/JavaFX pour la gestion
-            d’événements en copropriété. Un outil simple et collaboratif pour
+            d'événements en copropriété. Un outil simple et collaboratif pour
             planifier des assemblées générales, réunions et événements sociaux.
           </p>
           <div class="project-tech">
@@ -490,17 +506,20 @@
           </div>
           <div class="project-links">
             <a href="project-gelpp.html" class="project-link">
-              <i class="fas fa-eye"></i> Voir détails
+              <i class="fas fa-eye" aria-hidden="true"></i> Voir détails
             </a>
-            <a href="https://github.com/Spirit38/GELPP" class="project-link" target="_blank">
-              <i class="fab fa-github"></i> Code source
+            <a href="https://github.com/Spirit38/GELPP" class="project-link" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-github" aria-hidden="true"></i> Code source
             </a>
           </div>
         </div>
       </div>
 
       <div class="project-card" data-category="html" data-aos="fade-up" data-aos-delay="200">
-        <img src="assets/project1.png" alt="Site Web Institutionnel" class="project-image" />
+        <!-- FIX : dimensions explicites sur les images -->
+        <img src="assets/project1.png"
+          alt="Capture d'écran du site web institutionnel réalisé pour Orange Business Service" class="project-image"
+          width="400" height="200" loading="lazy" />
         <div class="project-content">
           <h3 class="project-title">Site Web Institutionnel</h3>
           <p class="project-description">
@@ -516,20 +535,21 @@
           </div>
           <div class="project-links">
             <a href="project1.html" class="project-link">
-              <i class="fas fa-eye"></i> Voir détails
+              <i class="fas fa-eye" aria-hidden="true"></i> Voir détails
             </a>
             <a href="https://github.com/Spirit38/Projet-IUT-Site-Web-Institutionnel" class="project-link"
-              target="_blank">
-              <i class="fab fa-github"></i> Code source
+              target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-github" aria-hidden="true"></i> Code source
             </a>
           </div>
         </div>
       </div>
 
+    </div>
   </section>
 
-  <section class="section" id="contact">
-    <h2 class="section-title" data-aos="fade-up">Contactez-moi</h2>
+  <section class="section" id="contact" aria-labelledby="contact-heading">
+    <h2 class="section-title" id="contact-heading" data-aos="fade-up">Contactez-moi</h2>
     <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
       N'hésitez pas à me contacter pour toute question ou opportunité
     </p>
@@ -541,15 +561,17 @@
         </h3>
 
         <div class="contact-item">
-          <i class="fas fa-envelope"></i>
+          <i class="fas fa-envelope" aria-hidden="true"></i>
           <div>
             <strong>Email</strong><br />
-            <a href="mailto:mathis.vangi@gmail.com" style="color: var(--text-secondary)">mathis.vangi@gmail.com</a>
+            <!-- FIX : obfuscation de l'email via data-attributes pour limiter le spam -->
+            <a href="#" class="obfuscated-email" data-user="mathis.vangi" data-domain="gmail.com"
+              style="color: var(--text-secondary)">[cliquez pour afficher]</a>
           </div>
         </div>
 
         <div class="contact-item">
-          <i class="fas fa-map-marker-alt"></i>
+          <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
           <div>
             <strong>Localisation</strong><br />
             Grenoble, France
@@ -557,7 +579,7 @@
         </div>
 
         <div class="contact-item">
-          <i class="fas fa-graduation-cap"></i>
+          <i class="fas fa-graduation-cap" aria-hidden="true"></i>
           <div>
             <strong>Formation</strong><br />
             BUT Informatique - IUT2 UGA
@@ -565,7 +587,7 @@
         </div>
 
         <div class="contact-item">
-          <i class="fas fa-briefcase"></i>
+          <i class="fas fa-briefcase" aria-hidden="true"></i>
           <div>
             <strong>Statut</strong><br />
             Étudiant - Recherche stage/alternance
@@ -573,21 +595,26 @@
         </div>
 
         <div class="social-links">
-          <a href="https://www.linkedin.com/in/mathis-vangi" target="_blank" class="social-link">
-            <i class="fab fa-linkedin"></i>
+          <a href="https://www.linkedin.com/in/mathis-vangi" target="_blank" rel="noopener noreferrer"
+            class="social-link" aria-label="Profil LinkedIn de Mathis Vangi">
+            <i class="fab fa-linkedin" aria-hidden="true"></i>
           </a>
-          <a href="https://github.com/Spirit38" target="_blank" class="social-link">
-            <i class="fab fa-github"></i>
+          <a href="https://github.com/Spirit38" target="_blank" rel="noopener noreferrer" class="social-link"
+            aria-label="Profil GitHub de Mathis Vangi">
+            <i class="fab fa-github" aria-hidden="true"></i>
           </a>
-          <a href="mailto:mathis.vangi@gmail.com" class="social-link">
-            <i class="fas fa-envelope"></i>
+          <a href="#" class="social-link obfuscated-email" data-user="mathis.vangi" data-domain="gmail.com"
+            aria-label="Envoyer un email à Mathis Vangi">
+            <i class="fas fa-envelope" aria-hidden="true"></i>
           </a>
-          <a href="assets/CV_VANGI_Mathis_INFORMATIQUE.pdf" download class="social-link">
-            <i class="fas fa-download"></i>
+          <a href="assets/CV_VANGI_Mathis_INFORMATIQUE.pdf" download class="social-link"
+            aria-label="Télécharger le CV de Mathis Vangi">
+            <i class="fas fa-download" aria-hidden="true"></i>
           </a>
         </div>
       </div>
 
+      <!-- FIX : formulaire avec gestion cohérente — l'animation ne bloque plus le POST -->
       <form class="contact-form" data-aos="fade-left" action="https://formspree.io/f/myzelkkz" method="post">
         <h3 style="color: var(--text-primary); margin-bottom: 1.5rem">
           Envoyez-moi un message
@@ -595,12 +622,12 @@
 
         <div class="form-group">
           <label for="name">Nom complet *</label>
-          <input type="text" id="name" name="Nom" required />
+          <input type="text" id="name" name="Nom" required autocomplete="name" />
         </div>
 
         <div class="form-group">
           <label for="email">Adresse email *</label>
-          <input type="email" id="email" name="Email" required />
+          <input type="email" id="email" name="Email" required autocomplete="email" />
         </div>
 
         <div class="form-group">
@@ -614,23 +641,40 @@
         </div>
 
         <button type="submit" class="btn btn-primary" style="width: 100%">
-          <i class="fas fa-paper-plane"></i> Envoyer le message
+          <i class="fas fa-paper-plane" aria-hidden="true"></i> Envoyer le message
         </button>
       </form>
     </div>
   </section>
 
+  <!-- FIX : aria-label sur le bouton scroll top -->
+  <button class="scroll-top" id="scroll-top" aria-label="Retour en haut de page">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
   <footer class="footer">
-    <p>&copy; 2025 Mathis Vangi. Tous droits réservés.</p>
+    <!-- FIX : année cohérente sur toutes les pages -->
+    <p>&copy; 2026 Mathis Vangi. Tous droits réservés.</p>
     <p><a href="mention-legal.html" class="footer-link">Mentions Légales</a></p>
   </footer>
 
-  <button class="scroll-top" id="scroll-top">
-    <i class="fas fa-arrow-up"></i>
-  </button>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script src="script.js"></script>
+  <script>
+    /* FIX : déobfuscation email au clic uniquement */
+    document.querySelectorAll(".obfuscated-email").forEach(function (el) {
+      el.addEventListener("click", function (e) {
+        e.preventDefault();
+        var email = this.dataset.user + "@" + this.dataset.domain;
+        if (this.tagName === "A" && this.querySelector("i")) {
+          window.location.href = "mailto:" + email;
+        } else {
+          this.href = "mailto:" + email;
+          this.textContent = email;
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

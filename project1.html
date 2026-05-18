@@ -1,73 +1,74 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Création d'un Site Web Institutionnel - Vangi Mathis</title>
-  <meta name="description" content="Détail du projet de création d’un site web institutionnel par Vangi Mathis.">
+  <meta name="description" content="Détail du projet de création d'un site web institutionnel par Vangi Mathis.">
+  <meta name="theme-color" content="#0f0f23" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap&font-display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="icon" type="image/png" href="assets/ms-icon-310x310.png">
 </head>
 
 <body>
-  <!-- Loading Screen -->
   <div class="loading" id="loading">
     <div class="loader"></div>
   </div>
 
-  <!-- Navigation -->
-  <nav class="navbar" id="navbar">
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Navigation principale">
     <div class="logo">Mathis<span> Vangi</span></div>
-
     <ul class="nav-links" id="nav-links">
-        <li><a href="index.html#home" class="nav-link active">Accueil</a></li>
-        <li><a href="index.html#about" class="nav-link">À propos</a></li>
-        <li><a href="index.html#timeline" class="nav-link">Parcours</a></li>
-        <li><a href="index.html#skills" class="nav-link">Compétences</a></li>
-        <li><a href="index.html#projects" class="nav-link">Projets</a></li>
-        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      <li><a href="index.html#home" class="nav-link">Accueil</a></li>
+      <li><a href="index.html#about" class="nav-link">À propos</a></li>
+      <li><a href="index.html#projects" class="nav-link active">Projets</a></li>
+      <li><a href="index.html#contact" class="nav-link">Contact</a></li>
     </ul>
-
     <div style="display: flex; align-items: center; gap: 1rem;">
-      <button class="theme-toggle" id="theme-toggle" title="Changer le thème">
-        <i class="fas fa-sun"></i>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Basculer vers le mode clair">
+        <i class="fas fa-sun" aria-hidden="true"></i>
       </button>
-      <a href="https://github.com/Spirit38" target="_blank" class="github-icon">
-        <i class="fab fa-github"></i>
+      <a href="https://github.com/Spirit38" target="_blank" rel="noopener noreferrer" class="github-icon"
+        aria-label="Profil GitHub de Mathis Vangi">
+        <i class="fab fa-github" aria-hidden="true"></i>
       </a>
-      <div class="mobile-menu" id="mobile-menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+      <button class="mobile-menu" id="mobile-menu" aria-label="Ouvrir le menu" aria-expanded="false"
+        aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
-  <!-- Section Projet -->
-  <section class="section project-detail">
-    <h1 class="section-title" data-aos="fade-up" style="margin-top: 2rem;">Création d'un Site Web Institutionnel</h1>
+  <section class="section project-detail" aria-labelledby="project-heading">
+    <h1 class="section-title" id="project-heading" data-aos="fade-up" style="margin-top: 2rem;">Création d'un Site Web
+      Institutionnel</h1>
     <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
       Projet visant à rendre les entreprises du numérique accessibles aux jeunes publics.
     </p>
 
-    <!-- Swiper gallery -->
-     <p class="gallery-hint" data-aos="fade-up">
-      <i class="fas fa-search-plus"></i> Cliquez sur les images pour les agrandir
+    <p class="gallery-hint" data-aos="fade-up">
+      <i class="fas fa-search-plus" aria-hidden="true"></i> Cliquez sur les images pour les agrandir
     </p>
+
     <div class="project-gallery" data-aos="fade-up" data-aos-delay="150">
-      <div class="swiper mySwiper">
+      <div class="swiper mySwiper" role="region" aria-label="Galerie du projet Site Web Institutionnel">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
-            <img src="assets/project1.png" alt="Photo site Orange Business Service" loading="lazy">
+            <img src="assets/project1.png"
+              alt="Capture du site web institutionnel réalisé pour Orange Business Service, ciblant les élèves de 3ème"
+              width="960" height="460" loading="lazy">
           </div>
         </div>
         <div class="swiper-pagination"></div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next" aria-label="Image suivante"></div>
+        <div class="swiper-button-prev" aria-label="Image précédente"></div>
       </div>
     </div>
 
@@ -75,14 +76,16 @@
       <div data-aos="fade-up" style="margin-bottom: 2.5rem;">
         <h2>🎯 Description du Projet</h2>
         <p>
-          Ce projet vise à créer un site web institutionnel pour une entreprise du secteur numérique, ciblant les élèves de 3ème (génération Alpha) en recherche de stage. Le site se veut clair, accessible, sobre et écoresponsable.
+          Ce projet vise à créer un site web institutionnel pour une entreprise du secteur numérique, ciblant les élèves
+          de 3ème (génération Alpha) en recherche de stage. Le site se veut clair, accessible, sobre et écoresponsable.
         </p>
       </div>
 
       <div data-aos="fade-up" style="margin-bottom: 2.5rem;">
         <h2>❓ Problématique</h2>
         <p>
-          Les sites d’entreprise sont souvent trop techniques et peu engageants pour les jeunes. Ce projet tente d’y remédier en rendant l’information compréhensible, éthique et durable.
+          Les sites d'entreprise sont souvent trop techniques et peu engageants pour les jeunes. Ce projet tente d'y
+          remédier en rendant l'information compréhensible, éthique et durable.
         </p>
       </div>
 
@@ -100,23 +103,25 @@
         <h2>🎯 Objectifs</h2>
         <ul>
           <li>Concevoir un site clair pour des collégiens</li>
-          <li>Respecter l’écoconception</li>
+          <li>Respecter l'écoconception</li>
           <li>Être conforme au RGPD et aux normes françaises</li>
-          <li>Transmettre des valeurs d’éthique et de durabilité</li>
+          <li>Transmettre des valeurs d'éthique et de durabilité</li>
         </ul>
       </div>
 
       <div data-aos="fade-up" style="margin-bottom: 2.5rem;">
         <h2>🤝 Travail en Groupe</h2>
         <p>
-          Le projet a été mené en équipe de 3 à 4 personnes, avec une répartition claire des tâches pour favoriser la coopération et la productivité.
+          Le projet a été mené en équipe de 3 à 4 personnes, avec une répartition claire des tâches pour favoriser la
+          coopération et la productivité.
         </p>
       </div>
 
       <div data-aos="fade-up" style="margin-bottom: 2.5rem;">
         <h2>👤 Apports Individuels</h2>
         <p>
-          J’ai personnellement contribué à la recherche, à la création des maquettes et à l’intégration HTML/CSS du site.
+          J'ai personnellement contribué à la recherche, à la création des maquettes et à l'intégration HTML/CSS du
+          site.
         </p>
       </div>
 
@@ -130,27 +135,28 @@
         </ul>
       </div>
 
-      <div class="button-group" data-aos="fade-up" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 2rem;">
+      <div class="button-group" data-aos="fade-up"
+        style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 2rem;">
         <a href="index.html#projects" class="btn btn-secondary">
-          <i class="fas fa-arrow-left"></i> Retour aux projets
+          <i class="fas fa-arrow-left" aria-hidden="true"></i> Retour aux projets
         </a>
-        <a href="https://github.com/Spirit38/Projet-IUT-Site-Web-Institutionnel" class="btn btn-secondary" target="_blank">
-          <i class="fab fa-github"></i> Code source
+        <a href="https://github.com/Spirit38/Projet-IUT-Site-Web-Institutionnel" class="btn btn-secondary"
+          target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-github" aria-hidden="true"></i> Code source
         </a>
       </div>
-
+    </div>
   </section>
 
-  <!-- Scroll to Top -->
-  <button class="scroll-top" id="scroll-top"><i class="fas fa-arrow-up"></i></button>
+  <button class="scroll-top" id="scroll-top" aria-label="Retour en haut de page">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
 
-  <!-- Footer -->
   <footer class="footer">
-    <p>&copy; 2025 Mathis Vangi. Tous droits réservés.</p>
+    <p>&copy; 2026 Mathis Vangi. Tous droits réservés.</p>
     <p><a href="mention-legal.html" class="footer-link">Mentions Légales</a></p>
   </footer>
 
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script src="script.js"></script>
