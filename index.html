@@ -7,6 +7,7 @@
   <title>Portfolio - Mathis Vangi | Développeur & Administrateur Réseaux</title>
   <meta name="description"
     content="Portfolio de Mathis Vangi, développeur et administrateur réseaux et systèmes. Découvrez mes projets et compétences techniques." />
+  <link rel="canonical" href="https://spirit38.github.io/Portfolio/" />
 
   <!-- SEO Open Graph -->
   <meta property="og:title" content="Portfolio - Mathis Vangi | Développeur & Administrateur Réseaux" />
@@ -14,19 +15,53 @@
     content="Étudiant en BUT Informatique, passionné par le développement et les infrastructures réseaux." />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="fr_FR" />
+  <meta property="og:url" content="https://spirit38.github.io/Portfolio/" />
+  <meta property="og:image" content="https://spirit38.github.io/Portfolio/assets/photo2.png" />
+  <meta property="og:image:alt" content="Portrait de Mathis Vangi" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Portfolio - Mathis Vangi | Développeur & Administrateur Réseaux" />
+  <meta name="twitter:description"
+    content="Étudiant en BUT Informatique, passionné par le développement et les infrastructures réseaux." />
+  <meta name="twitter:image" content="https://spirit38.github.io/Portfolio/assets/photo2.png" />
 
   <!-- Theme color mobile -->
   <meta name="theme-color" content="#0f0f23" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <!-- FIX : font-display=swap pour éviter le FOIT -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+  <!-- FIX : display=swap pour éviter le FOIT (paramètre font-display invalide retiré) -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap&font-display=swap"
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <!-- FIX : SRI (integrity) sur les ressources CDN tierces -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+    integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9xmBN9iUUhIndKtxwILGWYOSibOKjLsEdjyjZvYDq/cZwNeak0w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="icon" type="image/png" href="assets/ms-icon-310x310.png">
+
+  <!-- Données structurées (schema.org Person) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Mathis Vangi",
+    "url": "https://spirit38.github.io/Portfolio/",
+    "image": "https://spirit38.github.io/Portfolio/assets/photo2.png",
+    "jobTitle": "Développeur & Administrateur Réseaux et Systèmes",
+    "address": { "@type": "PostalAddress", "addressLocality": "Grenoble", "addressCountry": "FR" },
+    "sameAs": [
+      "https://github.com/Spirit38",
+      "https://www.linkedin.com/in/mathis-vangi"
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -65,6 +100,7 @@
     </div>
   </nav>
 
+  <main>
   <section class="hero" id="home" aria-labelledby="hero-heading">
     <div class="hero-content" data-aos="fade-right">
       <div class="hero-subtitle">Développeur <br> Administrateur Réseaux & Systèmes</div>
@@ -607,7 +643,7 @@
             aria-label="Envoyer un email à Mathis Vangi">
             <i class="fas fa-envelope" aria-hidden="true"></i>
           </a>
-          <a href="assets/CV_VANGI_Mathis_INFORMATIQUE.pdf" download class="social-link"
+          <a href="assets/CV_VANGI_Mathis_ALTERNANCE_INFORMATIQUE.pdf" download class="social-link"
             aria-label="Télécharger le CV de Mathis Vangi">
             <i class="fas fa-download" aria-hidden="true"></i>
           </a>
@@ -646,6 +682,7 @@
       </form>
     </div>
   </section>
+  </main>
 
   <!-- FIX : aria-label sur le bouton scroll top -->
   <button class="scroll-top" id="scroll-top" aria-label="Retour en haut de page">
@@ -658,23 +695,10 @@
     <p><a href="mention-legal.html" class="footer-link">Mentions Légales</a></p>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"
+    integrity="sha512-A7AYk1fGKX6S2SsHywmPkrnzTZHrgiVT7GcQkLGDe2ev0aWb8zejytzS8wjo7PGEXKqJOrjQ4oORtnimIRZBtw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="script.js"></script>
-  <script>
-    /* FIX : déobfuscation email au clic uniquement */
-    document.querySelectorAll(".obfuscated-email").forEach(function (el) {
-      el.addEventListener("click", function (e) {
-        e.preventDefault();
-        var email = this.dataset.user + "@" + this.dataset.domain;
-        if (this.tagName === "A" && this.querySelector("i")) {
-          window.location.href = "mailto:" + email;
-        } else {
-          this.href = "mailto:" + email;
-          this.textContent = email;
-        }
-      });
-    });
-  </script>
 </body>
 
 </html>

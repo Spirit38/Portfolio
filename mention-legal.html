@@ -6,10 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mentions Légales - Mathis Vangi</title>
     <meta name="theme-color" content="#0f0f23" />
+    <link rel="canonical" href="https://spirit38.github.io/Portfolio/mention-legal.html" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap&font-display=swap"
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <!-- FIX : paramètre font-display invalide retiré -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- FIX : SRI (integrity) sur la ressource CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="icon" type="image/png" href="assets/ms-icon-310x310.png">
 </head>
@@ -108,16 +115,6 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        document.querySelectorAll(".obfuscated-email").forEach(function (el) {
-            el.addEventListener("click", function (e) {
-                e.preventDefault();
-                var email = this.dataset.user + "@" + this.dataset.domain;
-                this.href = "mailto:" + email;
-                this.textContent = email;
-            });
-        });
-    </script>
 </body>
 
 </html>

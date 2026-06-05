@@ -1,16 +1,25 @@
-AOS.init({
-  duration: 1000,
-  easing: "ease-in-out",
-  once: true,
-  offset: 100,
-});
+/* FIX : AOS protégé — si le CDN échoue ou que la lib n'est pas chargée
+   (ex : page Mentions Légales), le reste du script continue de fonctionner. */
+if (typeof AOS !== "undefined") {
+  AOS.init({
+    duration: 1000,
+    easing: "ease-in-out",
+    once: true,
+    offset: 100,
+  });
+}
+
+/* FIX : respect de la préférence "réduire les animations" */
+const prefersReducedMotion =
+  window.matchMedia &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 window.addEventListener("load", function () {
   const loading = document.getElementById("loading");
   if (loading) {
     setTimeout(() => {
       loading.classList.add("hidden");
-      setTimeout(() => loading.style.display = "none", 500);
+      setTimeout(() => (loading.style.display = "none"), 500);
     }, 1000);
   }
 });
@@ -25,17 +34,25 @@ window.addEventListener("load", function () {
   const navLinkElements = document.querySelectorAll(".nav-link");
   const scrollTopBtn = document.getElementById("scroll-top");
 
-  if (mobileMenu) {
+  /* FIX : aria-expanded + aria-label synchronisés avec l'état réel du menu */
+  function setMenuState(isOpen) {
+    if (!mobileMenu) return;
+    mobileMenu.classList.toggle("active", isOpen);
+    mobileMenu.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    mobileMenu.setAttribute("aria-label", isOpen ? "Fermer le menu" : "Ouvrir le menu");
+  }
+
+  if (mobileMenu && navLinks) {
     mobileMenu.addEventListener("click", function () {
-      navLinks.classList.toggle("active");
-      this.classList.toggle("active");
+      const isOpen = navLinks.classList.toggle("active");
+      setMenuState(isOpen);
     });
   }
 
   navLinkElements.forEach((link) => {
     link.addEventListener("click", function () {
       if (navLinks) navLinks.classList.remove("active");
-      if (mobileMenu) mobileMenu.classList.remove("active");
+      setMenuState(false);
     });
   });
 
@@ -95,6 +112,7 @@ window.addEventListener("load", function () {
 
   /* =========================================
      Mode sombre
+     FIX : aria-label du bouton synchronisé avec le thème courant
      ========================================= */
   const themeToggle = document.getElementById("theme-toggle");
   const body = document.body;
@@ -102,19 +120,30 @@ window.addEventListener("load", function () {
   const currentTheme = localStorage.getItem("theme") || "dark";
   body.setAttribute("data-theme", currentTheme);
 
-  if (themeToggle) {
-    themeToggle.innerHTML = currentTheme === "light"
-      ? "<i class=\"fas fa-moon\"></i>"
-      : "<i class=\"fas fa-sun\"></i>";
+  function applyThemeUI(theme) {
+    if (!themeToggle) return;
+    // En mode clair, le bouton propose de passer en sombre (et inversement).
+    themeToggle.innerHTML =
+      theme === "light"
+        ? "<i class=\"fas fa-moon\" aria-hidden=\"true\"></i>"
+        : "<i class=\"fas fa-sun\" aria-hidden=\"true\"></i>";
+    themeToggle.setAttribute(
+      "aria-label",
+      theme === "light"
+        ? "Basculer vers le mode sombre"
+        : "Basculer vers le mode clair"
+    );
+  }
 
+  applyThemeUI(currentTheme);
+
+  if (themeToggle) {
     themeToggle.addEventListener("click", function () {
       const current = body.getAttribute("data-theme");
       const next = current === "dark" ? "light" : "dark";
       body.setAttribute("data-theme", next);
       localStorage.setItem("theme", next);
-      themeToggle.innerHTML = next === "light"
-        ? "<i class=\"fas fa-moon\"></i>"
-        : "<i class=\"fas fa-sun\"></i>";
+      applyThemeUI(next);
     });
   }
 
@@ -184,8 +213,9 @@ window.addEventListener("load", function () {
 
   /* =========================================
      TypeWriter Hero
-     FIX : on masque le titre avant de l'écrire
-     pour éviter le FOUC.
+     FIX : on masque le titre avant de l'écrire pour éviter le FOUC.
+     FIX : on saute l'animation si l'utilisateur préfère réduire les mouvements
+     (le <h1> conserve alors son texte statique présent dans le HTML).
      ========================================= */
   function typeWriter(element, text, speed) {
     speed = speed || 100;
@@ -208,7 +238,7 @@ window.addEventListener("load", function () {
 
   window.addEventListener("load", function () {
     const heroTitle = document.querySelector(".hero-title");
-    if (heroTitle) {
+    if (heroTitle && !prefersReducedMotion) {
       typeWriter(heroTitle, "Mathis Vangi", 150);
     }
   });
@@ -216,21 +246,37 @@ window.addEventListener("load", function () {
   /* =========================================
      Animation flottante hero image
      FIX : requestAnimationFrame à la place de setInterval
+     FIX : l'animation est suspendue quand l'image n'est pas visible (économie CPU)
+     et désactivée si l'utilisateur préfère réduire les mouvements.
      ========================================= */
   const heroImage = document.querySelector(".hero-image img");
-  if (heroImage) {
+  if (heroImage && !prefersReducedMotion) {
+    let floatRAF = null;
     function floatImage() {
-      heroImage.style.transform = "translateY(" + (Math.sin(Date.now() * 0.001) * 10) + "px)";
-      requestAnimationFrame(floatImage);
+      heroImage.style.transform =
+        "translateY(" + Math.sin(Date.now() * 0.001) * 10 + "px)";
+      floatRAF = requestAnimationFrame(floatImage);
     }
-    requestAnimationFrame(floatImage);
+
+    const floatObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && floatRAF === null) {
+          floatRAF = requestAnimationFrame(floatImage);
+        } else if (!entry.isIntersecting && floatRAF !== null) {
+          cancelAnimationFrame(floatRAF);
+          floatRAF = null;
+          heroImage.style.transform = "translateY(0)";
+        }
+      });
+    });
+    floatObserver.observe(heroImage);
   }
 
   /* =========================================
      Swiper
      ========================================= */
   const swiperContainer = document.querySelector(".mySwiper");
-  if (swiperContainer) {
+  if (swiperContainer && typeof Swiper !== "undefined") {
     new Swiper(".mySwiper", {
       loop: true,
       pagination: { el: ".swiper-pagination", clickable: true },
@@ -275,6 +321,8 @@ window.addEventListener("load", function () {
 
   /* =========================================
      Zoom Image (Lightbox)
+     FIX : images de galerie focusables + activables au clavier (Entrée / Espace),
+     gestion du focus (ouverture sur la modale, restitution à la fermeture).
      ========================================= */
   const lightbox = document.createElement("div");
   lightbox.id = "lightbox";
@@ -282,33 +330,78 @@ window.addEventListener("load", function () {
   lightbox.setAttribute("role", "dialog");
   lightbox.setAttribute("aria-modal", "true");
   lightbox.setAttribute("aria-label", "Aperçu de l'image");
+  lightbox.setAttribute("tabindex", "-1");
   document.body.appendChild(lightbox);
 
-  const projectImages = document.querySelectorAll(".swiper-slide img");
+  let lastFocusedBeforeLightbox = null;
 
-  if (projectImages.length > 0) {
-    projectImages.forEach((image) => {
-      image.addEventListener("click", (e) => {
-        e.stopPropagation();
-        lightbox.classList.add("active");
-
-        while (lightbox.firstChild) lightbox.removeChild(lightbox.firstChild);
-
-        const img = document.createElement("img");
-        img.src = image.src;
-        img.alt = image.alt;
-        lightbox.appendChild(img);
-      });
-    });
+  function openLightbox(image) {
+    lastFocusedBeforeLightbox = document.activeElement;
+    lightbox.classList.add("active");
+    while (lightbox.firstChild) lightbox.removeChild(lightbox.firstChild);
+    const img = document.createElement("img");
+    img.src = image.src;
+    img.alt = image.alt;
+    lightbox.appendChild(img);
+    lightbox.focus();
   }
 
+  function closeLightbox() {
+    if (!lightbox.classList.contains("active")) return;
+    lightbox.classList.remove("active");
+    if (
+      lastFocusedBeforeLightbox &&
+      typeof lastFocusedBeforeLightbox.focus === "function"
+    ) {
+      lastFocusedBeforeLightbox.focus();
+    }
+  }
+
+  const projectImages = document.querySelectorAll(".swiper-slide img");
+  projectImages.forEach((image) => {
+    image.setAttribute("tabindex", "0");
+    image.setAttribute("role", "button");
+    if (!image.getAttribute("aria-label")) {
+      image.setAttribute(
+        "aria-label",
+        "Agrandir l'image" + (image.alt ? " : " + image.alt : "")
+      );
+    }
+    image.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openLightbox(image);
+    });
+    image.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openLightbox(image);
+      }
+    });
+  });
+
   lightbox.addEventListener("click", (e) => {
-    if (e.target === e.currentTarget) lightbox.classList.remove("active");
+    if (e.target === e.currentTarget) closeLightbox();
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && lightbox.classList.contains("active")) {
-      lightbox.classList.remove("active");
-    }
+    if (e.key === "Escape") closeLightbox();
+  });
+
+  /* =========================================
+     Déobfuscation Email (centralisée)
+     FIX : logique déplacée ici depuis les scripts inline d'index.html
+     et mention-legal.html (source unique, exécutée sur toutes les pages).
+     ========================================= */
+  document.querySelectorAll(".obfuscated-email").forEach(function (el) {
+    el.addEventListener("click", function (e) {
+      e.preventDefault();
+      const email = this.dataset.user + "@" + this.dataset.domain;
+      if (this.tagName === "A" && this.querySelector("i")) {
+        window.location.href = "mailto:" + email;
+      } else {
+        this.href = "mailto:" + email;
+        this.textContent = email;
+      }
+    });
   });
 })();

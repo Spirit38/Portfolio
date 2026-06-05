@@ -8,14 +8,34 @@
     <meta name="description"
         content="Infrastructure SmartCity — Architecture réseau L3 sécurisée, cluster VRRP, pare-feu nftables et supervision SIEM Wazuh." />
     <meta name="theme-color" content="#0f0f23" />
+    <link rel="canonical" href="https://spirit38.github.io/Portfolio/project-smartcity.html" />
+
+    <!-- SEO Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content="Infrastructure SmartCity — Haute Disponibilité & Sécurité" />
+    <meta property="og:description"
+        content="Architecture réseau L3 sécurisée, cluster VRRP, pare-feu nftables et supervision SIEM Wazuh." />
+    <meta property="og:url" content="https://spirit38.github.io/Portfolio/project-smartcity.html" />
+    <meta property="og:image" content="https://spirit38.github.io/Portfolio/assets/schema_reseau.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <!-- FIX : paramètre font-display invalide retiré -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap&font-display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- FIX : SRI (integrity) sur les ressources CDN ; Swiper épinglé sur cdnjs (11.0.5) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+        integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9xmBN9iUUhIndKtxwILGWYOSibOKjLsEdjyjZvYDq/cZwNeak0w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css"
+        integrity="sha512-rd0qOHVMOcez6pLWPVFIv7EfSdGKLt+eafXh4RO/12Fgr41hDQxfGvoi1Vy55QIVcQEujUE1LQrATCLl2Fs+ag=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="icon" type="image/png" href="assets/ms-icon-310x310.png">
 </head>
@@ -48,6 +68,7 @@
         </div>
     </nav>
 
+    <main>
     <section class="section project-detail" aria-labelledby="project-heading">
         <h1 class="section-title" id="project-heading" data-aos="fade-up" style="margin-top: 2rem;">Infrastructure
             SmartCity</h1>
@@ -168,6 +189,7 @@
 
         </div>
     </section>
+    </main>
 
     <button class="scroll-top" id="scroll-top" aria-label="Retour en haut de page">
         <i class="fas fa-arrow-up" aria-hidden="true"></i>
@@ -178,8 +200,12 @@
         <p><a href="mention-legal.html" class="footer-link">Mentions Légales</a></p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"
+        integrity="sha512-Ysw1DcK1P+uYLqprEAzNQJP+J4hTx4t/3X2nbVwszao8wD+9afLjBQYjz7Uk4ADP+Er++mJoScI42ueGtQOzEA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"
+        integrity="sha512-A7AYk1fGKX6S2SsHywmPkrnzTZHrgiVT7GcQkLGDe2ev0aWb8zejytzS8wjo7PGEXKqJOrjQ4oORtnimIRZBtw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="script.js"></script>
 </body>
 
