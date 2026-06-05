@@ -4,9 +4,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    // Anti-FOUC : applique le thème mémorisé avant le rendu (évite le flash sombre→clair)
+    try { document.documentElement.setAttribute("data-theme", localStorage.getItem("theme") || "dark"); } catch (e) {}
+  </script>
   <title>Création d'un Site Web Institutionnel - Vangi Mathis</title>
   <meta name="description" content="Détail du projet de création d'un site web institutionnel par Vangi Mathis.">
-  <meta name="theme-color" content="#0f0f23" />
+  <meta name="theme-color" content="#0b0e14" />
   <link rel="canonical" href="https://spirit38.github.io/Portfolio/project1.html" />
 
   <!-- SEO Open Graph -->
@@ -23,7 +27,7 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
   <!-- FIX : paramètre font-display invalide retiré -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
     rel="stylesheet" />
   <!-- FIX : SRI (integrity) sur les ressources CDN ; Swiper épinglé sur cdnjs (11.0.5) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -37,6 +41,21 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="icon" type="image/png" href="assets/ms-icon-310x310.png">
+
+  <!-- Données structurées (schema.org SoftwareSourceCode) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "Site Web Institutionnel — projet de vulgarisation",
+    "author": { "@type": "Person", "name": "Mathis Vangi" },
+    "url": "https://spirit38.github.io/Portfolio/project1.html",
+    "codeRepository": "https://github.com/Spirit38/Projet-IUT-Site-Web-Institutionnel",
+    "image": "https://spirit38.github.io/Portfolio/assets/project1.png",
+    "programmingLanguage": ["HTML", "CSS", "JavaScript"],
+    "keywords": "HTML, CSS, JavaScript, écoconception, accessibilité, RGPD"
+  }
+  </script>
 </head>
 
 <body>
@@ -84,9 +103,12 @@
       <div class="swiper mySwiper" role="region" aria-label="Galerie du projet Site Web Institutionnel">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
-            <img src="assets/project1.png"
-              alt="Capture du site web institutionnel réalisé pour Orange Business Service, ciblant les élèves de 3ème"
-              width="960" height="460" loading="lazy">
+            <picture>
+              <source srcset="assets/project1.webp" type="image/webp" />
+              <img src="assets/project1.png"
+                alt="Capture du site web institutionnel réalisé pour Orange Business Service, ciblant les élèves de 3ème"
+                width="960" height="460" loading="lazy">
+            </picture>
           </div>
         </div>
         <div class="swiper-pagination"></div>
@@ -123,7 +145,7 @@
       </div>
 
       <div data-aos="fade-up" style="margin-bottom: 2.5rem;">
-        <h2>🎯 Objectifs</h2>
+        <h2>📌 Objectifs</h2>
         <ul>
           <li>Concevoir un site clair pour des collégiens</li>
           <li>Respecter l'écoconception</li>
@@ -141,7 +163,7 @@
       </div>
 
       <div data-aos="fade-up" style="margin-bottom: 2.5rem;">
-        <h2>👤 Apports Individuels</h2>
+        <h2>👤 Mon rôle</h2>
         <p>
           J'ai personnellement contribué à la recherche, à la création des maquettes et à l'intégration HTML/CSS du
           site.

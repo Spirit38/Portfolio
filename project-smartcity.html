@@ -4,10 +4,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+        // Anti-FOUC : applique le thème mémorisé avant le rendu (évite le flash sombre→clair)
+        try { document.documentElement.setAttribute("data-theme", localStorage.getItem("theme") || "dark"); } catch (e) {}
+    </script>
     <title>SmartCity Infra — Haute Disponibilité & Sécurité (Vangi Mathis)</title>
     <meta name="description"
         content="Infrastructure SmartCity — Architecture réseau L3 sécurisée, cluster VRRP, pare-feu nftables et supervision SIEM Wazuh." />
-    <meta name="theme-color" content="#0f0f23" />
+    <meta name="theme-color" content="#0b0e14" />
     <link rel="canonical" href="https://spirit38.github.io/Portfolio/project-smartcity.html" />
 
     <!-- SEO Open Graph -->
@@ -24,7 +28,7 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <!-- FIX : paramètre font-display invalide retiré -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
         rel="stylesheet">
     <!-- FIX : SRI (integrity) sur les ressources CDN ; Swiper épinglé sur cdnjs (11.0.5) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -38,6 +42,19 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="icon" type="image/png" href="assets/ms-icon-310x310.png">
+
+    <!-- Données structurées (schema.org CreativeWork) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      "name": "Infrastructure SmartCity — Haute Disponibilité & Sécurité",
+      "author": { "@type": "Person", "name": "Mathis Vangi" },
+      "url": "https://spirit38.github.io/Portfolio/project-smartcity.html",
+      "image": "https://spirit38.github.io/Portfolio/assets/schema_reseau.png",
+      "keywords": "réseau, VRRP, keepalived, nftables, Proxmox, Zabbix, Wazuh, haute disponibilité, cybersécurité, SIEM"
+    }
+    </script>
 </head>
 
 <body>
@@ -90,9 +107,12 @@
                             height="460" loading="lazy">
                     </div>
                     <div class="swiper-slide">
-                        <img src="assets/zabbix.png"
-                            alt="Tableau de bord de supervision Zabbix montrant les hôtes et alertes" width="960"
-                            height="460" loading="lazy">
+                        <picture>
+                            <source srcset="assets/zabbix.webp" type="image/webp" />
+                            <img src="assets/zabbix.png"
+                                alt="Tableau de bord de supervision Zabbix montrant les hôtes et alertes" width="960"
+                                height="460" loading="lazy">
+                        </picture>
                     </div>
                     <div class="swiper-slide">
                         <img src="assets/wazuh_dashboard.png"
@@ -104,6 +124,17 @@
                 <div class="swiper-button-next" aria-label="Image suivante"></div>
                 <div class="swiper-button-prev" aria-label="Image précédente"></div>
             </div>
+        </div>
+
+        <div class="project-metrics" data-aos="fade-up" role="list" aria-label="Chiffres clés du projet">
+            <div class="metric" role="listitem"><span class="metric-num">7</span><span class="metric-label">VLAN
+                    cloisonnés</span></div>
+            <div class="metric" role="listitem"><span class="metric-num">&lt; 2 s</span><span class="metric-label">Bascule
+                    VRRP</span></div>
+            <div class="metric" role="listitem"><span class="metric-num">2</span><span class="metric-label">Routeurs
+                    redondants</span></div>
+            <div class="metric" role="listitem"><span class="metric-num">Default Drop</span><span
+                    class="metric-label">Politique pare-feu</span></div>
         </div>
 
         <div class="project-content">
@@ -127,6 +158,15 @@
                     les serveurs de bases de données internes ? La réponse réside dans la <strong>redondance</strong> et
                     le principe de <strong>moindre privilège</strong>.
                 </p>
+            </div>
+
+            <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+                <h2>👤 Mon rôle</h2>
+                <!-- Mathis : renforce avec TON périmètre exact (ce que tu as personnellement configuré,
+                     part du travail si projet d'équipe) pour gagner en impact côté recruteur. -->
+                <p>Contribution à la conception et au déploiement de l'infrastructure : segmentation en VLANs, mise en
+                    place de la haute disponibilité (cluster VRRP), durcissement du pare-feu nftables et installation de
+                    la chaîne de supervision (Zabbix / Wazuh).</p>
             </div>
 
             <div data-aos="fade-up" class="mb-medium">
@@ -163,6 +203,42 @@
                         scans provenant du VLAN IoT, déclenchant des alertes de criticité 10 sur le tableau de bord
                         Wazuh.</li>
                 </ul>
+            </div>
+
+            <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+                <h2>⚙️ Extrait de configuration — bascule VRRP</h2>
+                <p>Cœur de la haute disponibilité : si le routeur master tombe, le secours reprend l'IP virtuelle (VIP)
+                    en moins de 2 secondes.</p>
+                <div class="project-config">
+                    <div class="project-config-head"><i class="fas fa-file-code" aria-hidden="true"></i>
+                        /etc/keepalived/keepalived.conf</div>
+                    <pre><span class="cfg-c"># Routeur MASTER — passerelle du VLAN Serveurs</span>
+<span class="cfg-k">vrrp_instance</span> VI_VLAN31 {
+    state             MASTER
+    interface         ens20        <span class="cfg-c"># sous-interface VLAN 31</span>
+    virtual_router_id 31
+    priority          100          <span class="cfg-c"># secours = 100 → le maître gagne l'élection</span>
+    advert_int        1
+    virtual_ipaddress {
+        192.168.31.254/24          <span class="cfg-c"># VIP : passerelle vue par les serveurs</span>
+    }
+}</pre>
+                </div>
+                <div class="project-config">
+                    <div class="project-config-head"><i class="fas fa-file-code" aria-hidden="true"></i>
+                        /etc/keepalived/keepalived.conf</div>
+                    <pre><span class="cfg-c"># Routeur BACKUP — passerelle du VLAN Serveurs</span>
+<span class="cfg-k">vrrp_instance</span> VI_VLAN31 {
+    state             BACKUP
+    interface         ens20        <span class="cfg-c"># sous-interface VLAN 31</span>
+    virtual_router_id 31
+    priority          90           <span class="cfg-c"># secours = 100 → le maître gagne l'élection</span>
+    advert_int        1
+    virtual_ipaddress {
+        192.168.31.254/24          <span class="cfg-c"># VIP : passerelle vue par les serveurs</span>
+    }
+}</pre>
+                </div>
             </div>
 
             <div data-aos="fade-up" class="mb-large">

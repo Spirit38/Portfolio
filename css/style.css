@@ -1,24 +1,48 @@
 :root {
-  --primary-color: #4f46e5;
-  --secondary-color: #06b6d4;
-  --accent-color: #f59e0b;
-  --bg-dark: #0f0f23;
-  --bg-card: #1a1a2e;
-  --bg-secondary: #16213e;
-  --text-primary: #ffffff;
+  --primary-color: #6e7be6;
+  --secondary-color: #39c5cf;
+  --accent-color: #e3b341;
+  --bg-dark: #0b0e14;
+  --bg-card: #11151f;
+  --bg-secondary: #1a2230;
+  --text-primary: #e6edf3;
   --text-mobile: #ffffff;
   --text-nav2: #ffffff;
-  --text-secondary: #b3c3d6;
+  --text-secondary: #c9d1d9;
   --text-nav: #b3c3d6;
-  --text-muted: #8b949e;
+  --text-muted: #8b98a8;
   --gradient: linear-gradient(
     135deg,
     var(--primary-color),
     var(--secondary-color)
   );
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  /* Gradient du logo : la navbar reste sombre dans les 2 thèmes, donc accents
+     clairs FIXES (ne pas réutiliser --primary/--secondary qui s'assombrissent en clair). */
+  --gradient-nav: linear-gradient(135deg, #6e7be6, #39c5cf);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
   --border-radius: 16px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Police signature monospace (surfaces techniques) + repli système robuste */
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", "Cascadia Code", Consolas, "Liberation Mono", monospace;
+
+  /* Palette ANSI sémantique (usage hors terminal, adaptée par thème) */
+  --ansi-green: #3fb950;
+  --ansi-cyan: #39c5cf;
+  --ansi-amber: #e3b341;
+  --ansi-red: #f85149;
+  --ansi-indigo: #6e7be6;
+
+  /* Terminal « mathish » : TOUJOURS sombre (console authentique) dans les 2 thèmes */
+  --term-bg: #0b0e14;
+  --term-surface: #11151f;
+  --term-border: #2a3343;
+  --term-text: #c9d1d9;
+  --term-dim: #8b98a8;
+  --term-green: #3fb950;
+  --term-cyan: #56d4dd;
+  --term-amber: #e3b341;
+  --term-red: #f85149;
+  --term-indigo: #8b96ee;
 }
 
 [data-theme="light"] {
@@ -35,6 +59,15 @@
   --text-nav: #ffffff;
   --text-muted: #718096;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  /* Accents assombris pour rester AA sur fond clair */
+  --primary-color: #4338ca;
+  --secondary-color: #0e7490;
+  --accent-color: #9a6700;
+  --ansi-green: #1a7f37;
+  --ansi-cyan: #0e7490;
+  --ansi-amber: #9a6700;
+  --ansi-red: #c0392b;
+  --ansi-indigo: #4338ca;
 }
 
 .filter-btn {
@@ -128,6 +161,12 @@ body {
   overflow-x: hidden;
 }
 
+/* Police monospace pour le code en ligne (ex : tcpdump, nft monitor…) */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
 /* Smooth scroll */
 html {
   scroll-behavior: smooth;
@@ -146,22 +185,22 @@ html {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: rgba(15, 15, 35, 0.95);
+  background: rgba(11, 14, 20, 0.95);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   transition: var(--transition);
 }
 
 .navbar.scrolled {
-  background: rgba(15, 15, 35, 0.98);
+  background: rgba(11, 14, 20, 0.98);
   box-shadow: var(--shadow);
 }
 
 .logo {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--text-primary);
-  background: var(--gradient);
+  color: var(--text-nav);
+  background: var(--gradient-nav);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -206,7 +245,8 @@ html {
 .theme-toggle {
   background: none;
   border: none;
-  color: var(--text-secondary);
+  /* navbar toujours sombre → icône claire FIXE dans les 2 thèmes */
+  color: var(--text-nav);
   font-size: 1.2rem;
   cursor: pointer;
   padding: 0.5rem;
@@ -215,18 +255,18 @@ html {
 }
 
 .theme-toggle:hover {
-  color: var(--text-primary);
+  color: var(--text-nav2);
   background: rgba(255, 255, 255, 0.1);
 }
 
 .github-icon {
   font-size: 1.3rem;
-  color: var(--text-secondary);
+  color: var(--text-nav);
   transition: var(--transition);
 }
 
 .github-icon:hover {
-  color: var(--text-primary);
+  color: var(--text-nav2);
   transform: scale(1.1);
 }
 
@@ -327,6 +367,15 @@ html {
 .hero-image {
   position: relative;
   z-index: 2;
+  text-align: center;
+}
+
+/* Conteneur du portrait : porte le halo/anneau, sinon il englobait aussi les CTA
+   (la .hero-image contient désormais les boutons → halo devenait une grande ellipse). */
+.hero-portrait {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
 }
 
 .hero-image img {
@@ -339,7 +388,7 @@ html {
   position: relative;
 }
 
-.hero-image::before {
+.hero-portrait::before {
   content: "";
   position: absolute;
   top: -10px;
@@ -529,6 +578,7 @@ html {
 .timeline-date {
   display: inline-block;
   color: var(--primary-color);
+  font-family: var(--font-mono);
   font-weight: 700;
   font-size: 0.85rem;
   margin-bottom: 10px;
@@ -537,6 +587,17 @@ html {
   border-radius: 20px;
   text-transform: none;
   letter-spacing: normal;
+  /* la date reste sur une ligne : la mono est plus large → évite le retour à la
+     ligne à l'intérieur de la pilule sur mobile */
+  white-space: nowrap;
+}
+
+/* Date de la « distinction argent » : même chip lisible que le tag silver
+   (remplace l'ancien color:#C0C0C0 inline, illisible sur fond clair). */
+.timeline-date.silver {
+  background: #1f2433;
+  color: #e8e8ee;
+  border: 1px solid #c0c0c0;
 }
 
 .timeline-title {
@@ -591,9 +652,25 @@ html {
   transition: 0.2s;
 }
 
+/* Tag « distinction argent » : chip sombre pour rester lisible dans les 2 thèmes
+   (remplace l'ancien color:#C0C0C0 inline, illisible sur fond clair). */
+.timeline-tags .tech-tag.silver {
+  background: #1f2433;
+  color: #e8e8ee;
+  border: 1px solid #c0c0c0;
+}
+
 .timeline-item:hover .tech-tag {
   background: rgba(79, 70, 229, 0.1);
   color: var(--primary-color);
+}
+
+/* Le chip de distinction garde son rendu argent même au survol (sinon le hover
+   l'emporte par ordre source → texte indigo illisible sur fond sombre, et perte
+   de l'identité « médaille »). Spécificité 0,4,0 > 0,3,0. */
+.timeline-item:hover .tech-tag.silver {
+  background: #1f2433;
+  color: #e8e8ee;
 }
 
 /* Skills Section */
@@ -747,6 +824,7 @@ html {
 .tech-tag {
   background: rgba(79, 70, 229, 0.2);
   color: var(--primary-color);
+  font-family: var(--font-mono);
   padding: 0.3rem 0.8rem;
   border-radius: 20px;
   font-size: 0.8rem;
@@ -893,6 +971,10 @@ html {
   flex-direction: column;
   cursor: pointer;
   padding: 0.5rem;
+  /* FIX : retirer le fond/bordure par défaut du <button> (sinon boîte blanche
+     sur la navbar sombre, barres blanches invisibles) */
+  background: none;
+  border: none;
 }
 
 .mobile-menu span {
@@ -927,7 +1009,7 @@ html {
     top: 100%;
     left: 0;
     right: 0;
-    background: rgba(15, 15, 35, 0.98);
+    background: rgba(11, 14, 20, 0.98);
     flex-direction: column;
     padding: 2rem;
     transform: translateY(-100%);
@@ -1120,6 +1202,100 @@ html {
   filter: brightness(1.1);
 }
 
+/* --- BANDEAU MÉTRIQUES (résultats chiffrés d'un projet) --- */
+.project-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  max-width: 840px;
+  margin: 0 auto 2.5rem;
+}
+
+.project-metrics .metric {
+  text-align: center;
+  padding: 1.3rem 0.8rem;
+  background: var(--bg-card);
+  border: 1px solid rgba(110, 123, 230, 0.25);
+  border-radius: var(--border-radius);
+}
+
+.project-metrics .metric-num {
+  display: block;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--primary-color);
+}
+
+.project-metrics .metric-label {
+  display: block;
+  margin-top: 0.45rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* --- ENCART CONFIGURATION (extrait de code/conf d'un projet) --- */
+.project-config {
+  max-width: 840px;
+  margin: 0 auto 1.5rem;
+  background: var(--term-bg, #0b0e14);
+  border: 1px solid rgba(86, 212, 221, 0.25);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.project-config-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.82rem;
+  color: var(--term-cyan);
+  background: rgba(86, 212, 221, 0.07);
+  border-bottom: 1px solid rgba(86, 212, 221, 0.18);
+}
+
+.project-config pre {
+  margin: 0;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: #c9d4e3;
+}
+
+.project-config .cfg-c {
+  color: #6b7a8d;
+}
+
+.project-config .cfg-k {
+  color: var(--term-green);
+}
+
+/* --- BADGE THÉMATIQUE (projet phare, ex. infra) --- */
+/* Pastille discrète en coin de carte — n'évoque PAS un prix (≠ award-ribbon). */
+.project-flag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--text-nav);
+  background: var(--gradient-nav);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
 /* --- AWARD RIBBON --- */
 /* FIX : doublons supprimés (.project-card déjà position:relative/overflow:hidden plus haut ;
    la 2e déclaration .award-ribbon.silver fusionnée ici). */
@@ -1298,4 +1474,328 @@ html {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* =========================================================================
+   TERMINAL « mathish » — couche interactive du hero (toujours sombre)
+   Préfixe .term-* pour ne jamais entrer en collision avec le reste du site.
+   ========================================================================= */
+
+/* Le hero accueille la fenêtre terminal (gauche) + le portrait (droite). */
+.hero--terminal {
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.term-window {
+  flex: 1 1 560px;
+  max-width: 640px;
+  min-width: 0;
+  background: var(--term-surface);
+  border: 1px solid var(--term-border);
+  border-radius: 12px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  font-family: var(--font-mono);
+  color: var(--term-text);
+  z-index: 2;
+}
+
+.term-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.9rem;
+  background: #0e131c;
+  border-bottom: 1px solid var(--term-border);
+}
+
+.term-dots {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.term-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.term-dot--red { background: #ff5f56; }
+.term-dot--amber { background: #ffbd2e; }
+.term-dot--green { background: #27c93f; }
+
+.term-bar-title {
+  font-size: 0.8rem;
+  color: var(--term-dim);
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.term-body {
+  padding: 1.1rem 1.2rem 1.2rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.term-ascii {
+  margin: 0 0 0.6rem;
+  color: var(--term-indigo);
+  font-size: 0.78rem;
+  line-height: 1.2;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.term-comment { color: var(--term-dim); }
+
+/* Le <h1> reste sémantique et bien visible (jamais de l'ASCII). */
+.term-window .hero-title {
+  font-family: var(--font-mono);
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  margin: 0.1rem 0 0.2rem;
+  color: var(--term-text);
+}
+
+.term-window .hero-subtitle {
+  color: var(--term-cyan);
+  font-size: 0.92rem;
+  letter-spacing: 1px;
+  margin-bottom: 0.9rem;
+  /* casse normale dans le terminal (la règle globale .hero-subtitle force l'uppercase) */
+  text-transform: none;
+}
+
+.hero-status {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  font-size: 0.86rem;
+  color: var(--term-text);
+  background: rgba(63, 185, 80, 0.08);
+  border: 1px solid rgba(63, 185, 80, 0.25);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.9rem;
+}
+
+.hero-status strong { color: var(--term-green); }
+
+.status-led {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--term-green);
+  box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.6);
+  animation: led-pulse 2s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes led-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.5); }
+  70% { box-shadow: 0 0 0 7px rgba(63, 185, 80, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(63, 185, 80, 0); }
+}
+
+.term-hint {
+  color: var(--term-dim);
+  font-size: 0.82rem;
+  margin-bottom: 0.55rem;
+}
+
+.term-hint code,
+.term-body code {
+  font-family: var(--font-mono);
+  color: var(--term-cyan);
+  background: rgba(86, 212, 221, 0.1);
+  padding: 0 4px;
+  border-radius: 4px;
+}
+
+.term-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+}
+
+.term-cmd {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--term-text);
+  background: #0e1622;
+  border: 1px solid var(--term-border);
+  border-radius: 6px;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.term-cmd::before {
+  content: "$ ";
+  color: var(--term-green);
+}
+
+.term-cmd:hover,
+.term-cmd:focus-visible {
+  border-color: var(--term-cyan);
+  color: var(--term-cyan);
+  background: #122031;
+}
+
+.term-cmd--accent {
+  border-color: rgba(63, 185, 80, 0.5);
+}
+
+.term-cmd--accent::before { content: "$ "; }
+
+/* Zone de sortie des commandes */
+.term-log {
+  margin: 0.4rem 0 0.7rem;
+  max-height: 320px;
+  overflow-y: auto;
+  font-size: 0.88rem;
+  border-top: 1px dashed var(--term-border);
+  padding-top: 0.6rem;
+}
+
+.term-log:empty { display: none; }
+
+.term-entry { margin-bottom: 0.75rem; }
+
+.term-entry-cmd {
+  color: var(--term-text);
+  margin-bottom: 0.2rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.term-entry-cmd .term-prompt-inline { color: var(--term-green); }
+
+.term-entry-out {
+  color: var(--term-dim);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.term-entry-out a { color: var(--term-cyan); }
+.term-out-green { color: var(--term-green); }
+.term-out-cyan { color: var(--term-cyan); }
+.term-out-amber { color: var(--term-amber); }
+.term-out-red { color: var(--term-red); }
+.term-out-strong { color: var(--term-text); font-weight: 700; }
+
+/* Tableau (ip a / systemctl) en sortie */
+.term-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  margin-top: 0.3rem;
+}
+
+.term-table th,
+.term-table td {
+  text-align: left;
+  padding: 2px 10px 2px 0;
+  color: var(--term-dim);
+  vertical-align: top;
+}
+
+.term-table th { color: var(--term-text); }
+
+/* Ligne de saisie — masquée sans JS (amélioration progressive) */
+.term-prompt-line {
+  display: none;
+  align-items: baseline;
+  gap: 0.5rem;
+  border-top: 1px solid var(--term-border);
+  padding-top: 0.7rem;
+}
+
+html.js .term-prompt-line {
+  display: flex;
+}
+
+.term-prompt {
+  color: var(--term-green);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.term-input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--term-text);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  caret-color: var(--term-green);
+  padding: 0;
+}
+
+.term-input::placeholder { color: var(--term-dim); }
+
+/* FIX a11y : indicateur de focus clavier sur la ligne de saisie (l'input lui-même
+   n'a pas d'outline pour rester « propre », le focus est porté par le conteneur). */
+.term-prompt-line:focus-within {
+  outline: 2px solid var(--term-cyan);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Curseur-bloc clignotant (purement décoratif, désactivé en reduced-motion) */
+.term-cursor {
+  display: inline-block;
+  width: 9px;
+  height: 1.05em;
+  background: var(--term-green);
+  vertical-align: -2px;
+  margin-left: 1px;
+  animation: term-blink 1.1s step-end infinite;
+}
+
+@keyframes term-blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .term-cursor { animation: none; }
+  .status-led { animation: none; }
+}
+
+/* Sans JS, le bouton « help » (seul .term-cmd non-ancre) ne ferait rien → masqué */
+html:not(.js) .term-suggestions button { display: none; }
+
+/* Empilage anticipé : entre 769 et 960px le portrait rigide (350px) comprimait
+   trop la fenêtre terminal → on passe en colonne plus tôt. */
+@media (max-width: 960px) {
+  /* en colonne, la fenêtre ne doit PAS grandir verticalement (sinon terminal
+     démesurément haut) → flex:none + hauteur de contenu + hero non étiré */
+  .hero--terminal {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    min-height: auto;
+  }
+  .hero--terminal .term-window { width: 100%; max-width: 100%; flex: none; }
+  .hero--terminal .hero-image { text-align: center; }
+}
+
+/* Responsive : sur mobile, mode lecture par défaut (input masqué, suggestions OK) */
+@media (max-width: 768px) {
+  .hero--terminal { flex-direction: column; }
+  .term-window { width: 100%; max-width: 100%; flex: none; }
+  .term-body { font-size: 0.86rem; }
+  .term-ascii { display: none; }
+  /* mode lecture sur petit écran : la saisie est masquée, les commandes
+     restent accessibles en cliquant les suggestions (ancres réelles). */
+  html.js .term-prompt-line { display: none; }
 }

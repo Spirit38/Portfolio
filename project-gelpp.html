@@ -4,10 +4,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    // Anti-FOUC : applique le thème mémorisé avant le rendu (évite le flash sombre→clair)
+    try { document.documentElement.setAttribute("data-theme", localStorage.getItem("theme") || "dark"); } catch (e) {}
+  </script>
   <title>GELPP — Gestionnaire d'événements (Vangi Mathis)</title>
   <meta name="description"
     content="GELPP — Gestionnaire d'événements pour lotissements et propriétés partagées (MEGA SAE)." />
-  <meta name="theme-color" content="#0f0f23" />
+  <meta name="theme-color" content="#0b0e14" />
   <link rel="canonical" href="https://spirit38.github.io/Portfolio/project-gelpp.html" />
 
   <!-- SEO Open Graph -->
@@ -24,7 +28,7 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <!-- FIX : paramètre font-display invalide retiré -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
     rel="stylesheet">
   <!-- FIX : SRI (integrity) sur les ressources CDN ; Swiper épinglé sur cdnjs (11.0.5) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -38,6 +42,21 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="icon" type="image/png" href="assets/ms-icon-310x310.png">
+
+  <!-- Données structurées (schema.org SoftwareSourceCode) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "GELPP — Gestionnaire d'événements en copropriété",
+    "author": { "@type": "Person", "name": "Mathis Vangi" },
+    "url": "https://spirit38.github.io/Portfolio/project-gelpp.html",
+    "codeRepository": "https://github.com/Spirit38/GELPP",
+    "image": "https://spirit38.github.io/Portfolio/assets/project2.png",
+    "programmingLanguage": "Java",
+    "keywords": "Java, JavaFX, UML, application lourde, gestion de projet, Git"
+  }
+  </script>
 </head>
 
 <body>
@@ -147,7 +166,7 @@
       </div>
 
       <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
-        <h2>🎯 Objectifs</h2>
+        <h2>📌 Objectifs</h2>
         <ul>
           <li>Permettre la création, la planification et le suivi d'événements</li>
           <li>Offrir une interface intuitive pour les gestionnaires</li>
@@ -163,7 +182,9 @@
       </div>
 
       <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
-        <h2>👤 Apports individuels</h2>
+        <h2>👤 Mon rôle</h2>
+        <!-- Mathis : si tu peux, chiffre ton apport (nb d'écrans/classes développés, modules dont tu étais
+             responsable) — ça remplacera avantageusement les formulations génériques. -->
         <p>Contribution au développement Java/JavaFX, à la conception des maquettes et à la rédaction des documents de
           cadrage. Participation aux revues de code et aux tests d'intégration.</p>
       </div>

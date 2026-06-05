@@ -4,15 +4,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio - Mathis Vangi | Développeur & Administrateur Réseaux</title>
+  <script>
+    // Anti-FOUC : applique le thème mémorisé avant le rendu (évite le flash sombre→clair)
+    try { document.documentElement.setAttribute("data-theme", localStorage.getItem("theme") || "dark"); } catch (e) {}
+    // Marqueur JS pour l'amélioration progressive (ex. saisie du terminal)
+    document.documentElement.classList.add("js");
+  </script>
+  <title>Mathis Vangi — Développeur & Administrateur Réseaux/Systèmes | Alternance 2026</title>
   <meta name="description"
-    content="Portfolio de Mathis Vangi, développeur et administrateur réseaux et systèmes. Découvrez mes projets et compétences techniques." />
+    content="Portfolio de Mathis Vangi, étudiant en BUT Informatique à Grenoble, en recherche d'alternance 2026 en développement, administration systèmes, réseaux et cybersécurité. Projets et compétences techniques." />
   <link rel="canonical" href="https://spirit38.github.io/Portfolio/" />
 
   <!-- SEO Open Graph -->
   <meta property="og:title" content="Portfolio - Mathis Vangi | Développeur & Administrateur Réseaux" />
   <meta property="og:description"
-    content="Étudiant en BUT Informatique, passionné par le développement et les infrastructures réseaux." />
+    content="Étudiant en BUT Informatique à Grenoble, en recherche d'alternance 2026 — développement, administration systèmes, réseaux & cybersécurité." />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="fr_FR" />
   <meta property="og:url" content="https://spirit38.github.io/Portfolio/" />
@@ -23,18 +29,18 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Portfolio - Mathis Vangi | Développeur & Administrateur Réseaux" />
   <meta name="twitter:description"
-    content="Étudiant en BUT Informatique, passionné par le développement et les infrastructures réseaux." />
+    content="Étudiant en BUT Informatique à Grenoble, en recherche d'alternance 2026 — développement, administration systèmes, réseaux & cybersécurité." />
   <meta name="twitter:image" content="https://spirit38.github.io/Portfolio/assets/photo2.png" />
 
   <!-- Theme color mobile -->
-  <meta name="theme-color" content="#0f0f23" />
+  <meta name="theme-color" content="#0b0e14" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
   <!-- FIX : display=swap pour éviter le FOIT (paramètre font-display invalide retiré) -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
     rel="stylesheet" />
   <!-- FIX : SRI (integrity) sur les ressources CDN tierces -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -102,24 +108,66 @@
   </nav>
 
   <main id="contenu" tabindex="-1">
-  <section class="hero" id="home" aria-labelledby="hero-heading">
-    <div class="hero-content" data-aos="fade-right">
-      <div class="hero-subtitle">Développeur <br> Administrateur Réseaux & Systèmes</div>
-      <!-- FIX : h1 sémantique présent dès le chargement, typeWriter l'animera -->
-      <h1 class="hero-title" id="hero-heading">Mathis Vangi</h1>
-      <p class="hero-description">
-        Passionné par le développement et les infrastructures réseaux.
-      </p>
-      <div class="hero-buttons">
-        <a href="#projects" class="btn btn-primary">Voir mes projets</a>
-        <a href="#contact" class="btn btn-secondary">Me contacter</a>
-        <a href="assets/CV_VANGI_Mathis_ALTERNANCE_INFORMATIQUE.pdf" class="btn btn-secondary" download>Télécharger
-          CV</a>
+  <section class="hero hero--terminal" id="home" aria-labelledby="hero-heading">
+
+    <!-- Fenêtre terminal « mathish » : couche interactive (le contenu reste accessible
+         via les ancres réelles ci-dessous, la navbar, et les sections plus bas). -->
+    <div class="term-window" id="terminal" data-aos="fade-right">
+      <div class="term-bar">
+        <span class="term-dots" aria-hidden="true"><i class="term-dot term-dot--red"></i><i
+            class="term-dot term-dot--amber"></i><i class="term-dot term-dot--green"></i></span>
+        <span class="term-bar-title" aria-hidden="true">mathis@grenoble: ~ — mathish</span>
+      </div>
+
+      <div class="term-body">
+        <pre class="term-ascii" aria-hidden="true"> ┌─[ mathis@grenoble ]─[ ~/portfolio ]
+ └─$ ./mathish --boot</pre>
+        <p class="term-comment" aria-hidden="true"># profil hybride : développeur + administrateur systèmes &amp; réseaux</p>
+
+        <!-- H1 textuel réel (jamais de l'ASCII) -->
+        <h1 class="hero-title" id="hero-heading">Mathis Vangi</h1>
+        <p class="hero-subtitle">Développeur · Administrateur Réseaux &amp; Systèmes</p>
+
+        <p class="hero-status">
+          <span class="status-led" aria-hidden="true"></span>
+          Étudiant BUT2 — <strong>Recherche alternance 2026</strong> · sysadmin / réseaux / sécurité · Grenoble
+        </p>
+
+        <p class="term-hint">Tapez <code>help</code> ou cliquez une commande :</p>
+        <nav class="term-suggestions" aria-label="Commandes rapides du terminal">
+          <a href="#about" class="term-cmd" data-cmd="whoami">whoami</a>
+          <a href="#projects" class="term-cmd" data-cmd="ls projets">ls projets</a>
+          <a href="#skills" class="term-cmd" data-cmd="skills">skills</a>
+          <a href="#contact" class="term-cmd term-cmd--accent" data-cmd="sudo hire-me">sudo hire-me</a>
+          <button type="button" class="term-cmd" data-cmd="help">help</button>
+        </nav>
+
+        <div class="term-log" id="term-log" role="log" aria-live="polite" aria-label="Sorties du terminal"></div>
+
+        <div class="term-prompt-line" id="term-prompt-line">
+          <label class="sr-only" for="term-input">Saisir une commande (tapez « help » pour la liste)</label>
+          <span class="term-prompt" aria-hidden="true">mathis@grenoble:~$</span>
+          <input class="term-input" id="term-input" type="text" autocomplete="off" autocapitalize="none"
+            autocorrect="off" spellcheck="false" aria-describedby="term-kbd-hint" />
+        </div>
+        <p class="sr-only" id="term-kbd-hint">Entrée pour exécuter, flèches haut et bas pour l'historique, Tab pour
+          compléter une commande.</p>
       </div>
     </div>
+
     <div class="hero-image" data-aos="fade-left">
-      <!-- FIX : dimensions explicites pour éviter le reflow -->
-      <img src="assets/photo2.png" alt="Portrait de Mathis Vangi" width="350" height="350" fetchpriority="high" />
+      <div class="hero-portrait">
+        <!-- FIX perf : WebP (17 Ko) servi en priorité, PNG en repli -->
+        <picture>
+          <source srcset="assets/photo2.webp" type="image/webp" />
+          <img src="assets/photo2.png" alt="Portrait de Mathis Vangi" width="350" height="350" fetchpriority="high" />
+        </picture>
+      </div>
+      <div class="hero-buttons" style="justify-content: center; margin-top: 1.5rem;">
+        <a href="#projects" class="btn btn-primary">Voir mes projets</a>
+        <a href="assets/CV_VANGI_Mathis_ALTERNANCE_INFORMATIQUE.pdf" class="btn btn-secondary" download>Télécharger le
+          CV</a>
+      </div>
     </div>
   </section>
 
@@ -161,8 +209,8 @@
           <span>Technologies maîtrisées</span>
         </div>
         <div class="stat-item">
-          <span class="stat-number">100%</span>
-          <span>Motivation</span>
+          <span class="stat-number">2<sup>e</sup></span>
+          <span>Prix Prototype (Argent)</span>
         </div>
       </div>
     </div>
@@ -236,7 +284,7 @@
           <i class="fas fa-medal"></i>
         </div>
         <div class="timeline-content" style="border-color: rgba(192, 192, 192, 0.3);">
-          <div class="timeline-date" style="color: #C0C0C0; background: rgba(192, 192, 192, 0.1);">
+          <div class="timeline-date silver">
             <i class="far fa-star" aria-hidden="true"></i> 2025 - 2026
           </div>
           <h3 class="timeline-title">Prix du Meilleur Prototype (2ème)</h3>
@@ -247,7 +295,7 @@
             l'OCR.
           </p>
           <div class="timeline-tags">
-            <span class="tech-tag" style="border: 1px solid #C0C0C0; color: #C0C0C0;">2ème Place</span>
+            <span class="tech-tag silver">2ème Place</span>
             <span class="tech-tag">Architecture</span>
             <span class="tech-tag">Innovation</span>
           </div>
@@ -461,14 +509,16 @@
 
     <div class="project-filters" role="group" aria-label="Filtrer les projets par catégorie">
       <button class="filter-btn active" data-filter="all">Tous</button>
-      <button class="filter-btn" data-filter="html">HTML / Frontend</button>
-      <button class="filter-btn" data-filter="php">PHP / Backend</button>
-      <button class="filter-btn" data-filter="java">Java</button>
-      <button class="filter-btn" data-filter="network">Systèmes & Réseaux</button>
+      <button class="filter-btn" data-filter="network">Réseaux &amp; Sécurité</button>
+      <button class="filter-btn" data-filter="web">Développement Web</button>
+      <button class="filter-btn" data-filter="java">Développement Logiciel</button>
     </div>
 
     <div class="projects-grid">
-      <div class="project-card" data-category="network" data-aos="fade-up" data-aos-delay="400">
+      <div class="project-card" data-category="network" data-aos="fade-up" data-aos-delay="0">
+        <span class="project-flag" aria-label="Projet phare — infrastructure haute disponibilité">
+          <i class="fas fa-server" aria-hidden="true"></i> Haute Dispo
+        </span>
         <img src="assets/schema_reseau.png"
           alt="Schéma de l'architecture réseau L3 de la SmartCity avec VLANs et cluster VRRP" class="project-image"
           width="400" height="200" loading="lazy" />
@@ -493,13 +543,16 @@
         </div>
       </div>
 
-      <div class="project-card" data-category="php" data-aos="fade-up" data-aos-delay="300">
+      <div class="project-card" data-category="web network" data-aos="fade-up" data-aos-delay="100">
         <div class="award-ribbon silver" aria-label="2ème Prix du meilleur prototype">
           <i class="fas fa-medal" aria-hidden="true"></i> 2ème Prix
         </div>
-        <img src="assets/aidevous_landing.png"
-          alt="Page d'accueil de l'application Aide&Vous, plateforme pour aidants familiaux" class="project-image"
-          width="400" height="200" loading="lazy" />
+        <picture>
+          <source srcset="assets/aidevous_landing.webp" type="image/webp" />
+          <img src="assets/aidevous_landing.png"
+            alt="Page d'accueil de l'application Aide&Vous, plateforme pour aidants familiaux" class="project-image"
+            width="400" height="200" loading="lazy" />
+        </picture>
         <div class="project-content">
           <h3 class="project-title">Aide&amp;Vous</h3>
           <p class="project-description">
@@ -525,7 +578,7 @@
         </div>
       </div>
 
-      <div class="project-card" data-category="java" data-aos="fade-up" data-aos-delay="300">
+      <div class="project-card" data-category="java" data-aos="fade-up" data-aos-delay="200">
         <img src="assets/project2.png" alt="Interface principale de l'application GELPP de gestion d'événements"
           class="project-image" width="400" height="200" loading="lazy" />
         <div class="project-content">
@@ -552,11 +605,14 @@
         </div>
       </div>
 
-      <div class="project-card" data-category="html" data-aos="fade-up" data-aos-delay="200">
-        <!-- FIX : dimensions explicites sur les images -->
-        <img src="assets/project1.png"
-          alt="Capture d'écran du site web institutionnel réalisé pour Orange Business Service" class="project-image"
-          width="400" height="200" loading="lazy" />
+      <div class="project-card" data-category="web" data-aos="fade-up" data-aos-delay="300">
+        <!-- FIX : dimensions explicites + WebP (155 Ko vs 3,6 Mo en PNG) -->
+        <picture>
+          <source srcset="assets/project1.webp" type="image/webp" />
+          <img src="assets/project1.png"
+            alt="Capture d'écran du site web institutionnel réalisé pour Orange Business Service" class="project-image"
+            width="400" height="200" loading="lazy" />
+        </picture>
         <div class="project-content">
           <h3 class="project-title">Site Web Institutionnel</h3>
           <p class="project-description">

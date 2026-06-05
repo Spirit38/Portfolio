@@ -102,6 +102,8 @@ window.addEventListener("load", function () {
     anchor.addEventListener("click", function (e) {
       const targetId = this.getAttribute("href");
       if (targetId === "#") return;
+      // Les ancres-commandes du terminal sont gérées par le module terminal
+      if (this.classList.contains("term-cmd")) return;
       const target = document.querySelector(targetId);
       if (target) {
         e.preventDefault();
@@ -122,12 +124,22 @@ window.addEventListener("load", function () {
      FIX : aria-label du bouton synchronisé avec le thème courant
      ========================================= */
   const themeToggle = document.getElementById("theme-toggle");
-  const body = document.body;
+  // FIX : thème porté par <html> (documentElement), cohérent avec le script
+  // anti-FOUC du <head> qui le pose avant le rendu.
+  const root = document.documentElement;
 
-  const currentTheme = localStorage.getItem("theme") || "dark";
-  body.setAttribute("data-theme", currentTheme);
+  // FIX : accès localStorage protégé (mode privé / stockage bloqué peut lever
+  // une exception qui casserait tout l'IIFE).
+  let currentTheme = "dark";
+  try { currentTheme = localStorage.getItem("theme") || "dark"; } catch (e) {}
+  root.setAttribute("data-theme", currentTheme);
 
   function applyThemeUI(theme) {
+    // FIX : la barre d'UI du navigateur mobile suit le thème (sinon reste sombre en clair)
+    const themeColorMeta = document.querySelector("meta[name=\"theme-color\"]");
+    if (themeColorMeta) {
+      themeColorMeta.setAttribute("content", theme === "light" ? "#ffffff" : "#0b0e14");
+    }
     if (!themeToggle) return;
     // En mode clair, le bouton propose de passer en sombre (et inversement).
     themeToggle.innerHTML =
@@ -146,10 +158,10 @@ window.addEventListener("load", function () {
 
   if (themeToggle) {
     themeToggle.addEventListener("click", function () {
-      const current = body.getAttribute("data-theme");
+      const current = root.getAttribute("data-theme");
       const next = current === "dark" ? "light" : "dark";
-      body.setAttribute("data-theme", next);
-      localStorage.setItem("theme", next);
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("theme", next); } catch (e) {}
       applyThemeUI(next);
     });
   }
@@ -206,78 +218,9 @@ window.addEventListener("load", function () {
     });
   }
 
-  /* =========================================
-     Effets visuels (Carte)
-     ========================================= */
-  document.querySelectorAll(".project-card").forEach((card) => {
-    card.addEventListener("mouseenter", function () {
-      this.style.transform = "translateY(-10px) rotateX(5deg)";
-    });
-    card.addEventListener("mouseleave", function () {
-      this.style.transform = "translateY(0) rotateX(0)";
-    });
-  });
-
-  /* =========================================
-     TypeWriter Hero
-     FIX : on masque le titre avant de l'écrire pour éviter le FOUC.
-     FIX : on saute l'animation si l'utilisateur préfère réduire les mouvements
-     (le <h1> conserve alors son texte statique présent dans le HTML).
-     ========================================= */
-  function typeWriter(element, text, speed) {
-    speed = speed || 100;
-    element.style.visibility = "hidden";
-    let i = 0;
-    element.innerHTML = "";
-
-    setTimeout(function startTyping() {
-      element.style.visibility = "visible";
-      function type() {
-        if (i < text.length) {
-          element.innerHTML += text.charAt(i);
-          i++;
-          setTimeout(type, speed);
-        }
-      }
-      type();
-    }, 1500);
-  }
-
-  window.addEventListener("load", function () {
-    const heroTitle = document.querySelector(".hero-title");
-    if (heroTitle && !prefersReducedMotion) {
-      typeWriter(heroTitle, "Mathis Vangi", 150);
-    }
-  });
-
-  /* =========================================
-     Animation flottante hero image
-     FIX : requestAnimationFrame à la place de setInterval
-     FIX : l'animation est suspendue quand l'image n'est pas visible (économie CPU)
-     et désactivée si l'utilisateur préfère réduire les mouvements.
-     ========================================= */
-  const heroImage = document.querySelector(".hero-image img");
-  if (heroImage && !prefersReducedMotion) {
-    let floatRAF = null;
-    function floatImage() {
-      heroImage.style.transform =
-        "translateY(" + Math.sin(Date.now() * 0.001) * 10 + "px)";
-      floatRAF = requestAnimationFrame(floatImage);
-    }
-
-    const floatObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && floatRAF === null) {
-          floatRAF = requestAnimationFrame(floatImage);
-        } else if (!entry.isIntersecting && floatRAF !== null) {
-          cancelAnimationFrame(floatRAF);
-          floatRAF = null;
-          heroImage.style.transform = "translateY(0)";
-        }
-      });
-    });
-    floatObserver.observe(heroImage);
-  }
+  /* Les micro-gadgets (hover rotateX des cartes, typeWriter du titre, flottement
+     du portrait en sinus) ont été retirés au profit d'une identité « terminal »
+     plus sobre : le <h1> est statique et le hero accueille la fenêtre mathish. */
 
   /* =========================================
      Swiper
@@ -347,7 +290,8 @@ window.addEventListener("load", function () {
     lightbox.classList.add("active");
     while (lightbox.firstChild) lightbox.removeChild(lightbox.firstChild);
     const img = document.createElement("img");
-    img.src = image.src;
+    // FIX : currentSrc => sert le WebP réellement chargé via <picture> (sinon repli PNG)
+    img.src = image.currentSrc || image.src;
     img.alt = image.alt;
     lightbox.appendChild(img);
     lightbox.focus();
@@ -411,4 +355,352 @@ window.addEventListener("load", function () {
       }
     });
   });
+
+  /* =========================================================================
+     Terminal « mathish » — couche interactive du hero (scopée à l'accueil).
+     Le contenu canonique reste dans <main> ; le terminal ne fait que l'afficher
+     et proposer la navigation. Aucune dépendance externe.
+     ========================================================================= */
+  (function initTerminal() {
+    const terminal = document.getElementById("terminal");
+    if (!terminal) return;
+    const input = document.getElementById("term-input");
+    const logEl = document.getElementById("term-log");
+    if (!input || !logEl) return;
+
+    const PROMPT = "mathis@grenoble:~$";
+
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+      });
+    }
+
+    function link(href, label) {
+      return '<a href="' + href + '">' + label + "</a>";
+    }
+
+    function extlink(href, label) {
+      return '<a href="' + href + '" target="_blank" rel="noopener noreferrer">' + label + "</a>";
+    }
+
+    function scrollToSection(id) {
+      const target = document.getElementById(id);
+      if (!target) return;
+      target.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" });
+      if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+      target.focus({ preventScroll: true });
+    }
+
+    const PROJECTS = {
+      smartcity: {
+        title: "SmartCity Infra",
+        href: "project-smartcity.html",
+        body:
+          "Architecture réseau L3 sécurisée & haute disponibilité (projet universitaire).\n" +
+          "  • 7 VLANs cloisonnés · cluster VRRP/Keepalived (bascule &lt; 2 s)\n" +
+          "  • pare-feu nftables stateful (default drop) · DMZ + reverse proxy Nginx/SSL\n" +
+          "  • DNS BIND9 · DHCP Kea · supervision Zabbix · SIEM Wazuh\n" +
+          "  essayez : <span class=\"term-out-cyan\">ip a</span>, <span class=\"term-out-cyan\">systemctl status</span>, <span class=\"term-out-cyan\">failover --test</span>"
+      },
+      aidevous: {
+        title: "Aide&amp;Vous — 2ᵉ Prix Meilleur Prototype",
+        href: "project-aidevous.html",
+        body:
+          "Plateforme web sécurisée pour aidants familiaux (médaille d'argent).\n" +
+          "  • PHP natif (MVC fait maison) · PostgreSQL · OCR Python (Tesseract)\n" +
+          "  • sécurité : AES-256 · Argon2 · protections CSRF/XSS · déploiement Debian\n" +
+          "  • travail d'équipe · méthode Agile · contexte RGPD"
+      },
+      gelpp: {
+        title: "GELPP",
+        href: "project-gelpp.html",
+        body:
+          "Application Java/JavaFX de gestion d'événements en copropriété.\n" +
+          "  • IHM JavaFX · modélisation UML (Visual Paradigm)\n" +
+          "  • équipe de 4-5 · Git · méthodes agiles"
+      },
+      "site-institutionnel": {
+        title: "Site Web Institutionnel",
+        href: "project1.html",
+        body:
+          "Site HTML/CSS/JS sobre & écoresponsable pour la génération Alpha.\n" +
+          "  • éco-conception · RGPD · accessibilité\n" +
+          "  • (ce portfolio applique les mêmes principes)"
+      }
+    };
+    const PROJECT_ALIASES = { site: "site-institutionnel" };
+
+    const COMMANDS = {
+      help: function () {
+        return {
+          out:
+            "Commandes disponibles :\n" +
+            "  <span class=\"term-out-cyan\">whoami</span>            qui suis-je\n" +
+            "  <span class=\"term-out-cyan\">ls projets</span>        liste des projets\n" +
+            "  <span class=\"term-out-cyan\">cat projets/&lt;nom&gt;</span> détail d'un projet\n" +
+            "  <span class=\"term-out-cyan\">skills</span>            compétences techniques\n" +
+            "  <span class=\"term-out-cyan\">parcours</span>          formation &amp; distinctions\n" +
+            "  <span class=\"term-out-cyan\">ip a</span>              interfaces réseau (SmartCity)\n" +
+            "  <span class=\"term-out-cyan\">systemctl status</span>  services supervisés (SmartCity)\n" +
+            "  <span class=\"term-out-cyan\">failover --test</span>   démo de bascule VRRP\n" +
+            "  <span class=\"term-out-cyan\">contact</span>           me contacter\n" +
+            "  <span class=\"term-out-green\">sudo hire-me</span>      pourquoi me recruter en alternance\n" +
+            "  <span class=\"term-out-cyan\">theme</span>             basculer le thème clair/sombre\n" +
+            "  <span class=\"term-out-cyan\">clear</span>             effacer le terminal\n" +
+            "<span class=\"term-dim\">↑/↓ historique · Tab autocomplétion</span>"
+        };
+      },
+      whoami: function () {
+        return {
+          section: "about",
+          out:
+            "mathis — étudiant en BUT2 Informatique (parcours « déploiement d'applications communicantes et sécurisées »).\n" +
+            "Profil hybride : j'aime autant écrire du code que configurer des serveurs.\n" +
+            link("#about", "→ voir « À propos »")
+        };
+      },
+      ls: function () {
+        return {
+          section: "projects",
+          out:
+            "<span class=\"term-out-cyan\">smartcity/</span>   <span class=\"term-out-cyan\">aidevous/</span>   <span class=\"term-out-cyan\">gelpp/</span>   <span class=\"term-out-cyan\">site-institutionnel/</span>\n" +
+            "<span class=\"term-dim\">→ « cat projets/&lt;nom&gt; » pour le détail</span>"
+        };
+      },
+      cat: function (args) {
+        const arg = (args[0] || "").toLowerCase();
+        if (arg === "about.txt" || arg === "about") return COMMANDS.whoami();
+        if (arg === "contact.vcf" || arg === "contact") return COMMANDS.contact();
+        const m = arg.match(/^projets\/(.+)$/);
+        if (m) {
+          const key = PROJECT_ALIASES[m[1]] || m[1];
+          const p = PROJECTS[key];
+          if (p) {
+            return {
+              section: "projects",
+              out:
+                "<span class=\"term-out-strong\">" + p.title + "</span>\n" + p.body + "\n" +
+                link(p.href, "→ ouvrir la page détaillée")
+            };
+          }
+          return { out: "<span class=\"term-out-red\">cat: projets/" + esc(m[1]) + ": fichier introuvable</span>\n<span class=\"term-dim\">essayez « ls projets »</span>" };
+        }
+        return { out: "<span class=\"term-out-red\">cat: " + esc(arg || "?") + ": fichier introuvable</span>" };
+      },
+      skills: function () {
+        return {
+          section: "skills",
+          out:
+            "<span class=\"term-out-strong\">Langages</span>     Java · C/C++ · HTML/CSS (avancé) · PHP · SQL · Python\n" +
+            "<span class=\"term-out-strong\">Réseaux/Sys</span>  admin Linux/Debian · réseaux · sécurité &amp; SIEM · virtualisation &amp; HA\n" +
+            "<span class=\"term-out-strong\">Outils</span>       Git · Proxmox · Nginx · Keepalived · nftables · Zabbix · Wazuh\n" +
+            link("#skills", "→ voir « Compétences »")
+        };
+      },
+      parcours: function () {
+        return {
+          section: "timeline",
+          out:
+            "2024–2027  BUT Informatique — IUT2 UGA (parcours B)\n" +
+            "2026       Stage développeur — Mini-golf indoor, Crolles\n" +
+            "2025–2026  <span class=\"term-out-amber\">2ᵉ Prix Meilleur Prototype</span> (Aide&amp;Vous)\n" +
+            "2024       Certification PIX\n" +
+            "2021–2024  Bac STI2D option SIN — Vaucanson, Grenoble\n" +
+            link("#timeline", "→ voir « Parcours »")
+        };
+      },
+      contact: function () {
+        return {
+          section: "contact",
+          out:
+            "Email     <span class=\"term-dim\">cliquez « Me contacter » (anti-spam)</span>\n" +
+            "LinkedIn  " + extlink("https://www.linkedin.com/in/mathis-vangi", "mathis-vangi") + "\n" +
+            "GitHub    " + extlink("https://github.com/Spirit38", "Spirit38") + "\n" +
+            "Lieu      Grenoble, France\n" +
+            link("#contact", "→ voir « Contact »")
+        };
+      },
+      ip: function (args) {
+        const a = (args[0] || "");
+        if (a !== "a" && a !== "addr") return { out: "<span class=\"term-dim\">usage : ip a</span>" };
+        const rows = [
+          ["eth0.10", "10", "Admin", "10.10.0.1/24"],
+          ["eth0.20", "20", "Serveurs", "10.20.0.1/24"],
+          ["eth0.30", "30", "IoT", "10.30.0.1/24"],
+          ["eth0.40", "40", "Utilisateurs", "10.40.0.1/24"],
+          ["eth0.50", "50", "DMZ", "10.50.0.1/24"],
+          ["eth0.60", "60", "Supervision", "10.60.0.1/24"],
+          ["eth0.99", "99", "Management", "10.99.0.1/24"]
+        ];
+        let t = "<table class=\"term-table\"><caption class=\"sr-only\">Interfaces VLAN du réseau SmartCity</caption><thead><tr><th>interface</th><th>VLAN</th><th>rôle</th><th>adresse</th></tr></thead><tbody>";
+        rows.forEach(function (r) {
+          t += "<tr><td class=\"term-out-cyan\">" + r[0] + "</td><td>" + r[1] + "</td><td>" + r[2] + "</td><td>" + r[3] + "</td></tr>";
+        });
+        t += "</tbody></table>";
+        return {
+          out:
+            "7 interfaces VLAN — cloisonnement du réseau SmartCity :\n" + t +
+            "<span class=\"term-dim\">VIP VRRP gérée par keepalived (bascule &lt; 2 s). Représentation d'un projet universitaire.</span>\n" +
+            link("project-smartcity.html", "→ détails du projet SmartCity")
+        };
+      },
+      systemctl: function () {
+        const services = [
+          ["bind9.service", "DNS interne"],
+          ["kea-dhcp4.service", "DHCP dynamique"],
+          ["nginx.service", "reverse proxy / DMZ"],
+          ["keepalived.service", "haute dispo (VRRP)"],
+          ["zabbix-server.service", "supervision"],
+          ["wazuh-manager.service", "SIEM / détection d'intrusion"]
+        ];
+        let t = "<table class=\"term-table\"><caption class=\"sr-only\">Services supervisés du projet SmartCity</caption><tbody>";
+        services.forEach(function (s) {
+          t += "<tr><td class=\"term-out-strong\">" + s[0] + "</td><td class=\"term-out-green\">● active (running)</td><td class=\"term-dim\">" + s[1] + "</td></tr>";
+        });
+        t += "</tbody></table>";
+        return { out: "État des services (projet SmartCity) :\n" + t + link("project-smartcity.html", "→ détails du projet SmartCity") };
+      },
+      failover: function () { return { animate: true }; },
+      clear: function () { logEl.innerHTML = ""; return { silent: true }; },
+      sudo: function (args) {
+        const rest = args.join(" ").toLowerCase();
+        if (rest === "hire-me" || rest === "hireme") {
+          return {
+            section: "contact",
+            out:
+              "<span class=\"term-dim\">[sudo] mot de passe pour mathis : ********</span>\n" +
+              "<span class=\"term-out-green\">Accès accordé.</span> Poste idéal :\n" +
+              "  type         = <span class=\"term-out-cyan\">alternance</span>\n" +
+              "  domaine      = administration systèmes / réseaux / cybersécurité\n" +
+              "  localisation = Grenoble (ou environs)\n" +
+              "  dispo        = 2026\n" +
+              "  motivation   = élevée <span class=\"term-out-green\">✓</span>\n" +
+              link("#contact", "→ Discutons-en : « Me contacter »")
+          };
+        }
+        return { out: "<span class=\"term-out-red\">mathis is not in the sudoers file. This incident will be reported.</span>" };
+      },
+      theme: function () {
+        const btn = document.getElementById("theme-toggle");
+        if (btn) btn.click();
+        return { out: "<span class=\"term-dim\">thème basculé.</span>" };
+      }
+    };
+    COMMANDS["?"] = COMMANDS.help;
+    COMMANDS.about = COMMANDS.whoami;
+    COMMANDS.cls = COMMANDS.clear;
+
+    const COMPLETIONS = [
+      "help", "whoami", "ls projets", "cat projets/", "skills", "parcours",
+      "ip a", "systemctl status", "failover --test", "contact", "sudo hire-me", "theme", "clear"
+    ];
+
+    function appendEntry(cmdText, outHtml) {
+      const entry = document.createElement("div");
+      entry.className = "term-entry";
+      const cmdLine = document.createElement("div");
+      cmdLine.className = "term-entry-cmd";
+      cmdLine.innerHTML = '<span class="term-prompt-inline" aria-hidden="true">' + PROMPT + "</span> " + esc(cmdText);
+      entry.appendChild(cmdLine);
+      if (outHtml != null) {
+        const outEl = document.createElement("div");
+        outEl.className = "term-entry-out";
+        outEl.innerHTML = outHtml;
+        entry.appendChild(outEl);
+      }
+      logEl.appendChild(entry);
+      logEl.scrollTop = logEl.scrollHeight;
+      return entry;
+    }
+
+    function runFailover(entry) {
+      const outEl = document.createElement("div");
+      outEl.className = "term-entry-out";
+      entry.appendChild(outEl);
+      const steps = [
+        "[*] test de bascule VRRP…",
+        "[*] MASTER rtr-01 : <span class=\"term-out-red\">DOWN</span> (simulé)",
+        "[*] élection VRRP… le BACKUP rtr-02 reprend la VIP",
+        "<span class=\"term-out-green\">[✓] failover terminé en 1.8 s — service maintenu</span>"
+      ];
+      if (prefersReducedMotion) {
+        outEl.innerHTML = steps.join("\n");
+        logEl.scrollTop = logEl.scrollHeight;
+        return;
+      }
+      let i = 0;
+      (function next() {
+        // si l'utilisateur a fait « clear » entre-temps, on arrête (noeud détaché)
+        if (i >= steps.length || !logEl.contains(outEl)) return;
+        outEl.innerHTML += (i ? "\n" : "") + steps[i];
+        logEl.scrollTop = logEl.scrollHeight;
+        i++;
+        setTimeout(next, 600);
+      })();
+    }
+
+    function execute(raw, opts) {
+      opts = opts || {};
+      const text = String(raw).trim();
+      if (!text) return;
+      const parts = text.replace(/\s+/g, " ").split(" ");
+      const name = parts[0].toLowerCase();
+      const args = parts.slice(1);
+      const fn = COMMANDS[name];
+      if (!fn) {
+        appendEntry(text, "<span class=\"term-out-red\">commande introuvable : " + esc(name) + "</span>\n<span class=\"term-dim\">tapez « help » pour la liste</span>");
+        return;
+      }
+      const res = fn(args) || {};
+      if (res.silent) return;
+      if (res.animate) { runFailover(appendEntry(text, null)); return; }
+      appendEntry(text, res.out);
+      if (res.section && opts.scroll) scrollToSection(res.section);
+    }
+
+    const history = [];
+    let histIndex = 0;
+
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const val = input.value;
+        if (val.trim()) { history.push(val); histIndex = history.length; }
+        execute(val, { scroll: false });
+        input.value = "";
+      } else if (e.key === "ArrowUp") {
+        if (!history.length) return;
+        e.preventDefault();
+        histIndex = Math.max(0, histIndex - 1);
+        input.value = history[histIndex] || "";
+      } else if (e.key === "ArrowDown") {
+        if (!history.length) return;
+        e.preventDefault();
+        histIndex = Math.min(history.length, histIndex + 1);
+        input.value = history[histIndex] || "";
+      } else if (e.key === "Tab") {
+        const val = input.value.trim().toLowerCase();
+        if (!val) return; // Tab reste échappable (WCAG 2.1.2)
+        const matches = COMPLETIONS.filter(function (c) { return c.indexOf(val) === 0; });
+        if (matches.length === 1) {
+          e.preventDefault();
+          input.value = matches[0];
+        } else if (matches.length > 1) {
+          e.preventDefault();
+          appendEntry(input.value, "<span class=\"term-dim\">" + matches.join("   ") + "</span>");
+        }
+      }
+    });
+
+    // Suggestions cliquables (ancres réelles → fallback no-JS conservé)
+    terminal.querySelectorAll(".term-cmd").forEach(function (el) {
+      el.addEventListener("click", function (e) {
+        const cmd = el.getAttribute("data-cmd");
+        if (!cmd) return;
+        e.preventDefault();
+        execute(cmd, { scroll: true });
+      });
+    });
+  })();
 })();

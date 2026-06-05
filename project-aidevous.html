@@ -4,10 +4,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    // Anti-FOUC : applique le thème mémorisé avant le rendu (évite le flash sombre→clair)
+    try { document.documentElement.setAttribute("data-theme", localStorage.getItem("theme") || "dark"); } catch (e) {}
+  </script>
   <title>Aide&amp;Vous — Assistant pour aidants (Vangi Mathis)</title>
   <meta name="description"
     content="Aide&Vous — Application Web sécurisée pour la gestion des dossiers médicaux et la coordination des aidants familiaux." />
-  <meta name="theme-color" content="#0f0f23" />
+  <meta name="theme-color" content="#0b0e14" />
   <link rel="canonical" href="https://spirit38.github.io/Portfolio/project-aidevous.html" />
 
   <!-- SEO Open Graph -->
@@ -24,7 +28,7 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <!-- FIX : paramètre font-display invalide retiré -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
     rel="stylesheet">
   <!-- FIX : SRI (integrity) sur les ressources CDN ; Swiper épinglé sur cdnjs (11.0.5) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -38,6 +42,21 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="icon" type="image/png" href="assets/ms-icon-310x310.png">
+
+  <!-- Données structurées (schema.org SoftwareSourceCode) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "Aide&Vous — Assistant pour aidants familiaux",
+    "author": { "@type": "Person", "name": "Mathis Vangi" },
+    "url": "https://spirit38.github.io/Portfolio/project-aidevous.html",
+    "codeRepository": "https://github.com/Spirit38/AideEtVous",
+    "image": "https://spirit38.github.io/Portfolio/assets/aidevous_landing.png",
+    "programmingLanguage": ["PHP", "Python", "SQL"],
+    "keywords": "PHP, MVC, PostgreSQL, OCR, Tesseract, AES-256, Argon2, RGPD, sécurité"
+  }
+  </script>
 </head>
 
 <body>
@@ -91,8 +110,11 @@
       <div class="swiper mySwiper" role="region" aria-label="Galerie du projet Aide&Vous">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
-            <img src="assets/aidevous_landing.png" alt="Page d'accueil de l'application Aide&Vous" width="960"
-              height="460" loading="lazy">
+            <picture>
+              <source srcset="assets/aidevous_landing.webp" type="image/webp" />
+              <img src="assets/aidevous_landing.png" alt="Page d'accueil de l'application Aide&Vous" width="960"
+                height="460" loading="lazy">
+            </picture>
           </div>
           <div class="swiper-slide">
             <img src="assets/aidevous_dashboard.png" alt="Tableau de bord de l'aidant avec vue synthétique du dossier"
@@ -124,6 +146,17 @@
         <div class="swiper-button-next" aria-label="Image suivante"></div>
         <div class="swiper-button-prev" aria-label="Image précédente"></div>
       </div>
+    </div>
+
+    <div class="project-metrics" data-aos="fade-up" role="list" aria-label="Points techniques clés">
+      <div class="metric" role="listitem"><span class="metric-num">AES-256</span><span class="metric-label">Chiffrement
+          des documents</span></div>
+      <div class="metric" role="listitem"><span class="metric-num">Argon2</span><span class="metric-label">Hachage des
+          mots de passe</span></div>
+      <div class="metric" role="listitem"><span class="metric-num">OCR</span><span class="metric-label">Lecture auto.
+          d'ordonnances</span></div>
+      <div class="metric" role="listitem"><span class="metric-num">0</span><span class="metric-label">Dépendance (MVC
+          natif)</span></div>
     </div>
 
     <div class="project-content">
@@ -170,6 +203,15 @@
           <li><strong>Post-it collaboratif :</strong> Post-it virtuels pour notes rapides et partage automatique entre
             tous les aidants.</li>
         </ul>
+      </div>
+
+      <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+        <h2>👤 Mon rôle</h2>
+        <!-- Mathis : précise TON apport (modules développés, partie sécurité/OCR/base de données dont tu étais
+             responsable). C'est ce qu'un recruteur regarde en premier sur un projet d'équipe. -->
+        <p>Contribution au développement de l'application (architecture MVC, base de données et intégration de la
+          sécurité) ainsi qu'à la rédaction du dossier d'architecture technique justifiant les choix (Natif vs
+          Framework, PostgreSQL vs SQLite).</p>
       </div>
 
       <div data-aos="fade-up" style="margin-bottom: 1.5rem;">

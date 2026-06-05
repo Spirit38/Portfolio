@@ -4,14 +4,18 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+        // Anti-FOUC : applique le thème mémorisé avant le rendu (évite le flash sombre→clair)
+        try { document.documentElement.setAttribute("data-theme", localStorage.getItem("theme") || "dark"); } catch (e) {}
+    </script>
     <title>Mentions Légales - Mathis Vangi</title>
-    <meta name="theme-color" content="#0f0f23" />
+    <meta name="theme-color" content="#0b0e14" />
     <link rel="canonical" href="https://spirit38.github.io/Portfolio/mention-legal.html" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
     <!-- FIX : paramètre font-display invalide retiré -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
         rel="stylesheet" />
     <!-- FIX : SRI (integrity) sur la ressource CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -104,7 +108,7 @@
                     rel="noopener noreferrer">Confidentialité Formspree</a>.
             </p>
 
-            <p style="text-align: center; margin-top: 60px; font-size: 0.9rem; color: #aaa;">
+            <p style="text-align: center; margin-top: 60px; font-size: 0.9rem; color: var(--text-muted);">
                 Dernière mise à jour : 09/03/2026
             </p>
         </div>
