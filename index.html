@@ -65,6 +65,7 @@
 </head>
 
 <body>
+  <a href="#contenu" class="skip-link">Aller au contenu</a>
   <div class="loading" id="loading">
     <div class="loader"></div>
   </div>
@@ -100,7 +101,7 @@
     </div>
   </nav>
 
-  <main>
+  <main id="contenu" tabindex="-1">
   <section class="hero" id="home" aria-labelledby="hero-heading">
     <div class="hero-content" data-aos="fade-right">
       <div class="hero-subtitle">Développeur <br> Administrateur Réseaux & Systèmes</div>
@@ -118,7 +119,7 @@
     </div>
     <div class="hero-image" data-aos="fade-left">
       <!-- FIX : dimensions explicites pour éviter le reflow -->
-      <img src="assets/photo2.png" alt="Portrait de Mathis Vangi" width="350" height="350" />
+      <img src="assets/photo2.png" alt="Portrait de Mathis Vangi" width="350" height="350" fetchpriority="high" />
     </div>
   </section>
 
@@ -626,7 +627,7 @@
           <i class="fas fa-briefcase" aria-hidden="true"></i>
           <div>
             <strong>Statut</strong><br />
-            Étudiant - Recherche stage/alternance
+            Étudiant — Recherche d'alternance 2026
           </div>
         </div>
 
@@ -668,7 +669,7 @@
 
         <div class="form-group">
           <label for="subject">Sujet</label>
-          <input type="text" id="subject" name="Sujet" placeholder="Ex: Opportunité de stage" />
+          <input type="text" id="subject" name="Sujet" placeholder="Ex : Opportunité d'alternance" />
         </div>
 
         <div class="form-group">
