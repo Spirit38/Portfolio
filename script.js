@@ -106,6 +106,13 @@ window.addEventListener("load", function () {
       if (target) {
         e.preventDefault();
         target.scrollIntoView({ behavior: "smooth", block: "start" });
+        // FIX a11y : preventDefault() annule le déplacement natif du focus ;
+        // on le déplace donc manuellement vers la cible (sinon le skip-link et
+        // les ancres internes sont inopérants au clavier — WCAG 2.4.1).
+        if (!target.hasAttribute("tabindex")) {
+          target.setAttribute("tabindex", "-1");
+        }
+        target.focus({ preventScroll: true });
       }
     });
   });
