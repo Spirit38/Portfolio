@@ -627,6 +627,27 @@ html {
   margin-bottom: 15px;
 }
 
+/* Lien « Voir le projet » d'une étape de parcours (discret, pas un gros bouton) */
+.timeline-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: gap 0.2s ease, opacity 0.2s ease;
+}
+
+.timeline-link:hover {
+  gap: 0.7rem;
+  opacity: 0.85;
+}
+
+.timeline-link i {
+  font-size: 0.75rem;
+}
+
 /* --- TAGS --- */
 .timeline-tags {
   display: flex;

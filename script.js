@@ -393,6 +393,15 @@ window.addEventListener("load", function () {
     }
 
     const PROJECTS = {
+      minigolf: {
+        title: "Mini-Golf de Crolles — appli en production",
+        href: "project-minigolf.html",
+        body:
+          "PWA de gestion de scores (stage pro, déployée en production).\n" +
+          "  • React/TypeScript · Supabase/PostgreSQL · 5 Edge Functions (Deno)\n" +
+          "  • sécurité : RLS sur toutes les tables · autorité serveur · audit &amp; durcissement JWT · RGPD\n" +
+          "  • déploiement : domaine · DNS (SPF/DKIM) · en-têtes HSTS/CSP"
+      },
       smartcity: {
         title: "SmartCity Infra",
         href: "project-smartcity.html",
@@ -464,7 +473,7 @@ window.addEventListener("load", function () {
         return {
           section: "projects",
           out:
-            "<span class=\"term-out-cyan\">smartcity/</span>   <span class=\"term-out-cyan\">aidevous/</span>   <span class=\"term-out-cyan\">gelpp/</span>   <span class=\"term-out-cyan\">site-institutionnel/</span>\n" +
+            "<span class=\"term-out-cyan\">minigolf/</span>   <span class=\"term-out-cyan\">smartcity/</span>   <span class=\"term-out-cyan\">aidevous/</span>   <span class=\"term-out-cyan\">gelpp/</span>   <span class=\"term-out-cyan\">site-institutionnel/</span>\n" +
             "<span class=\"term-dim\">→ « cat projets/&lt;nom&gt; » pour le détail</span>"
         };
       },

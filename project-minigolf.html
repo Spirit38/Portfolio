@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    // Anti-FOUC : applique le thème mémorisé avant le rendu (évite le flash sombre→clair)
+    try { document.documentElement.setAttribute("data-theme", localStorage.getItem("theme") || "dark"); } catch (e) {}
+  </script>
+  <title>Application Mini-Golf de Crolles — PWA, sécurité & déploiement (Vangi Mathis)</title>
+  <meta name="description"
+    content="Application web progressive (PWA) de gestion de scores développée en stage chez JKL Events : base PostgreSQL sécurisée (RLS), back-office, gamification et mise en production (DNS, en-têtes de sécurité)." />
+  <meta name="theme-color" content="#0b0e14" />
+  <link rel="canonical" href="https://spirit38.github.io/Portfolio/project-minigolf.html" />
+
+  <!-- SEO Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:title" content="Application Mini-Golf de Crolles — PWA, sécurité & déploiement" />
+  <meta property="og:description"
+    content="Stage de 8 semaines : PWA React/TypeScript sur Supabase, base PostgreSQL sécurisée (RLS), back-office, gamification et déploiement en production." />
+  <meta property="og:url" content="https://spirit38.github.io/Portfolio/project-minigolf.html" />
+  <meta property="og:image" content="https://spirit38.github.io/Portfolio/assets/minigolf_dashboard.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <!-- FIX : paramètre font-display invalide retiré -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <!-- FIX : SRI (integrity) sur les ressources CDN ; Swiper épinglé sur cdnjs (11.0.5) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+    integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9xmBN9iUUhIndKtxwILGWYOSibOKjLsEdjyjZvYDq/cZwNeak0w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css"
+    integrity="sha512-rd0qOHVMOcez6pLWPVFIv7EfSdGKLt+eafXh4RO/12Fgr41hDQxfGvoi1Vy55QIVcQEujUE1LQrATCLl2Fs+ag=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/png" href="assets/ms-icon-310x310.png">
+
+  <!-- Données structurées (schema.org SoftwareSourceCode) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "Application Mini-Golf de Crolles",
+    "author": { "@type": "Person", "name": "Mathis Vangi" },
+    "url": "https://spirit38.github.io/Portfolio/project-minigolf.html",
+    "image": "https://spirit38.github.io/Portfolio/assets/minigolf_dashboard.png",
+    "programmingLanguage": ["TypeScript", "SQL"],
+    "runtimePlatform": "React, Supabase, PostgreSQL, Deno",
+    "keywords": "PWA, React, TypeScript, Supabase, PostgreSQL, RLS, sécurité, gamification, déploiement, DNS, RGPD"
+  }
+  </script>
+</head>
+
+<body>
+  <a href="#contenu" class="skip-link">Aller au contenu</a>
+  <div class="loading" id="loading">
+    <div class="loader"></div>
+  </div>
+
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Navigation principale">
+    <div class="logo">Mathis<span> Vangi</span></div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html#home" class="nav-link">Accueil</a></li>
+      <li><a href="index.html#about" class="nav-link">À propos</a></li>
+      <li><a href="index.html#projects" class="nav-link active">Projets</a></li>
+      <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Basculer vers le mode clair">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+      </button>
+      <a href="https://github.com/Spirit38" target="_blank" rel="noopener noreferrer" class="github-icon"
+        aria-label="Profil GitHub de Mathis Vangi">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      <button class="mobile-menu" id="mobile-menu" aria-label="Ouvrir le menu" aria-expanded="false"
+        aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="contenu" tabindex="-1">
+  <section class="section project-detail" aria-labelledby="project-heading">
+    <h1 class="section-title" id="project-heading" data-aos="fade-up" style="margin-top: 2rem;">Application Mini-Golf de
+      Crolles</h1>
+    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+      Stage de 8 semaines chez JKL Events — une application web progressive (PWA) de gestion de scores, déployée en
+      production.
+    </p>
+
+    <div class="project-metrics" data-aos="fade-up" role="list" aria-label="Chiffres clés du projet">
+      <div class="metric" role="listitem"><span class="metric-num">8 sem.</span><span class="metric-label">Stage en
+          entreprise</span></div>
+      <div class="metric" role="listitem"><span class="metric-num">20+</span><span class="metric-label">Tables
+          PostgreSQL (RLS)</span></div>
+      <div class="metric" role="listitem"><span class="metric-num">5</span><span class="metric-label">Edge Functions
+          (Deno)</span></div>
+      <div class="metric" role="listitem"><span class="metric-num">Live</span><span class="metric-label">En
+          production</span></div>
+    </div>
+
+    <p class="gallery-hint" data-aos="fade-up">
+      <i class="fas fa-search-plus" aria-hidden="true"></i> Cliquez sur les images pour les agrandir
+    </p>
+
+    <div class="project-gallery" data-aos="fade-up" data-aos-delay="150">
+      <div class="swiper mySwiper" role="region" aria-label="Galerie du projet Mini-Golf de Crolles">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <picture>
+              <source srcset="assets/minigolf_dashboard.webp" type="image/webp" />
+              <img src="assets/minigolf_dashboard.png"
+                alt="Tableau de bord administrateur en temps réel : fréquentation, parties en cours, records" width="960"
+                height="460" loading="lazy">
+            </picture>
+          </div>
+          <div class="swiper-slide">
+            <picture>
+              <source srcset="assets/minigolf_player.webp" type="image/webp" />
+              <img src="assets/minigolf_player.png"
+                alt="Application joueur : saisie des scores par trou sur smartphone" width="960" height="460"
+                loading="lazy">
+            </picture>
+          </div>
+          <div class="swiper-slide">
+            <picture>
+              <source srcset="assets/minigolf_player2.webp" type="image/webp" />
+              <img src="assets/minigolf_player2.png"
+                alt="Application joueur : détail d'un trou et validation du score" width="960" height="460"
+                loading="lazy">
+            </picture>
+          </div>
+          <div class="swiper-slide">
+            <picture>
+              <source srcset="assets/minigolf_architecture.webp" type="image/webp" />
+              <img src="assets/minigolf_architecture.png"
+                alt="Architecture en couches : client React, base PostgreSQL faisant autorité, Edge Functions" width="960"
+                height="460" loading="lazy">
+            </picture>
+          </div>
+          <div class="swiper-slide">
+            <picture>
+              <source srcset="assets/minigolf_gamification.webp" type="image/webp" />
+              <img src="assets/minigolf_gamification.png"
+                alt="Back-office : gestion de la gamification (succès et récompenses)" width="960" height="460"
+                loading="lazy">
+            </picture>
+          </div>
+          <div class="swiper-slide">
+            <picture>
+              <source srcset="assets/minigolf_wheel.webp" type="image/webp" />
+              <img src="assets/minigolf_wheel.png" alt="Roue des cadeaux côté joueur" width="960" height="460"
+                loading="lazy">
+            </picture>
+          </div>
+          <div class="swiper-slide">
+            <picture>
+              <source srcset="assets/minigolf_email.webp" type="image/webp" />
+              <img src="assets/minigolf_email.png"
+                alt="Email de relance automatique (J+20), authentifié par SPF et DKIM" width="960" height="460"
+                loading="lazy">
+            </picture>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next" aria-label="Image suivante"></div>
+        <div class="swiper-button-prev" aria-label="Image précédente"></div>
+      </div>
+    </div>
+
+    <div class="project-content">
+
+      <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+        <h2>🎯 Contexte</h2>
+        <p>Stage de développement de 8 semaines chez <strong>JKL Events</strong> (Mini-Golf de Crolles), un complexe de
+          loisirs immersif. En <strong>équipe de 3 développeurs</strong>, nous avons reconstruit de zéro l'application
+          numérique de l'établissement : une <strong>PWA</strong> (application web progressive) remplaçant les fiches de
+          score papier et une ancienne application Firebase vieillissante.</p>
+      </div>
+
+      <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+        <h2>❓ Problématique</h2>
+        <p>Le suivi des parties reposait sur du papier (calculs de points « Énergie Quantique » complexes, erreurs
+          fréquentes, aucune donnée exploitable) et une application obsolète sans fidélisation. Il fallait une solution
+          <strong>moderne, fluide sur mobile, sécurisée</strong> et exploitable pour le pilotage de l'activité — tout en
+          laissant un joueur saisir ses scores <strong>sans créer de compte</strong>.</p>
+      </div>
+
+      <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+        <h2>👤 Mon rôle</h2>
+        <p>Au sein de l'équipe, j'ai pris en charge <strong>l'essentiel de la partie serveur, des données et de la
+            sécurité</strong> :</p>
+        <ul>
+          <li>Conception et <strong>sécurisation de la base de données PostgreSQL</strong> (~20 tables).</li>
+          <li>Développement du <strong>back-office d'administration</strong> (tableau de bord temps réel, validation des
+            parties, modération).</li>
+          <li><strong>Gamification</strong> : succès, récompenses et roue des cadeaux.</li>
+          <li>Système de <strong>notifications push et d'emails</strong> automatisés.</li>
+          <li><strong>Déploiement et mise en production</strong> de l'application.</li>
+        </ul>
+      </div>
+
+      <div data-aos="fade-up" class="mb-medium">
+        <h2>🧠 Stack technique</h2>
+        <div style="margin-bottom: 10px;">
+          <span class="tech-tag">React 18</span>
+          <span class="tech-tag">TypeScript</span>
+          <span class="tech-tag">Vite</span>
+          <span class="tech-tag">Tailwind CSS</span>
+          <span class="tech-tag">Supabase</span>
+          <span class="tech-tag">PostgreSQL</span>
+          <span class="tech-tag">Deno (Edge Functions)</span>
+          <span class="tech-tag">PWA</span>
+        </div>
+        <ul>
+          <li><strong>Frontend :</strong> React + TypeScript en PWA mobile-first (installable, hors-ligne partiel,
+            notifications push) — une seule base de code pour iOS et Android, sans store.</li>
+          <li><strong>Backend :</strong> Supabase (BaaS) — base PostgreSQL relationnelle, authentification et moteur
+            temps réel.</li>
+          <li><strong>Serverless :</strong> 4 Edge Functions Deno/TypeScript isolant les opérations sensibles (emails
+            via Resend, Web Push, tâche planifiée, suppression de compte RGPD).</li>
+        </ul>
+      </div>
+
+      <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+        <h2>🔒 Architecture &amp; sécurité</h2>
+        <p>Principe directeur : <strong>l'autorité revient au serveur, jamais au client</strong>. La logique est
+          répartie sur trois niveaux de confiance (client / base de données / Edge Functions).</p>
+        <ul>
+          <li><strong>RLS (Row Level Security)</strong> sur toutes les tables, avec un <em>event trigger</em> activant
+            automatiquement la RLS à la création de toute nouvelle table (aucune table ne reste sans protection).</li>
+          <li><strong>Secret d'équipe :</strong> pour autoriser un invité (sans compte) à modifier sa partie sans
+            accéder à celles des autres, chaque équipe reçoit un secret transmis par en-tête HTTP — secret
+            <strong>jamais lisible côté client</strong> grâce à des privilèges au niveau colonne.</li>
+          <li><strong>Calculs sensibles côté base</strong> (victoire, attribution des succès) via des triggers : le
+            client ne peut pas se déclarer vainqueur.</li>
+          <li><strong>Audit &amp; durcissement :</strong> un audit pendant le stage a révélé que des Edge Functions ne
+            vérifiaient pas l'identité de l'appelant (envoi d'emails de masse déclenchable par n'importe qui) ; je les ai
+            durcies pour vérifier le rôle via le <strong>jeton JWT</strong>, non falsifiable.</li>
+          <li><strong>Conformité RGPD :</strong> suppression de compte côté serveur, anonymisant le profil tout en
+            conservant les statistiques.</li>
+        </ul>
+      </div>
+
+      <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+        <h2>⚙️ Extrait — confidentialité du secret d'équipe (PostgreSQL)</h2>
+        <p>Le secret ne doit jamais fuiter côté client : on retire le <code>SELECT</code> global puis on ré-accorde
+          l'accès colonne par colonne, en excluant la colonne du secret.</p>
+        <div class="project-config">
+          <div class="project-config-head"><i class="fas fa-shield-halved" aria-hidden="true"></i>
+            sécurité — politiques RLS (PostgreSQL)</div>
+          <pre><span class="cfg-c">-- Le secret d'équipe ne doit jamais être lisible côté client :</span>
+<span class="cfg-c">-- on retire le SELECT global, puis on ré-accorde colonne par colonne — sauf team_secret.</span>
+<span class="cfg-k">REVOKE SELECT</span> ON public.teams <span class="cfg-k">FROM</span> anon, authenticated;
+<span class="cfg-k">GRANT  SELECT</span> (id, name, created_by, nb_joueurs, is_finished, share_token)
+       ON public.teams <span class="cfg-k">TO</span> anon, authenticated;   <span class="cfg-c">-- team_secret exclu</span>
+
+<span class="cfg-c">-- L'écriture d'un invité n'est autorisée que si le secret (en-tête HTTP) concorde.</span>
+<span class="cfg-k">CREATE POLICY</span> "Modification_teams" ON public.teams
+  <span class="cfg-k">FOR UPDATE USING</span> (public.team_write_allowed(id));</pre>
+        </div>
+      </div>
+
+      <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+        <h2>🚀 Réalisations clés</h2>
+        <ul>
+          <li><strong>Attribution automatique des succès</strong> en une seule requête SQL transactionnelle (chaînage de
+            CTE) : atomique, idempotente, sans surdistribution de stock — avec le mécanisme inverse de révocation si un
+            score est supprimé.</li>
+          <li><strong>Relance automatique J+20</strong> (Edge Function planifiée) avec gestion fine de l'échec partiel :
+            une équipe n'est marquée « relancée » que si <strong>tous</strong> ses emails sont partis, sinon reprise le
+            lendemain — traitement auto-correctif.</li>
+          <li><strong>Barèmes de points configurables</strong> depuis le back-office, appliqués en temps réel sans
+            redéploiement (repli automatique sur les valeurs du code).</li>
+          <li><strong>Statistiques calculées en base</strong> (vues SQL) plutôt que côté client, et tableau de bord
+            <strong>temps réel</strong> (Supabase Realtime).</li>
+        </ul>
+      </div>
+
+      <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+        <h2>🛠️ Déploiement &amp; mise en production</h2>
+        <p>J'ai assuré la mise en production de bout en bout :</p>
+        <ul>
+          <li>Build Vite (fichiers statiques versionnés par hachage) hébergé sur <strong>Hostinger Business</strong>
+            derrière le domaine <code>app.minigolfcrolles.fr</code>.</li>
+          <li><strong>En-têtes de sécurité</strong> via <code>.htaccess</code> : HSTS, X-Frame-Options,
+            X-Content-Type-Options, Permissions-Policy et Content-Security-Policy.</li>
+          <li><strong>Configuration DNS :</strong> entrées <strong>SPF</strong> et <strong>DKIM</strong> authentifiant
+            les emails (sans elles, les relances seraient classées en indésirables).</li>
+          <li>Secrets (clés Supabase / Resend / push) en <strong>variables d'environnement</strong>, jamais dans le
+            dépôt ; intégration Git pour le déploiement automatique sur push.</li>
+        </ul>
+      </div>
+
+      <div data-aos="fade-up" class="mb-large">
+        <h2>🛠️ Ce que j'ai appris</h2>
+        <ul>
+          <li>Placer la sécurité et l'intégrité <strong>directement dans la base</strong> (RLS, fonctions à droits du
+            propriétaire, triggers) plutôt que de faire confiance au client.</li>
+          <li>Concevoir des <strong>fonctions serverless robustes</strong> (gestion des échecs partiels, traitements
+            planifiés).</li>
+          <li>Mener un projet jusqu'à la <strong>production réelle</strong> (domaine, DNS, services tiers) pour de vrais
+            utilisateurs.</li>
+          <li>Travailler à plusieurs sur une même base de code : intégration propre des modules et documentation des
+            choix.</li>
+        </ul>
+      </div>
+
+      <div class="button-group" data-aos="fade-up"
+        style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;">
+        <a href="index.html#projects" class="btn btn-secondary">
+          <i class="fas fa-arrow-left" aria-hidden="true"></i> Retour aux projets
+        </a>
+        <a href="https://app.minigolfcrolles.fr" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-up-right-from-square" aria-hidden="true"></i> Voir l'application
+        </a>
+      </div>
+
+    </div>
+  </section>
+  </main>
+
+  <button class="scroll-top" id="scroll-top" aria-label="Retour en haut de page">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <footer class="footer">
+    <p>&copy; 2026 Mathis Vangi. Tous droits réservés.</p>
+    <p><a href="mention-legal.html" class="footer-link">Mentions Légales</a></p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"
+    integrity="sha512-Ysw1DcK1P+uYLqprEAzNQJP+J4hTx4t/3X2nbVwszao8wD+9afLjBQYjz7Uk4ADP+Er++mJoScI42ueGtQOzEA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"
+    integrity="sha512-A7AYk1fGKX6S2SsHywmPkrnzTZHrgiVT7GcQkLGDe2ev0aWb8zejytzS8wjo7PGEXKqJOrjQ4oORtnimIRZBtw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
