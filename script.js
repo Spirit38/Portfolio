@@ -345,14 +345,25 @@ window.addEventListener("load", function () {
      ========================================= */
   document.querySelectorAll(".obfuscated-email").forEach(function (el) {
     el.addEventListener("click", function (e) {
-      e.preventDefault();
       const email = this.dataset.user + "@" + this.dataset.domain;
-      if (this.tagName === "A" && this.querySelector("i")) {
-        window.location.href = "mailto:" + email;
-      } else {
-        this.href = "mailto:" + email;
-        this.textContent = email;
+
+      // Vérifie si le lien a déjà été transformé
+      if (!this.href.startsWith("mailto:")) {
+        e.preventDefault(); // On bloque uniquement le "#" initial
+        
+        // On met à jour le vrai lien
+        this.href = "mailto:" + email; 
+
+        // Si c'est le lien texte, on révèle l'email
+        if (!this.querySelector("i")) {
+          this.textContent = email;
+        }
+
+        // On déclenche l'ouverture de la messagerie
+        window.location.href = this.href; 
       }
+      // Si l'attribut href commence DÉJÀ par "mailto:", 
+      // on ne fait rien et on laisse le navigateur ouvrir l'application mail tout seul au prochain clic.
     });
   });
 
