@@ -793,7 +793,26 @@ html {
 .project-content {
   padding: 2rem;
   max-width: 840px;
-  margin: 0 auto; 
+  margin: 0 auto;
+}
+
+/* Lien « démo en ligne » (section Tester l'application) : lien inline mis en valeur
+   — police mono + accent cyan (cohérent avec le thème terminal), soulignement animé
+   au survol. Le focus clavier reste assuré par la règle :focus-visible globale. */
+.demo-link {
+  color: var(--secondary-color);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: var(--transition);
+  word-break: break-word;
+}
+
+.demo-link:hover,
+.demo-link:focus-visible {
+  color: var(--primary-color);
+  border-bottom-color: currentColor;
 }
 
 .button-group .btn {
