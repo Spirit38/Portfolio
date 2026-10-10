@@ -475,7 +475,7 @@ window.addEventListener("load", function () {
         return {
           section: "about",
           out:
-            "mathis — étudiant en BUT2 Informatique (parcours « déploiement d'applications communicantes et sécurisées »).\n" +
+            "mathis — étudiant en BUT3 Informatique, en alternance chez Chartreuse (parcours « déploiement d'applications communicantes et sécurisées »).\n" +
             "Profil hybride : j'aime autant écrire du code que configurer des serveurs.\n" +
             link("#about", "→ voir « À propos »")
         };
@@ -523,7 +523,8 @@ window.addEventListener("load", function () {
           section: "timeline",
           out:
             "2024–2027  BUT Informatique — IUT2 UGA (parcours B)\n" +
-            "2026       Stage développeur — Mini-golf indoor, Crolles\n" +
+            "2026–2027  <span class=\"term-out-cyan\">Alternance chez Chartreuse</span> — BUT3 (en cours)\n" +
+            "Avr–Juin 2026  Stage développeur — Mini-golf indoor, Crolles\n" +
             "2025–2026  <span class=\"term-out-amber\">2ᵉ Prix Meilleur Prototype</span> (Aide&amp;Vous)\n" +
             "2024       Certification PIX\n" +
             "2021–2024  Bac STI2D option SIN — Vaucanson, Grenoble\n" +
