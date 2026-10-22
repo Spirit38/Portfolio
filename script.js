@@ -1,11 +1,16 @@
 /* FIX : AOS protégé — si le CDN échoue ou que la lib n'est pas chargée
-   (ex : page Mentions Légales), le reste du script continue de fonctionner. */
+   (ex : page Mentions Légales), le reste du script continue de fonctionner.
+   FIX offset : réduit à 50 (était 100) pour éviter que les sections
+   restent invisibles juste sous le hero au premier chargement. */
 if (typeof AOS !== "undefined") {
+  const prefersReducedMotionAOS =
+    window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   AOS.init({
-    duration: 1000,
+    duration: prefersReducedMotionAOS ? 0 : 800,
     easing: "ease-in-out",
     once: true,
-    offset: 100,
+    offset: 50,
+    disable: prefersReducedMotionAOS,
   });
 }
 
@@ -167,21 +172,29 @@ window.addEventListener("load", function () {
   }
 
   /* =========================================
-     Animation Compétences
+     Animation Compétences (badges)
+     FIX : l'ancienne animation ciblait .skill-progress (barres supprimées).
+     On anime désormais les .skill-badge avec un fade-in décalé au scroll.
      ========================================= */
   const skillsSection = document.getElementById("skills");
-  if (skillsSection) {
-    function animateSkills() {
-      document.querySelectorAll(".skill-progress").forEach((bar) => {
-        bar.style.width = bar.getAttribute("data-width") + "%";
-      });
-    }
+  if (skillsSection && !prefersReducedMotion) {
+    const skillBadges = skillsSection.querySelectorAll(".skill-badge");
+    skillBadges.forEach((badge, i) => {
+      badge.style.opacity = "0";
+      badge.style.transform = "translateY(6px)";
+    });
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            animateSkills();
+            skillBadges.forEach((badge, i) => {
+              setTimeout(() => {
+                badge.style.transition = "opacity 0.3s ease, transform 0.3s ease";
+                badge.style.opacity = "1";
+                badge.style.transform = "translateY(0)";
+              }, i * 30);
+            });
             observer.unobserve(entry.target);
           }
         });
@@ -367,6 +380,70 @@ window.addEventListener("load", function () {
     });
   });
 
+  /* =========================================
+     Presse-papier & Notification Toast
+     Boutons "Copier l'email" (.btn-copy-email)
+     ========================================= */
+  function showToast(message) {
+    let toast = document.getElementById("toast");
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.id = "toast";
+      toast.className = "toast";
+      toast.setAttribute("role", "status");
+      toast.setAttribute("aria-live", "polite");
+      toast.innerHTML =
+        '<i class="fas fa-check-circle" aria-hidden="true"></i><span class="toast-message"></span>';
+      document.body.appendChild(toast);
+    }
+    const msgEl = toast.querySelector(".toast-message");
+    if (msgEl) msgEl.textContent = message;
+    toast.classList.add("show");
+    if (toast._timer) clearTimeout(toast._timer);
+    toast._timer = setTimeout(function () {
+      toast.classList.remove("show");
+    }, 3200);
+  }
+
+  function copyTextToClipboard(text, successMsg) {
+    showToast(successMsg || "Adresse email copiée !");
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).catch(function () {
+        fallbackCopy(text);
+      });
+    } else {
+      fallbackCopy(text);
+    }
+  }
+
+  function fallbackCopy(text) {
+    try {
+      const temp = document.createElement("textarea");
+      temp.value = text;
+      temp.style.position = "fixed";
+      temp.style.left = "-9999px";
+      temp.style.top = "0";
+      document.body.appendChild(temp);
+      temp.focus();
+      temp.select();
+      document.execCommand("copy");
+      document.body.removeChild(temp);
+    } catch (e) {
+      console.warn("Fallback copy failed", e);
+    }
+  }
+
+  // Écouteur global par délégation pour les boutons de copie d'email
+  document.addEventListener("click", function (e) {
+    const btn = e.target.closest(".btn-copy-email");
+    if (!btn) return;
+    e.preventDefault();
+    const user = btn.getAttribute("data-user") || "mathis.vangi";
+    const domain = btn.getAttribute("data-domain") || "gmail.com";
+    const email = user + "@" + domain;
+    copyTextToClipboard(email, "Adresse email copiée : " + email);
+  });
+
   /* =========================================================================
      Terminal « mathish » — couche interactive du hero (scopée à l'accueil).
      Le contenu canonique reste dans <main> ; le terminal ne fait que l'afficher
@@ -512,9 +589,10 @@ window.addEventListener("load", function () {
         return {
           section: "skills",
           out:
-            "<span class=\"term-out-strong\">Langages</span>     Java · C/C++ · HTML/CSS (avancé) · PHP · SQL · Python\n" +
-            "<span class=\"term-out-strong\">Réseaux/Sys</span>  admin Linux/Debian · réseaux · sécurité &amp; SIEM · virtualisation &amp; HA\n" +
-            "<span class=\"term-out-strong\">Outils</span>       Git · Proxmox · Nginx · Keepalived · nftables · Zabbix · Wazuh\n" +
+            "<span class=\"term-out-strong\">Langages</span>     Java · C/C++ · HTML/CSS · TypeScript (avancé) · PHP · SQL · Python\n" +
+            "<span class=\"term-out-strong\">Frameworks</span>   React · JavaFX · Supabase · PostgreSQL (RLS) · Symfony\n" +
+            "<span class=\"term-out-strong\">Réseaux/Sys</span>  admin Linux · réseaux · sécurité &amp; SIEM · virtualisation &amp; HA · Proxmox\n" +
+            "<span class=\"term-out-strong\">Outils</span>       Git · Docker · Bash · Nginx · Keepalived · nftables · Zabbix · Wazuh\n" +
             link("#skills", "→ voir « Compétences »")
         };
       },
@@ -535,7 +613,7 @@ window.addEventListener("load", function () {
         return {
           section: "contact",
           out:
-            "Email     <span class=\"term-dim\">cliquez « Me contacter » (anti-spam)</span>\n" +
+            "Email     <button type=\"button\" class=\"term-cmd btn-copy-email\" data-user=\"mathis.vangi\" data-domain=\"gmail.com\">mathis.vangi@gmail.com [copier]</button>\n" +
             "LinkedIn  " + extlink("https://www.linkedin.com/in/mathis-vangi", "mathis-vangi") + "\n" +
             "GitHub    " + extlink("https://github.com/Spirit38", "Spirit38") + "\n" +
             "Lieu      Grenoble, France\n" +
