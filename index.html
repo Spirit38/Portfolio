@@ -491,6 +491,65 @@
       </div>
 
       <div class="projects-grid">
+
+        <div class="project-card" data-category="network" data-aos="fade-up" data-aos-delay="200">
+          <span class="project-flag" aria-label="Stage en entreprise — service en production interne">
+            <i class="fas fa-shield-alt" aria-hidden="true"></i> En production
+          </span>
+          <img src="assets/schema_archi.webp"
+            alt="Schéma de l'architecture Vaultwarden : Docker, Nginx et cloisonnement VPN/LAN" class="project-image"
+            width="400" height="200" loading="lazy" />
+          <div class="project-content">
+            <h3 class="project-title">Vaultwarden — Gestionnaire de mots de passe</h3>
+            <p class="project-description">
+              Déploiement et sécurisation d'un gestionnaire de mots de passe d'entreprise sur l'infrastructure interne
+              de <strong>Chartreuse</strong> : conteneurisation Docker, reverse proxy Nginx, cloisonnement VPN et
+              sauvegarde automatisée à chaud.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">Docker</span>
+              <span class="tech-tag">Nginx</span>
+              <span class="tech-tag">Linux (Debian)</span>
+              <span class="tech-tag">Bash / Cron</span>
+              <span class="tech-tag">VPN</span>
+            </div>
+            <div class="project-links">
+              <a href="project-vaultwarden.html" class="project-link">
+                <i class="fas fa-eye" aria-hidden="true"></i> Voir détails
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="network" data-aos="fade-up" data-aos-delay="300">
+          <span class="project-flag" aria-label="Stage en entreprise — service en production interne">
+            <i class="fas fa-book" aria-hidden="true"></i> En production
+          </span>
+          <img src="assets/schema_archi_wiki.webp"
+            alt="Schéma de l'architecture Wiki.js : Docker, PostgreSQL, Nginx, SSL et SSO"
+            class="project-image" width="400" height="200" loading="lazy" />
+          <div class="project-content">
+            <h3 class="project-title">Wiki.js — Infrastructure documentaire</h3>
+            <p class="project-description">
+              Migration, sécurisation et automatisation complète de l'instance Wiki.js de
+              <strong>Chartreuse</strong> : Docker, SSL/TLS automatisé (DNS-01), SSO Entra ID,
+              PRA avec rsync NAS et nettoyage SQL de masse.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">Docker</span>
+              <span class="tech-tag">PostgreSQL 17</span>
+              <span class="tech-tag">Nginx</span>
+              <span class="tech-tag">acme.sh / Let's Encrypt</span>
+              <span class="tech-tag">Azure AD / Entra ID</span>
+            </div>
+            <div class="project-links">
+              <a href="project-wikijs.html" class="project-link">
+                <i class="fas fa-eye" aria-hidden="true"></i> Voir détails
+              </a>
+            </div>
+          </div>
+        </div>
+
         <div class="project-card" data-category="web network" data-aos="fade-up" data-aos-delay="0">
           <span class="project-flag" aria-label="Stage en entreprise — application en production">
             <i class="fas fa-rocket" aria-hidden="true"></i> En production
@@ -555,7 +614,7 @@
           </div>
         </div>
 
-        <div class="project-card" data-category="web network" data-aos="fade-up" data-aos-delay="200">
+        <div class="project-card" data-category="web network" data-aos="fade-up" data-aos-delay="300">
           <div class="award-ribbon silver" aria-label="2ème Prix du meilleur prototype">
             <i class="fas fa-medal" aria-hidden="true"></i> 2ème Prix
           </div>

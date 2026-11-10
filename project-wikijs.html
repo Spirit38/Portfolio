@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    try { document.documentElement.setAttribute("data-theme", localStorage.getItem("theme") || "dark"); } catch (e) { }
+  </script>
+  <title>Wiki.js — Migration & Sécurisation de l'infrastructure documentaire (Vangi Mathis)</title>
+  <meta name="description"
+    content="Migration, sécurisation et automatisation de l'infrastructure Wiki.js de Chartreuse : Docker, PostgreSQL, Nginx, SSL/TLS, SSO Azure AD, PRA et GPO Active Directory." />
+  <meta name="theme-color" content="#0b0e14" />
+  <link rel="canonical" href="https://spirit38.github.io/Portfolio/project-wikijs.html" />
+
+  <!-- SEO Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:title" content="Wiki.js — Migration & Sécurisation de l'infrastructure documentaire" />
+  <meta property="og:description"
+    content="Migration, sécurisation et automatisation de l'infrastructure Wiki.js de Chartreuse." />
+  <meta property="og:url" content="https://spirit38.github.io/Portfolio/project-wikijs.html" />
+  <meta property="og:image" content="https://spirit38.github.io/Portfolio/assets/schema_archi_wiki.webp" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+    integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9xmBN9iUUhIndKtxwILGWYOSibOKjLsEdjyjZvYDq/cZwNeak0w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css"
+    integrity="sha512-rd0qOHVMOcez6pLWPVFIv7EfSdGKLt+eafXh4RO/12Fgr41hDQxfGvoi1Vy55QIVcQEujUE1LQrATCLl2Fs+ag=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/png" href="assets/ms-icon-310x310.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "Wiki.js — Migration, Sécurisation et Automatisation de l'Infrastructure documentaire",
+    "author": { "@type": "Person", "name": "Mathis Vangi" },
+    "url": "https://spirit38.github.io/Portfolio/project-wikijs.html",
+    "keywords": "Wiki.js, Docker, PostgreSQL, Nginx, acme.sh, Let's Encrypt, Azure AD, Entra ID, SSO, Bash, Active Directory, GPO, PRA, rsync"
+  }
+  </script>
+</head>
+
+<body>
+  <a href="#contenu" class="skip-link">Aller au contenu</a>
+  <div class="loading" id="loading">
+    <div class="loader"></div>
+  </div>
+
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Navigation principale">
+    <div class="logo">Mathis<span> Vangi</span></div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html#home" class="nav-link">Accueil</a></li>
+      <li><a href="index.html#about" class="nav-link">À propos</a></li>
+      <li><a href="index.html#projects" class="nav-link active">Projets</a></li>
+      <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Basculer vers le mode clair">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+      </button>
+      <a href="https://github.com/Spirit38" target="_blank" rel="noopener noreferrer" class="github-icon"
+        aria-label="Profil GitHub de Mathis Vangi">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      <button class="mobile-menu" id="mobile-menu" aria-label="Ouvrir le menu" aria-expanded="false"
+        aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="contenu" tabindex="-1">
+    <section class="section project-detail" aria-labelledby="project-heading">
+      <h1 class="section-title" id="project-heading" data-aos="fade-up" style="margin-top: 2rem;">Wiki.js</h1>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+        Infrastructure documentaire — Migration, sécurisation et automatisation complète pour Chartreuse.
+      </p>
+
+      <p class="gallery-hint" data-aos="fade-up">
+        <i class="fas fa-search-plus" aria-hidden="true"></i> Cliquez sur les images pour les agrandir
+      </p>
+
+      <div class="project-gallery" data-aos="fade-up" data-aos-delay="150">
+        <div class="swiper mySwiper" role="region" aria-label="Galerie du projet Wiki.js">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="assets/schema_archi_wiki.webp"
+                alt="Schéma de l'architecture Wiki.js : Docker, PostgreSQL, Nginx reverse proxy, SSL Let's Encrypt et SSO Entra ID"
+                width="960" height="460" loading="lazy">
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next" aria-label="Image suivante"></div>
+          <div class="swiper-button-prev" aria-label="Image précédente"></div>
+        </div>
+      </div>
+
+      <div class="project-metrics" data-aos="fade-up" data-aos-delay="150" role="list"
+        aria-label="Points techniques clés">
+        <div class="metric" role="listitem"><span class="metric-num">&lt; 5 min</span><span
+            class="metric-label">Interruption lors du basculement</span></div>
+        <div class="metric" role="listitem"><span class="metric-num">100 %</span><span class="metric-label">Autonomie
+            (SSL, backups, NAS)</span></div>
+        <div class="metric" role="listitem"><span class="metric-num">0</span><span class="metric-label">Lien mort en
+            base après migration</span></div>
+        <div class="metric" role="listitem"><span class="metric-num">J+60</span><span
+            class="metric-label">Renouvellement SSL automatique</span></div>
+      </div>
+
+      <div class="project-content">
+
+        <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+          <h2>🎯 Contexte et Problématique</h2>
+          <p>
+            L'instance <strong>Wiki.js</strong> de <strong>Chartreuse</strong> — plateforme centrale de documentation
+            interne — était hébergée sur un service externe présentant des limites en termes de contrôle,
+            de sécurité et de résilience. J'ai pris en charge la migration complète vers une
+            <strong>VM interne dédiée</strong>, en assurant la continuité du service, la
+            sécurisation des accès (SSL, SSO), la remise en état de l'authentification Microsoft Entra ID
+            post-migration et l'automatisation des sauvegardes.
+          </p>
+        </div>
+
+        <div data-aos="fade-up" class="mb-medium">
+          <h2>🧠 Stack Technique &amp; Environnement</h2>
+          <div style="margin-bottom: 10px;">
+            <span class="tech-tag">Linux</span>
+            <span class="tech-tag">Docker &amp; Docker Compose</span>
+            <span class="tech-tag">PostgreSQL 17</span>
+            <span class="tech-tag">Nginx</span>
+            <span class="tech-tag">acme.sh</span>
+            <span class="tech-tag">Let's Encrypt</span>
+            <span class="tech-tag">Microsoft Entra ID</span>
+            <span class="tech-tag">Bash</span>
+          </div>
+        </div>
+
+        <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+          <h2>🏗️ Conteneurisation &amp; Restructuration du Stockage</h2>
+          <ul>
+            <li>
+              <strong>Migration de volumes :</strong> Conversion des volumes Docker autonomes vers une
+              arborescence locale en <em>bind mounts</em> (<code>./wiki-data</code>, <code>./db-data</code>,
+              <code>./.db-secret</code>) pour un contrôle direct du stockage et une gestion simplifiée
+              du Plan de Reprise d'Activité.
+            </li>
+            <li>
+              <strong>Stack multi-conteneurs :</strong> Déploiement coordonné des services
+              <code>wiki</code>, <code>db</code> (PostgreSQL 17) et <code>wiki-update-companion</code>
+              avec gestion stricte des privilèges (UID/GID <code>1000:1000</code> pour Wiki.js).
+            </li>
+          </ul>
+        </div>
+
+        <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+          <h2>🔒 Certificat SSL &amp; Renouvellement Automatique </h2>
+          <p>
+            Le service étant exclusivement interne, l'obtention d'un certificat Let's Encrypt nécessitait
+            le challenge DNS-01 (impossible de passer par HTTP-01 sur un réseau non exposé).
+          </p>
+          <ul>
+            <li>
+              <strong>acme.sh + API Infomaniak :</strong> Génération et renouvellement automatique du
+              certificat TLS sur le domaine délégué <code>in.chartreuse.eu</code> via l'API DNS Infomaniak,
+              sans exposition publique du serveur.
+            </li>
+            <li>
+              <strong>Utilisateur système dédié (<code>acme</code>) :</strong> Exécution du processus
+              sous un compte isolé à privilèges réduits pour limiter la surface d'attaque.
+            </li>
+            <li>
+              <strong>Rechargement Nginx sans élévation globale :</strong> Règle <code>sudoers</code>
+              ciblée permettant au script de recharger le reverse-proxy
+              (<code>systemctl reload nginx</code>) sans accorder de droits <code>root</code> complets.
+            </li>
+          </ul>
+        </div>
+
+        <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+          <h2>🌐 Reverse Proxy Nginx &amp; Support WebSocket</h2>
+          <ul>
+            <li>
+              <strong>HTTPS strict :</strong> Virtual Host configuré avec TLSv1.2/TLSv1.3,
+              redirection 301 systématique de HTTP vers HTTPS.
+            </li>
+            <li>
+              <strong>WebSockets :</strong> Passage des en-têtes <code>Upgrade</code> et
+              <code>Connection</code> indispensables au bon fonctionnement de l'éditeur collaboratif
+              temps réel de Wiki.js.
+            </li>
+          </ul>
+        </div>
+
+        <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+          <h2>🔑 Diagnostic &amp; Résolution d'Incident SSO (Intervention SQL)</h2>
+          <p>
+            Suite à la migration, l'authentification Microsoft Entra ID (Azure AD) était cassée — les URL de callback et
+            les secrets n'étant plus
+            valides pour la nouvelle instance.
+          </p>
+          <ul>
+            <li>
+              <strong>Reconfiguration Entra ID en base :</strong> Injection directe du nouveau
+              <em>Client Secret</em> et réalignement des URL de callback dans la table
+              <code>authentication</code> de PostgreSQL via des requêtes SQL ciblées, sans accès
+              à l'interface d'administration.
+            </li>
+            <li>
+              <strong>Réalignement de la clé <code>host</code> :</strong> Mise à jour de la table
+              <code>settings</code> pour forcer la génération correcte des jetons OpenID Connect
+              sur le nouveau domaine.
+            </li>
+          </ul>
+        </div>
+
+        <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+          <h2>⚙️ Plan de Reprise d'Activité &amp; Sauvegarde Automatisée</h2>
+          <ul>
+            <li>
+              <strong>Script Bash d'archivage à chaud :</strong> Export SQL complet via
+              <code>pg_dump</code> combiné à la compression des assets médias (<code>tar.gz</code>),
+              sans interruption du service.
+            </li>
+            <li>
+              <strong>Rétention glissante :</strong> Nettoyage automatique des archives de plus de
+              7 jours pour prévenir la saturation du stockage.
+            </li>
+            <li>
+              <strong>Externalisation NAS sécurisée :</strong> Synchronisation automatique du dossier
+              de sauvegarde vers le NAS d'entreprise via <code>rsync</code> et authentification SSH
+              par clés <strong>Ed25519</strong> non-interactives (zéro mot de passe).
+            </li>
+            <li>
+              <strong>Planification Cron :</strong> Sauvegardes déclenchées quotidiennement à 03h00,
+              renouvellement SSL automatique à J+60.
+            </li>
+          </ul>
+        </div>
+
+        <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+          <h2>🗄️ Nettoyage de Masse de la Base de Données</h2>
+          <p>
+            Après migration, l'ensemble des liens internes de la documentation pointaient encore vers
+            l'ancien domaine hébergeur.
+          </p>
+          <ul>
+            <li>
+              <strong>Audit SQL :</strong> Requêtes d'inspection (<code>SELECT</code> avec conversion
+              de type JSON) pour identifier l'intégralité des références résiduelles vers l'ancien domaine.
+            </li>
+            <li>
+              <strong>Refactoring de masse :</strong> Remplacement via <code>REPLACE()</code> sur les
+              colonnes <code>content</code> (Markdown) et <code>render</code> (HTML) de la table
+              <code>pages</code> — résultat : <strong>0 lien mort</strong> conservé après opération.
+            </li>
+          </ul>
+        </div>
+
+        <div data-aos="fade-up" class="mb-large">
+          <h2>🛠️ Savoir-faire acquis</h2>
+          <ul>
+            <li>Migration d'une application conteneurisée avec continuité de service (< 5 min d'interruption).</li>
+            <li>Génération et renouvellement SSL automatisé via challenge DNS-01 sur réseau interne non exposé.</li>
+            <li>Diagnostic et résolution d'incidents SSO par intervention directe en base PostgreSQL.</li>
+            <li>Conception d'un PRA complet : sauvegarde à chaud, rétention et externalisation NAS via SSH.</li>
+            <li>Nettoyage et intégrité de données à grande échelle par requêtes SQL de masse.</li>
+          </ul>
+        </div>
+
+        <div class="button-group" data-aos="fade-up"
+          style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;">
+          <a href="index.html#projects" class="btn btn-secondary">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i> Retour aux projets
+          </a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <button class="scroll-top" id="scroll-top" aria-label="Retour en haut de page">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <footer class="footer">
+    <p>&copy; 2026 Mathis Vangi. Tous droits réservés.</p>
+    <p><a href="mention-legal.html" class="footer-link">Mentions Légales</a></p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"
+    integrity="sha512-Ysw1DcK1P+uYLqprEAzNQJP+J4hTx4t/3X2nbVwszao8wD+9afLjBQYjz7Uk4ADP+Er++mJoScI42ueGtQOzEA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"
+    integrity="sha512-A7AYk1fGKX6S2SsHywmPkrnzTZHrgiVT7GcQkLGDe2ev0aWb8zejytzS8wjo7PGEXKqJOrjQ4oORtnimIRZBtw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

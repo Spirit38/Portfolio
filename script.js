@@ -136,7 +136,7 @@ window.addEventListener("load", function () {
   // FIX : accès localStorage protégé (mode privé / stockage bloqué peut lever
   // une exception qui casserait tout l'IIFE).
   let currentTheme = "dark";
-  try { currentTheme = localStorage.getItem("theme") || "dark"; } catch (e) {}
+  try { currentTheme = localStorage.getItem("theme") || "dark"; } catch (e) { }
   root.setAttribute("data-theme", currentTheme);
 
   function applyThemeUI(theme) {
@@ -166,7 +166,7 @@ window.addEventListener("load", function () {
       const current = root.getAttribute("data-theme");
       const next = current === "dark" ? "light" : "dark";
       root.setAttribute("data-theme", next);
-      try { localStorage.setItem("theme", next); } catch (e) {}
+      try { localStorage.setItem("theme", next); } catch (e) { }
       applyThemeUI(next);
     });
   }
@@ -363,9 +363,9 @@ window.addEventListener("load", function () {
       // Vérifie si le lien a déjà été transformé
       if (!this.href.startsWith("mailto:")) {
         e.preventDefault(); // On bloque uniquement le "#" initial
-        
+
         // On met à jour le vrai lien
-        this.href = "mailto:" + email; 
+        this.href = "mailto:" + email;
 
         // Si c'est le lien texte, on révèle l'email
         if (!this.querySelector("i")) {
@@ -373,7 +373,7 @@ window.addEventListener("load", function () {
         }
 
         // On déclenche l'ouverture de la messagerie
-        window.location.href = this.href; 
+        window.location.href = this.href;
       }
       // Si l'attribut href commence DÉJÀ par "mailto:", 
       // on ne fait rien et on laisse le navigateur ouvrir l'application mail tout seul au prochain clic.
@@ -517,6 +517,29 @@ window.addEventListener("load", function () {
           "  • IHM JavaFX · modélisation UML (Visual Paradigm)\n" +
           "  • équipe de 4-5 · Git · méthodes agiles"
       },
+      vaultwarden: {
+        title: "Vaultwarden — Gestionnaire de mots de passe d'entreprise",
+        href: "project-vaultwarden.html",
+        body:
+          "Déploiement &amp; sécurisation d'un gestionnaire de mots de passe interne (Alternance chez Chartreuse).\n" +
+          "  • conteneurisation Docker Compose · reverse proxy Nginx (HTTPS)\n" +
+          "  • cloisonnement LAN/VPN · service vault.in.chartreuse.eu non exposé\n" +
+          "  • sécurité : Zero-Knowledge · org. unique · récupération cryptographique\n" +
+          "  • sauvegarde à chaud sqlite3 (.backup) · rotation Cron find -mtime · chmod 700\n" +
+          "  • documentation Wiki.js · sessions post-migration"
+      },
+      wikijs: {
+        title: "Wiki.js — Migration & Sécurisation de l'Infrastructure documentaire",
+        href: "project-wikijs.html",
+        body:
+          "Migration complète vers VM Debian interne + sécurisation + automatisation (stage chez Chartreuse).\n" +
+          "  • stack Docker Compose : Wiki.js · PostgreSQL 17 · update-companion\n" +
+          "  • SSL Let\'s Encrypt automatisé via acme.sh + challenge DNS-01 (API Infomaniak)\n" +
+          "  • Nginx reverse proxy TLSv1.2/1.3 + headers WebSocket pour l\'éditeur temps réel\n" +
+          "  • résolution SSO Entra ID (Azure AD) : injection SQL directe table authentication\n" +
+          "  • PRA : pg_dump + tar.gz + rsync NAS via SSH Ed25519 · rétention 7 jours\n" +
+          "  • nettoyage SQL de masse REPLACE() : 0 lien mort conservé · basculement &lt; 5 min\n"
+      },
       "site-institutionnel": {
         title: "Site Web Institutionnel",
         href: "project1.html",
@@ -526,7 +549,7 @@ window.addEventListener("load", function () {
           "  • (ce portfolio applique les mêmes principes)"
       }
     };
-    const PROJECT_ALIASES = { site: "site-institutionnel" };
+    const PROJECT_ALIASES = { site: "site-institutionnel", vault: "vaultwarden", wiki: "wikijs" };
 
     const COMMANDS = {
       help: function () {
@@ -561,7 +584,7 @@ window.addEventListener("load", function () {
         return {
           section: "projects",
           out:
-            "<span class=\"term-out-cyan\">minigolf/</span>   <span class=\"term-out-cyan\">smartcity/</span>   <span class=\"term-out-cyan\">aidevous/</span>   <span class=\"term-out-cyan\">gelpp/</span>   <span class=\"term-out-cyan\">site-institutionnel/</span>\n" +
+            "<span class=\"term-out-cyan\">minigolf/</span>   <span class=\"term-out-cyan\">smartcity/</span>   <span class=\"term-out-cyan\">vaultwarden/</span>   <span class=\"term-out-cyan\">wikijs/</span>   <span class=\"term-out-cyan\">aidevous/</span>   <span class=\"term-out-cyan\">gelpp/</span>   <span class=\"term-out-cyan\">site-institutionnel/</span>\n" +
             "<span class=\"term-dim\">→ « cat projets/&lt;nom&gt; » pour le détail</span>"
         };
       },
@@ -691,7 +714,7 @@ window.addEventListener("load", function () {
     COMMANDS.cls = COMMANDS.clear;
 
     const COMPLETIONS = [
-      "help", "whoami", "ls projets", "cat projets/", "skills", "parcours",
+      "help", "whoami", "ls projets", "cat projets/", "cat projets/vaultwarden", "cat projets/wikijs", "skills", "parcours",
       "ip a", "systemctl status", "failover --test", "contact", "sudo hire-me", "theme", "clear"
     ];
 

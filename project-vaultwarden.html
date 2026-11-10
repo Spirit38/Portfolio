@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    // Anti-FOUC : applique le thème mémorisé avant le rendu (évite le flash sombre→clair)
+    try { document.documentElement.setAttribute("data-theme", localStorage.getItem("theme") || "dark"); } catch (e) { }
+  </script>
+  <title>Vaultwarden — Gestionnaire de mots de passe d'entreprise (Vangi Mathis)</title>
+  <meta name="description"
+    content="Déploiement et sécurisation d'un gestionnaire de mots de passe d'entreprise Vaultwarden sur l'infrastructure interne de Chartreuse : Docker, Nginx, sauvegarde automatisée et haute disponibilité." />
+  <meta name="theme-color" content="#0b0e14" />
+  <link rel="canonical" href="https://spirit38.github.io/Portfolio/project-vaultwarden.html" />
+
+  <!-- SEO Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:title" content="Vaultwarden — Gestionnaire de mots de passe d'entreprise" />
+  <meta property="og:description"
+    content="Déploiement et sécurisation d'un gestionnaire de mots de passe d'entreprise sur l'infrastructure interne de Chartreuse." />
+  <meta property="og:url" content="https://spirit38.github.io/Portfolio/project-vaultwarden.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+    integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9xmBN9iUUhIndKtxwILGWYOSibOKjLsEdjyjZvYDq/cZwNeak0w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css"
+    integrity="sha512-rd0qOHVMOcez6pLWPVFIv7EfSdGKLt+eafXh4RO/12Fgr41hDQxfGvoi1Vy55QIVcQEujUE1LQrATCLl2Fs+ag=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/png" href="assets/ms-icon-310x310.png">
+
+  <!-- Données structurées (schema.org TechArticle) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "Vaultwarden — Déploiement d'un gestionnaire de mots de passe d'entreprise",
+    "author": { "@type": "Person", "name": "Mathis Vangi" },
+    "url": "https://spirit38.github.io/Portfolio/project-vaultwarden.html",
+    "keywords": "Vaultwarden, Docker, Nginx, Reverse Proxy, SQLite, Bash, Linux, Debian, sécurité, VPN, sauvegarde"
+  }
+  </script>
+</head>
+
+<body>
+  <a href="#contenu" class="skip-link">Aller au contenu</a>
+  <div class="loading" id="loading">
+    <div class="loader"></div>
+  </div>
+
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Navigation principale">
+    <div class="logo">Mathis<span> Vangi</span></div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html#home" class="nav-link">Accueil</a></li>
+      <li><a href="index.html#about" class="nav-link">À propos</a></li>
+      <li><a href="index.html#projects" class="nav-link active">Projets</a></li>
+      <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Basculer vers le mode clair">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+      </button>
+      <a href="https://github.com/Spirit38" target="_blank" rel="noopener noreferrer" class="github-icon"
+        aria-label="Profil GitHub de Mathis Vangi">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      <button class="mobile-menu" id="mobile-menu" aria-label="Ouvrir le menu" aria-expanded="false"
+        aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="contenu" tabindex="-1">
+    <section class="section project-detail" aria-labelledby="project-heading">
+      <h1 class="section-title" id="project-heading" data-aos="fade-up" style="margin-top: 2rem;">Vaultwarden</h1>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+        Infrastructure sécurisée — Déploiement d'un gestionnaire de mots de passe d'entreprise pour Chartreuse.
+      </p>
+
+      <p class="gallery-hint" data-aos="fade-up">
+        <i class="fas fa-search-plus" aria-hidden="true"></i> Cliquez sur les images pour les agrandir
+      </p>
+
+      <div class="project-gallery" data-aos="fade-up" data-aos-delay="150">
+        <div class="swiper mySwiper" role="region" aria-label="Galerie du projet Vaultwarden">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="assets/schema_archi.webp"
+                alt="Schéma de l'architecture réseau Vaultwarden : Docker, Nginx reverse proxy et cloisonnement VPN/LAN"
+                width="960" height="460" loading="lazy">
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next" aria-label="Image suivante"></div>
+          <div class="swiper-button-prev" aria-label="Image précédente"></div>
+        </div>
+      </div>
+
+      <div class="project-metrics" data-aos="fade-up" data-aos-delay="150" role="list"
+        aria-label="Points techniques clés">
+        <div class="metric" role="listitem"><span class="metric-num">Docker</span><span
+            class="metric-label">Conteneurisation & isolation</span></div>
+        <div class="metric" role="listitem"><span class="metric-num">Nginx</span><span class="metric-label">Reverse
+            Proxy HTTPS</span></div>
+        <div class="metric" role="listitem"><span class="metric-num">VPN</span><span class="metric-label">Cloisonnement
+            réseau</span></div>
+        <div class="metric" role="listitem"><span class="metric-num">7j</span><span class="metric-label">Rotation auto.
+            des sauvegardes</span></div>
+      </div>
+
+      <div class="project-content">
+
+        <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+          <h2>🎯 Contexte et Problématique</h2>
+          <p>
+            Dans le cadre de mon stage chez <strong>Chartreuse</strong>, j'ai été chargé de centraliser et sécuriser la
+            gestion des accès numériques de l'entreprise — notamment pour les services <strong>RH et
+              Comptabilité</strong>
+            qui manipulaient des identifiants critiques sans solution unifiée. L'enjeu était double : garantir la
+            <strong>sécurité des secrets d'entreprise</strong> tout en offrant une <strong>expérience utilisateur
+              fluide</strong> aux collaborateurs non-techniques.
+          </p>
+          <p>
+            La solution retenue est <strong>Vaultwarden</strong>, une implémentation open-source légère et compatible
+            avec les clients Bitwarden, déployée en interne sur l'infrastructure Linux de l'entreprise.
+          </p>
+        </div>
+
+        <div data-aos="fade-up" class="mb-medium">
+          <h2>🧠 Stack Technique &amp; Environnement</h2>
+          <div style="margin-bottom: 10px;">
+            <span class="tech-tag">Linux (Debian)</span>
+            <span class="tech-tag">Docker &amp; Docker Compose</span>
+            <span class="tech-tag">Nginx</span>
+            <span class="tech-tag">SQLite</span>
+            <span class="tech-tag">Bash</span>
+            <span class="tech-tag">Cron</span>
+            <span class="tech-tag">Wiki.js</span>
+          </div>
+        </div>
+
+        <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+          <h2>🏗️ Architecture et Déploiement</h2>
+          <p>
+            J'ai conçu une architecture en couches visant à minimiser la surface d'attaque exposée tout en garantissant
+            la disponibilité du service en interne.
+          </p>
+          <ul>
+            <li>
+              <strong>Conteneurisation Docker :</strong> Déploiement via Docker Compose pour garantir l'isolation du
+              service, sa portabilité et la facilité des mises à jour futures.
+            </li>
+            <li>
+              <strong>Cloisonnement réseau (LAN/VPN) :</strong> Le service
+              (<code>vault.in.chartreuse.eu</code>) n'est <em>pas</em> exposé sur Internet. Il est
+              protégé derrière le pare-feu de l'entreprise, accessible uniquement en réseau interne ou via VPN,
+              réduisant drastiquement la surface d'attaque.
+            </li>
+            <li>
+              <strong>Reverse Proxy Nginx :</strong> Configuration du routage HTTPS pour chiffrer les flux de
+              bout en bout entre les navigateurs des employés et le conteneur Docker, sans exposer directement
+              l'application.
+            </li>
+          </ul>
+        </div>
+
+        <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+          <h2>🔐 Sécurité Avancée et Politiques d'Entreprise</h2>
+          <ul>
+            <li>
+              <strong>Architecture "Zero-Knowledge" :</strong> Le serveur ne stocke jamais les mots de passe
+              maîtres des employés — le chiffrement/déchiffrement s'effectue exclusivement côté client, dans le
+              navigateur ou l'application.
+            </li>
+            <li>
+              <strong>Politique d'Organisation Unique :</strong> Restriction activée côté serveur pour forcer
+              les utilisateurs à n'appartenir qu'à l'environnement clos de l'entreprise, empêchant toute fuite
+              de données vers des comptes personnels.
+            </li>
+            <li>
+              <strong>Récupération de compte sécurisée :</strong> Mise en place d'un processus
+              cryptographique d'urgence permettant au service IT de restaurer l'accès d'un collaborateur ayant
+              perdu son mot de passe maître, sans compromettre l'architecture ni les données des autres
+              utilisateurs.
+            </li>
+          </ul>
+        </div>
+
+        <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+          <h2>⚙️ Automatisation et Plan de Reprise d'Activité</h2>
+          <p>
+            Pour garantir la résilience du service, j'ai conçu un système de sauvegarde automatisé adapté
+            aux contraintes d'une base SQLite en production continue.
+          </p>
+          <ul>
+            <li>
+              <strong>Sauvegarde à chaud (Zero-Downtime) :</strong> Création d'un script Bash utilisant la
+              commande native <code>sqlite3 (.backup)</code> pour dumper la base de données de manière
+              atomique <em>sans jamais arrêter le conteneur en production</em>.
+            </li>
+            <li>
+              <strong>Gestion des permissions :</strong> Exécution sécurisée via une tâche <strong>Cron</strong>
+              root, nécessaire car le répertoire <code>vw-data</code> est verrouillé en <code>chmod 700</code>
+              pour protéger les archives.
+            </li>
+            <li>
+              <strong>Rotation automatique des archives :</strong> Intégration d'une commande
+              <code>find -mtime</code> pour purger automatiquement les sauvegardes de plus de 7 jours et
+              prévenir la saturation du disque.
+            </li>
+          </ul>
+        </div>
+
+        <div data-aos="fade-up" style="margin-bottom: 1.5rem;">
+          <h2>🤝 Conduite du Changement et Support Utilisateur</h2>
+          <p>
+            Le volet technique ne représente qu'une partie du projet. La réussite du déploiement a nécessité
+            un accompagnement humain des équipes non-techniques.
+          </p>
+          <ul>
+            <li>
+              <strong>Documentation complète sur Wiki.js :</strong> Rédaction d'un guide de première
+              connexion, d'un référentiel de bonnes pratiques et d'un tutoriel sur l'usage des collections
+              partagées.
+            </li>
+          </ul>
+        </div>
+
+        <div data-aos="fade-up" class="mb-large">
+          <h2>🛠️ Savoir-faire acquis</h2>
+          <ul>
+            <li>Conception et déploiement d'une infrastructure applicative conteneurisée (Docker Compose).</li>
+            <li>Configuration d'un reverse proxy Nginx avec terminaison TLS/HTTPS.</li>
+            <li>Mise en œuvre de politiques de sécurité avancées sur un service en production réelle.</li>
+            <li>Rédaction de scripts Bash de sauvegarde à chaud et planification Cron.</li>
+            <li>Gestion du changement et de la documentation technique à destination d'utilisateurs finaux.</li>
+          </ul>
+        </div>
+
+        <div class="button-group" data-aos="fade-up"
+          style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;">
+          <a href="index.html#projects" class="btn btn-secondary">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i> Retour aux projets
+          </a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <button class="scroll-top" id="scroll-top" aria-label="Retour en haut de page">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <footer class="footer">
+    <p>&copy; 2026 Mathis Vangi. Tous droits réservés.</p>
+    <p><a href="mention-legal.html" class="footer-link">Mentions Légales</a></p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"
+    integrity="sha512-Ysw1DcK1P+uYLqprEAzNQJP+J4hTx4t/3X2nbVwszao8wD+9afLjBQYjz7Uk4ADP+Er++mJoScI42ueGtQOzEA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"
+    integrity="sha512-A7AYk1fGKX6S2SsHywmPkrnzTZHrgiVT7GcQkLGDe2ev0aWb8zejytzS8wjo7PGEXKqJOrjQ4oORtnimIRZBtw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
